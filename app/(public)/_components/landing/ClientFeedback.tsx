@@ -1,0 +1,109 @@
+import Image from 'next/image';
+import { ChevronLeft, ChevronRight, Play } from 'lucide-react';
+
+const testimonials = [
+  {
+    id: 1,
+    quote: 'Upgraded my Prado with Auxbeam LED straight, sharp, and glare-free.',
+    name: 'Rakib Hasan',
+    role: 'Automotive Enthusiast',
+    image: '/images/landing/client-feedback/536c8bf6ec7eb35b36b1b8ec1953f4c098029a49.png',
+  },
+  {
+    id: 2,
+    quote: 'Auxbeam bulbs instantly improved my night driving visibility.',
+    name: 'Tanvir Ahmed',
+    role: 'Business Executive',
+    image: '/images/landing/client-feedback/91409c62d10476f009ceb549f50a2ad82eecdbf1.png',
+  },
+  {
+    id: 3,
+    quote: 'Auxbeam LEDs deliver strong visibility in any condition.',
+    name: 'Mizanur Rahman',
+    role: 'Off-Road Driver',
+    image: '/images/landing/client-feedback/c720ec2c5e57a0bc8d6ddfb287ceee26a9140229.png',
+  },
+  {
+    id: 4,
+    quote: 'Auxbeam LEDs deliver strong visibility in any condition.',
+    name: 'Tanvir Ahmed',
+    role: 'Business Executive',
+    image: '/images/landing/client-feedback/cfa8138ad5135723dcedad5236627bc4d080c002.png',
+  },
+];
+
+export default function ClientFeedback() {
+  return (
+    <section className="py-[100px] bg-[#F9FAFB]">
+      <div className="container mx-auto px-4">
+        {/* Header */}
+        <div className="flex items-start justify-between mb-10">
+          <h2 className="text-[32px] font-semibold text-[#111827] max-w-md">
+            Feedback From Our Satisfied Customers
+          </h2>
+          
+          {/* Navigation Arrows */}
+          <div className="flex items-center gap-2">
+            <button 
+              className="w-10 h-10 rounded-full bg-[#E5E7EB] flex items-center justify-center hover:bg-[#D1D5DB] transition-colors"
+              aria-label="Previous testimonials"
+            >
+              <ChevronLeft className="w-5 h-5 text-[#111827]" />
+            </button>
+            <button 
+              className="w-10 h-10 rounded-full bg-[#FCE32D] flex items-center justify-center hover:bg-[#e6cc28] transition-colors"
+              aria-label="Next testimonials"
+            >
+              <ChevronRight className="w-5 h-5 text-[#111827]" />
+            </button>
+          </div>
+        </div>
+
+        {/* Testimonials Grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          {testimonials.map((testimonial) => (
+            <div 
+              key={testimonial.id} 
+              className="relative rounded-[8px] overflow-hidden h-[480px] group cursor-pointer"
+            >
+              {/* Full Card Image */}
+              <Image
+                src={testimonial.image}
+                alt={testimonial.name}
+                fill
+                sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                className="object-cover"
+              />
+              
+              {/* Play Button Overlay */}
+              <div className="absolute inset-0 flex items-center justify-center">
+                <button 
+                  className="w-16 h-16 rounded-full bg-white/90 backdrop-blur-sm flex items-center justify-center hover:bg-white transition-colors shadow-lg"
+                  aria-label="Play video testimonial"
+                >
+                  <Play className="w-6 h-6 text-[#111827] ml-1" fill="currentColor" />
+                </button>
+              </div>
+
+              {/* Text Overlay at Bottom */}
+              <div className="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black/90 via-black/70 to-transparent pt-20">
+                {/* Quote */}
+                <p className="text-white text-sm leading-relaxed mb-4">
+                  {testimonial.quote}
+                </p>
+                
+                {/* Customer Info */}
+                <h3 className="text-white text-xl font-semibold mb-1">
+                  {testimonial.name}
+                </h3>
+                <p className="text-white/80 text-sm">
+                  {testimonial.role}
+                </p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
