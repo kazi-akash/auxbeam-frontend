@@ -88,7 +88,6 @@ export default function Header() {
                 style={{ fontSize: '15px', fontWeight: 400, color: '#12100E' }}
               >
                 Shop
-                <ChevronDown className="w-4 h-4 group-hover:rotate-180 transition-transform" />
               </Link>
               <Link 
                 href="/off-road-lights" 
@@ -222,7 +221,6 @@ export default function Header() {
               onClick={() => setMobileMenuOpen(false)}
             >
               Shop
-              <ChevronDown className="w-4 h-4" />
             </Link>
             <Link 
               href="/off-road-lights" 

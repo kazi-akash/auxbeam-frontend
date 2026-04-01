@@ -1,180 +1,193 @@
 'use client';
 
 import { useState } from 'react';
-import { useProducts } from '@/lib/hooks/public/useProducts';
-import { useCategories } from '@/lib/hooks/public/useCategories';
 import Pagination from '@/components/ui/Pagination';
-import { getImageUrl } from '@/lib/utils/image';
-import Link from 'next/link';
-import Image from 'next/image';
+import ShopHero from '@/app/(public)/_components/shop/ShopHero';
+import ShopFilters from '@/app/(public)/_components/shop/ShopFilters';
+import ProductGrid from '@/app/(public)/_components/shop/ProductGrid';
+
+// Mock products data - same as BestSellingProducts
+const mockProducts = [
+  {
+    id: 1,
+    slug: 'f2-series-10000lm-52w-led-headlight-bulbs',
+    name: 'F2 Series 10000LM 52W LED Headlight Bulbs 6500K Cool White',
+    price: 6000.99,
+    compare_price: null,
+    primary_image: '/images/landing/best-selling-products/2e7873338809bb4c9d78fb2995a6bc2026e5f1aa.png',
+    rating: 5,
+    reviews: 132,
+    isNew: true,
+  },
+  {
+    id: 2,
+    slug: 'f16-plus-series-16000lm-70w-led-headlight-bulbs',
+    name: 'F-16 PLUS Series 16000LM 70W LED Headlight Bulbs 6000K Cool White',
+    price: 8550.99,
+    compare_price: 9600.99,
+    primary_image: '/images/landing/best-selling-products/6c3a6ef62f11f9fae812d5d2fdbd02f0a1bfe18f.png',
+    rating: 5,
+    reviews: 132,
+    isNew: false,
+  },
+  {
+    id: 3,
+    slug: 'gx-series-25000lm-120w-led-headlight-bulbs',
+    name: 'GX Series 25000LM 120W LED Headlight Bulbs 6500K Cool White',
+    price: 11500.99,
+    compare_price: null,
+    primary_image: '/images/landing/best-selling-products/a5375ec89708c75248641ad73a28e3c292df0e86.png',
+    rating: 5,
+    reviews: 132,
+    isNew: true,
+  },
+  {
+    id: 4,
+    slug: 'gx-bi-color-smart-series-25000lm-110w',
+    name: 'GX Bi-Color Smart Series 25000LM 110W LED Headlight Bulbs',
+    price: 15000.99,
+    compare_price: null,
+    primary_image: '/images/landing/best-selling-products/ade0c4fff24ab52c0f15d7211ed1b4843770e341.png',
+    rating: 5,
+    reviews: 132,
+    isNew: true,
+  },
+  {
+    id: 5,
+    slug: '168-2825-w5w-t10-led-license-plate',
+    name: '168 2825 W5W T10 LED License Plate/Side Marker/Interior Light Bulbs',
+    price: 1500.99,
+    compare_price: null,
+    primary_image: '/images/landing/best-selling-products/c2e74d7b9cc01f3e22c4e0b882d5cc3732648957.png',
+    rating: 5,
+    reviews: 132,
+    isNew: true,
+  },
+  {
+    id: 6,
+    slug: 't20-7443-7440-led-4000lm-turn-signal',
+    name: 'T20 7443 7440 LED 4000LM Turn Signal Light Bulbs Rear/Front',
+    price: 5000.99,
+    compare_price: null,
+    primary_image: '/images/landing/best-selling-products/c599842c23cd93b27236dcf3bbd37e5d63d5fd33.png',
+    rating: 5,
+    reviews: 132,
+    isNew: true,
+  },
+  {
+    id: 7,
+    slug: '168-2825-w5w-t10-led-license-plate-2',
+    name: '168 2825 W5W T10 LED License Plate/Side Marker/Interior Light',
+    price: 1500.99,
+    compare_price: null,
+    primary_image: '/images/landing/best-selling-products/efc3c1017f528f09b465a135b4db16307d7cd056.png',
+    rating: 5,
+    reviews: 132,
+    isNew: true,
+  },
+  {
+    id: 8,
+    slug: '3-inch-136w-6000k-double-hyperboloid',
+    name: '3 Inch 136W 6000K Double Hyperboloid Bi-LED Headlight',
+    price: 36248.99,
+    compare_price: null,
+    primary_image: '/images/landing/best-selling-products/fadc04fd87ccc319e6502fabf7cf58c452a180a9.png',
+    rating: 5,
+    reviews: 132,
+    isNew: true,
+  },
+  {
+    id: 9,
+    slug: 'f2-series-10000lm-52w-led-headlight-bulbs-2',
+    name: 'F2 Series 10000LM 52W LED Headlight Bulbs 6500K Cool White',
+    price: 6000.99,
+    compare_price: 7000.99,
+    primary_image: '/images/landing/best-selling-products/2e7873338809bb4c9d78fb2995a6bc2026e5f1aa.png',
+    rating: 5,
+    reviews: 132,
+    isNew: false,
+  },
+];
 
 export default function ShopPage() {
-  const [filters, setFilters] = useState({
-    page: 1,
-    per_page: 12,
-    category_id: undefined as number | undefined,
-    search: '',
-    sort_by: 'created_at' as 'price' | 'name' | 'created_at',
-    sort_order: 'desc' as 'asc' | 'desc',
-  });
-
-  const { data: productsData, isLoading, error } = useProducts(filters);
-  const { data: categoriesData } = useCategories();
-
-  if (error) {
-    return (
-      <div className="container mx-auto px-4 py-8">
-        <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded">
-          <p>Unable to load products. Please make sure the backend API is running.</p>
-          <p className="text-sm mt-2">API URL: {process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000'}</p>
-        </div>
-      </div>
-    );
-  }
-
-  if (isLoading) {
-    return (
-      <div className="container mx-auto px-4 py-8">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-          {[...Array(8)].map((_, i) => (
-            <div key={i} className="animate-pulse">
-              <div className="bg-gray-200 h-48 rounded-lg mb-4"></div>
-              <div className="bg-gray-200 h-4 rounded mb-2"></div>
-              <div className="bg-gray-200 h-4 rounded w-2/3"></div>
-            </div>
-          ))}
-        </div>
-      </div>
-    );
-  }
+  const [priceRange, setPriceRange] = useState<[number, number]>([0, 100000]);
+  const [selectedSeries, setSelectedSeries] = useState<string[]>([]);
+  const [selectedBulbSizes, setSelectedBulbSizes] = useState<string[]>([]);
+  const [sortBy, setSortBy] = useState('products');
+  const [currentPage, setCurrentPage] = useState(1);
+  
+  const itemsPerPage = 9;
+  const totalPages = Math.ceil(mockProducts.length / itemsPerPage);
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
+  const currentProducts = mockProducts.slice(startIndex, endIndex);
 
   return (
-    <div className="container mx-auto px-4 py-8">
-      <h1 className="text-3xl font-bold mb-8">Shop</h1>
+    <main className="min-h-screen bg-[#F9FAFB]">
+      {/* Hero Section */}
+      <ShopHero />
 
-      <div className="flex flex-col md:flex-row gap-8">
-        {/* Filters Sidebar */}
-        <aside className="w-full md:w-64 space-y-6">
-          {/* Search */}
-          <div>
-            <label className="block font-semibold mb-2">Search</label>
-            <input
-              type="text"
-              value={filters.search}
-              onChange={(e) => setFilters({ ...filters, search: e.target.value, page: 1 })}
-              placeholder="Search products..."
-              className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+      {/* Main Content */}
+      <div className="container mx-auto px-4 py-12">
+        <div className="flex flex-col lg:flex-row gap-8">
+          {/* Left Sidebar - Filters */}
+          <div className="w-full lg:w-[280px] flex-shrink-0">
+            <ShopFilters
+              selectedCategory={undefined}
+              onCategoryChange={() => {}}
+              priceRange={priceRange}
+              onPriceRangeChange={setPriceRange}
+              selectedSeries={selectedSeries}
+              onSeriesChange={setSelectedSeries}
+              selectedBulbSizes={selectedBulbSizes}
+              onBulbSizeChange={setSelectedBulbSizes}
             />
           </div>
 
-          {/* Categories */}
-          {categoriesData?.data && (
-            <div>
-              <h3 className="font-semibold mb-4">Categories</h3>
-              <div className="space-y-2">
-                <button
-                  onClick={() => setFilters({ ...filters, category_id: undefined, page: 1 })}
-                  className={`block w-full text-left px-4 py-2 rounded ${
-                    !filters.category_id ? 'bg-blue-50 text-blue-600' : 'hover:bg-gray-50'
-                  }`}
+          {/* Right Side - Products */}
+          <div className="flex-1">
+            {/* Header with count and sort */}
+            <div className="flex items-center justify-between mb-6">
+              <p className="text-sm text-gray-600">
+                {mockProducts.length} products are available
+              </p>
+              {/* add here a beautifule search for product search */}
+              <div className="flex items-center gap-2">
+                <label htmlFor="sort" className="text-sm text-gray-600">
+                  Sort By
+                </label>
+                <select
+                  id="sort"
+                  value={sortBy}
+                  onChange={(e) => setSortBy(e.target.value)}
+                  className="px-4 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white"
                 >
-                  All Categories
-                </button>
-                {categoriesData.data.map((category: any) => (
-                  <button
-                    key={category.id}
-                    onClick={() => setFilters({ ...filters, category_id: category.id, page: 1 })}
-                    className={`block w-full text-left px-4 py-2 rounded ${
-                      filters.category_id === category.id
-                        ? 'bg-blue-50 text-blue-600'
-                        : 'hover:bg-gray-50'
-                    }`}
-                  >
-                    {category.name}
-                  </button>
-                ))}
+                  <option value="products">Products</option>
+                  <option value="price-asc">Price: Low to High</option>
+                  <option value="price-desc">Price: High to Low</option>
+                  <option value="name-asc">Name: A to Z</option>
+                  <option value="name-desc">Name: Z to A</option>
+                  <option value="newest">Newest First</option>
+                </select>
               </div>
             </div>
-          )}
 
-          {/* Sort */}
-          <div>
-            <label className="block font-semibold mb-2">Sort By</label>
-            <select
-              value={`${filters.sort_by}-${filters.sort_order}`}
-              onChange={(e) => {
-                const [sort_by, sort_order] = e.target.value.split('-');
-                setFilters({
-                  ...filters,
-                  sort_by: sort_by as any,
-                  sort_order: sort_order as any,
-                  page: 1,
-                });
-              }}
-              className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-            >
-              <option value="created_at-desc">Newest First</option>
-              <option value="created_at-asc">Oldest First</option>
-              <option value="price-asc">Price: Low to High</option>
-              <option value="price-desc">Price: High to Low</option>
-              <option value="name-asc">Name: A to Z</option>
-              <option value="name-desc">Name: Z to A</option>
-            </select>
-          </div>
-        </aside>
+            {/* Product Grid */}
+            <ProductGrid products={currentProducts} isLoading={false} />
 
-        {/* Products Grid */}
-        <div className="flex-1">
-          {productsData?.data?.length === 0 ? (
-            <div className="text-center py-12">
-              <p className="text-gray-500 text-lg">No products found.</p>
-            </div>
-          ) : (
-            <>
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-                {productsData?.data?.map((product: any) => (
-                  <Link
-                    key={product.id}
-                    href={`/product/${product.slug}`}
-                    className="group bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow overflow-hidden"
-                  >
-                    <div className="relative h-48 bg-gray-100">
-                      <Image
-                        src={getImageUrl(product.primary_image)}
-                        alt={product.name}
-                        fill
-                        className="object-cover group-hover:scale-105 transition-transform"
-                      />
-                    </div>
-                    <div className="p-4">
-                      <h3 className="font-semibold mb-2 line-clamp-2 group-hover:text-blue-600 transition-colors">
-                        {product.name}
-                      </h3>
-                      <p className="text-2xl font-bold text-blue-600">
-                        ${product.price}
-                      </p>
-                      {product.compare_price && (
-                        <p className="text-sm text-gray-500 line-through">
-                          ${product.compare_price}
-                        </p>
-                      )}
-                    </div>
-                  </Link>
-                ))}
-              </div>
-
-              {/* Pagination */}
-              {productsData?.last_page > 1 && (
+            {/* Pagination */}
+            {totalPages > 1 && (
+              <div className="mt-12">
                 <Pagination
-                  currentPage={productsData.current_page}
-                  totalPages={productsData.last_page}
-                  onPageChange={(page) => setFilters({ ...filters, page })}
+                  currentPage={currentPage}
+                  totalPages={totalPages}
+                  onPageChange={setCurrentPage}
                 />
-              )}
-            </>
-          )}
+              </div>
+            )}
+          </div>
         </div>
       </div>
-    </div>
+    </main>
   );
 }
