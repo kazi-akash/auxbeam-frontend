@@ -1,3 +1,5 @@
+'use client';
+
 import Image from 'next/image';
 import Link from 'next/link';
 import { Heart, Star, Plus } from 'lucide-react';
@@ -126,9 +128,10 @@ export default function BestSellingProducts() {
         {/* Products Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {products.map((product) => (
-            <div 
-              key={product.id} 
-              className="bg-white rounded-[16px] overflow-hidden border border-[#E5E7EB] transition-shadow group"
+            <Link
+              key={product.id}
+              href={`/products/${product.id}`}
+              className="bg-white rounded-[16px] overflow-hidden border border-[#E5E7EB] transition-shadow group cursor-pointer hover:shadow-lg block"
               style={{ boxShadow: '0px 2px 30px 0px rgba(0, 0, 0, 0.08)' }}
             >
               {/* Image Container */}
@@ -148,7 +151,11 @@ export default function BestSellingProducts() {
                 </div>
 
                 {/* Wishlist Button */}
-                <button 
+                <button
+                  onClick={(e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                  }}
                   className="absolute top-3 right-3 z-10 w-8 h-8 rounded-full bg-white flex items-center justify-center hover:bg-gray-100 transition-colors shadow-sm"
                   aria-label="Add to wishlist"
                 >
@@ -203,7 +210,12 @@ export default function BestSellingProducts() {
                       </span>
                     )}
                   </div>
-                  <button 
+                  <button
+                    onClick={(e) => {
+                      e.preventDefault();
+                      e.stopPropagation();
+                      // Add to cart logic here
+                    }}
                     className="h-9 px-4 rounded bg-[#FCE32D] flex items-center justify-center gap-1 hover:bg-[#e6cc28] transition-colors"
                     aria-label="Add to cart"
                   >
@@ -212,7 +224,7 @@ export default function BestSellingProducts() {
                   </button>
                 </div>
               </div>
-            </div>
+            </Link>
           ))}
         </div>
       </div>
