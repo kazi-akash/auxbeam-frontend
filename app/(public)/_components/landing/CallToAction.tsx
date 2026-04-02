@@ -4,7 +4,7 @@ import { ArrowUpRight } from 'lucide-react';
 
 export default function CallToAction() {
   return (
-    <section className="py-[100px] bg-white">
+    <section className="pb-[100px] bg-white">
       <div className="container mx-auto px-4">
         <div className="relative h-[480px] rounded-[8px] overflow-hidden">
           {/* Background Image */}

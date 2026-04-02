@@ -6,7 +6,6 @@ import NewArrivalProducts from './_components/landing/NewArrivalProducts';
 import PopularAccessories from './_components/landing/PopularAccessories';
 import ClientFeedback from './_components/landing/ClientFeedback';
 import LightingSolutions from './_components/landing/LightingSolutions';
-import CallToAction from './_components/landing/CallToAction';
 import WhyChooseAuxbeam from './_components/landing/WhyChooseAuxbeam';
 
 export default function Home() {
@@ -34,9 +33,6 @@ export default function Home() {
 
       {/* lighting-solutions */}
       <LightingSolutions />
-
-      {/* call to action */}
-      <CallToAction />
     </div>
   );
 }

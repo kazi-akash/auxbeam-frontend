@@ -210,12 +210,12 @@ export default function CartPage() {
 
               {/* Action Buttons */}
               <div className="space-y-3">
-                <button className="w-full bg-[#ffd700] hover:bg-[#ffed4e] text-gray-900 font-semibold py-3 rounded-[4px]">
+                <a href="/checkout" className="block w-full bg-[#ffd700] hover:bg-[#ffed4e] text-gray-900 font-semibold py-3 rounded-[4px] text-center">
                   Proceed to Checkout
-                </button>
-                <button className="w-full bg-white hover:bg-gray-50 text-gray-900 font-semibold py-3 rounded-[4px] border border-gray-300">
+                </a>
+                <a href="/shop" className="block w-full bg-white hover:bg-gray-50 text-gray-900 font-semibold py-3 rounded-[4px] border border-gray-300 text-center">
                   Continue Shopping
-                </button>
+                </a>
               </div>
             </div>
           </div>

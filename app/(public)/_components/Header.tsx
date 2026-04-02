@@ -54,7 +54,7 @@ export default function Header() {
                 <GitCompare className="w-5 h-5" />
                 <span>Compare</span>
               </Link>
-              <div className="w-px h-8 bg-white/30"></div>
+              <div className="w-px h-4 bg-white"></div>
               <Link href="/track-order" className="flex items-center gap-2 text-white hover:text-gray-200 transition-colors">
                 <Package className="w-5 h-5" />
                 <span>Track Order</span>
