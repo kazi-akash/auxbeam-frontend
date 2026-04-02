@@ -30,7 +30,7 @@ export default function Header() {
       {/* Topbar - Dark Brown */}
       <div className="bg-[#411C09] text-white font-[family-name:var(--font-geist-sans)]">
         <div className="container mx-auto px-4">
-          <div className="flex items-center justify-between h-10" style={{ fontSize: '14px', fontWeight: 400 }}>
+          <div className="flex items-center justify-between py-[13.5px] text-sm font-normal">
             {/* Left: Contact Info */}
             <div className="hidden md:flex items-center gap-6">
               <a href="tel:+8809647245931" className="flex items-center gap-2 hover:text-primary-500 transition-colors">
@@ -50,12 +50,13 @@ export default function Header() {
 
             {/* Right: Utility Links */}
             <div className="hidden md:flex items-center gap-6">
-              <Link href="/compare" className="flex items-center gap-2 hover:text-primary-500 transition-colors">
-                <GitCompare className="w-3 h-3" />
+              <Link href="/compare" className="flex items-center gap-2 text-white hover:text-gray-200 transition-colors">
+                <GitCompare className="w-5 h-5" />
                 <span>Compare</span>
               </Link>
-              <Link href="/track-order" className="flex items-center gap-2 hover:text-primary-500 transition-colors">
-                <Package className="w-3 h-3" />
+              <div className="w-px h-8 bg-white/30"></div>
+              <Link href="/track-order" className="flex items-center gap-2 text-white hover:text-gray-200 transition-colors">
+                <Package className="w-5 h-5" />
                 <span>Track Order</span>
               </Link>
             </div>
@@ -64,18 +65,20 @@ export default function Header() {
       </div>
 
       {/* Main Navbar - White */}
-      <div className="bg-white shadow-sm font-[family-name:var(--font-geist-sans)]" style={{ fontSize: '16px', fontWeight: 400, color: '#12100E' }}>
+      <div className="bg-[#F9FAFB] font-[family-name:var(--font-geist-sans)]" style={{ fontSize: '16px', fontWeight: 400, color: '#12100E' }}>
         <div className="container mx-auto px-4">
           <div className="flex items-center justify-between h-20">
             {/* Logo */}
             <Link href="/" className="flex items-center">
-              <div className="w-32 h-14 relative">
+              <div className="w-20 h-16 relative">
                 <Image 
                   src="/auxbeam-logo.png" 
                   alt="AuxBeam Bangladesh" 
                   fill 
                   className="object-contain" 
                   priority
+                  quality={100}
+                  unoptimized
                 />
               </div>
             </Link>
@@ -115,25 +118,26 @@ export default function Header() {
               </Link>
             </nav>
 
-            {/* Search Bar */}
-            <div className="hidden md:flex items-center flex-1 max-w-lg mx-8">
-              <div className="relative w-full">
-                <input
-                  type="text"
-                  placeholder="Search Products"
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  className="w-full pl-5 pr-12 py-2.5 bg-[#F3F4F6] border-none rounded-full focus:ring-2 focus:ring-primary-500 placeholder:text-[#6B7280]"
-                  style={{ fontSize: '15px', fontWeight: 400, color: '#12100E' }}
-                />
-                <button className="absolute right-4 top-1/2 -translate-y-1/2 text-[#6B7280] hover:text-primary-600 transition-colors">
-                  <Search className="w-5 h-5" />
-                </button>
-              </div>
-            </div>
+            
 
             {/* Actions */}
             <div className="flex items-center gap-6">
+              {/* Search Bar */}
+              <div className="hidden md:flex items-center flex-1 max-w-2xs">
+                <div className="relative w-full">
+                  <input
+                    type="text"
+                    placeholder="Search Products"
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    className="w-full pl-5 pr-12 py-2.5 bg-[#F3F4F6] border-none rounded-full focus:ring-2 focus:ring-primary-500 placeholder:text-[#6B7280]"
+                    style={{ fontSize: '15px', fontWeight: 400, color: '#12100E' }}
+                  />
+                  <button className="absolute right-4 top-1/2 -translate-y-1/2 text-[#6B7280] hover:text-primary-600 transition-colors">
+                    <Search className="w-5 h-5" />
+                  </button>
+                </div>
+              </div>
               {/* Cart */}
               <Link 
                 href="/cart" 

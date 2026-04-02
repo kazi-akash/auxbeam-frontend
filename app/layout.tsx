@@ -17,8 +17,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "AuxBeam - E-commerce Store",
-  description: "Shop the best products online",
+  title: "AuxBeam Bangladesh - E-commerce Store",
+  description: "Shop the best LED lights and automotive lighting products online",
 };
 
 export default function RootLayout({

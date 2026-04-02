@@ -6,6 +6,7 @@ import AddToCompareButton from '../../_components/product/AddToCompareButton';
 import ProductImageGallery from '../../_components/product/ProductImageGallery';
 import ProductInfo from '../../_components/product/ProductInfo';
 import ProductDetails from '../../_components/product/ProductDetails';
+import YouMayAlsoLike from '../../_components/shop/YouMayAlsoLike';
 
 // Mock product data - replace with API call
 const productImages = [
@@ -60,8 +61,10 @@ export default function ProductDetailsPage({ params }: { params: Promise<{ id: s
         {/* Product Details Tabs */}
         <ProductDetails reviewCount={product.reviews} />
 
-        {/* review section */}
       </div>
+
+      {/* You May Also Like Section */}
+      <YouMayAlsoLike />
     </div>
   );
 }

@@ -147,7 +147,7 @@ export default function ProductDetails({ reviewCount = 132 }: ProductDetailsProp
       )}
 
       {activeTab === 'specifications' && (
-        <div className="bg-white">
+        <div className="bg-white p-[32px] border border-gray-200 rounded-[6px]">
           <section>
             <h2 className="text-2xl font-bold text-gray-900 mb-6">Product Specifications</h2>
             <ul className="list-disc pl-5 space-y-2">
@@ -171,7 +171,7 @@ export default function ProductDetails({ reviewCount = 132 }: ProductDetailsProp
       )}
 
       {activeTab === 'shipping' && (
-        <div className="bg-white">
+        <div className="bg-white p-[32px] border border-gray-200 rounded-[6px]">
           {/* International Shipping */}
           <section className="mb-8">
             <h2 className="text-2xl font-bold text-gray-900 mb-6">International Shipping</h2>

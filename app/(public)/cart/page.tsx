@@ -1,0 +1,229 @@
+'use client';
+
+import Image from 'next/image';
+import { useState } from 'react';
+import { Trash2 } from 'lucide-react';
+import Breadcrumb from '../_components/Breadcrumb';
+import YouMayAlsoLike from '../_components/shop/YouMayAlsoLike';
+
+interface CartItem {
+  id: string;
+  name: string;
+  image: string;
+  bulbSize: string;
+  price: number;
+  originalPrice?: number;
+  discount?: number;
+  quantity: number;
+}
+
+export default function CartPage() {
+  const [cartItems, setCartItems] = useState<CartItem[]>([
+    {
+      id: '1',
+      name: 'F2 Series 10000LM 52W LED Headlight Bulbs 6500K Cool White',
+      image: '/images/landing/best-selling-products/2e7873338809bb4c9d78fb2995a6bc2026e5f1aa.png',
+      bulbSize: '(2pcs) 9005/HB3/H10',
+      price: 6000.99,
+      originalPrice: 7000.99,
+      discount: 40,
+      quantity: 1,
+    },
+    {
+      id: '2',
+      name: 'GX Series 25000LM 120W LED Headlight Bulbs 6500K Cool White',
+      image: '/images/landing/best-selling-products/6c3a6ef62f11f9fae812d5d2fdbd02f0a1bfe18f.png',
+      bulbSize: '(2pcs) 9005/HB3/H10',
+      price: 11500.99,
+      quantity: 1,
+    },
+    {
+      id: '3',
+      name: '3 Inch 136W 6000K Double Hyperboloid Bi-LED Headlight',
+      image: '/images/landing/best-selling-products/a5375ec89708c75248641ad73a28e3c292df0e86.png',
+      bulbSize: '(2pcs) 9005/HB3/H10',
+      price: 36248.99,
+      quantity: 1,
+    },
+  ]);
+
+  const [couponCode, setCouponCode] = useState('');
+
+  const homeInstallation = 999.99;
+  const promoDiscount = 0.0;
+
+  const totalItems = cartItems.reduce((sum, item) => sum + item.quantity, 0);
+  const totalPrice = cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
+  const subTotal = totalPrice + homeInstallation - promoDiscount;
+
+  const updateQuantity = (id: string, delta: number) => {
+    setCartItems((items) =>
+      items.map((item) =>
+        item.id === id
+          ? { ...item, quantity: Math.max(1, item.quantity + delta) }
+          : item
+      )
+    );
+  };
+
+  const removeItem = (id: string) => {
+    setCartItems((items) => items.filter((item) => item.id !== id));
+  };
+
+  return (
+    <div className="min-h-screen bg-[#F9FAFB]">
+      <Breadcrumb items={[
+        { label: 'Home', href: '/' },
+        { label: 'Add to Cart' }
+      ]} />
+      <div className="max-w-7xl mx-auto py-8 px-4">
+        <h1 className="text-2xl font-bold text-gray-900 mb-6">
+          My Shopping Cart ({totalItems} items)
+        </h1>
+
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          {/* Cart Items */}
+          <div className="lg:col-span-2 space-y-4">
+            {cartItems.map((item) => (
+              <div
+                key={item.id}
+                className="bg-white rounded-lg p-6 border border-[#E5E7EB]"
+              >
+                <div className="flex gap-6">
+                  {/* Product Image */}
+                  <div className="w-32 h-32 bg-gray-100 rounded-lg flex-shrink-0 relative">
+                    <Image
+                      src={item.image}
+                      alt={item.name}
+                      fill
+                      className="object-contain p-2"
+                    />
+                  </div>
+
+                  {/* Product Details */}
+                  <div className="flex-1">
+                    <h3 className="text-base font-semibold text-gray-900 mb-2">
+                      {item.name}
+                    </h3>
+                    <p className="text-sm text-gray-500 mb-4">
+                      Bulb Size: {item.bulbSize}
+                    </p>
+
+                    <div className="flex items-center gap-3 mb-4">
+                      <span className="text-xl font-bold text-gray-900">
+                        {item.price.toFixed(2)} BDT
+                      </span>
+                      {item.originalPrice && (
+                        <>
+                          <span className="text-sm text-gray-400 line-through">
+                            BDT {item.originalPrice.toFixed(2)}
+                          </span>
+                          <span className="bg-red-500 text-white text-xs px-2 py-1 rounded">
+                            {item.discount}% off
+                          </span>
+                        </>
+                      )}
+                    </div>
+                  </div>
+
+                  {/* Quantity Controls */}
+                  <div className="flex flex-col items-end justify-between">
+                    <div className="flex items-center gap-3 bg-gray-100 rounded-lg px-4 py-2">
+                      <button
+                        onClick={() => updateQuantity(item.id, -1)}
+                        className="text-gray-600 hover:text-gray-900 w-6 h-6 flex items-center justify-center"
+                      >
+                        -
+                      </button>
+                      <span className="text-gray-900 font-medium w-8 text-center">
+                        {item.quantity}
+                      </span>
+                      <button
+                        onClick={() => updateQuantity(item.id, 1)}
+                        className="text-gray-600 hover:text-gray-900 w-6 h-6 flex items-center justify-center"
+                      >
+                        +
+                      </button>
+                    </div>
+
+                    <button
+                      onClick={() => removeItem(item.id)}
+                      className="flex items-center gap-2 text-red-500 hover:text-red-600 text-sm"
+                    >
+                      <Trash2 size={16} />
+                      Remove
+                    </button>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* Order Summary */}
+          <div className="lg:col-span-1">
+            <div className="bg-[#E5E7EB] rounded-lg p-6 shadow-sm sticky top-4">
+              <h2 className="text-xl font-bold text-gray-900 mb-6">
+                Order Summary
+              </h2>
+
+              {/* Coupon Input */}
+              <div className="flex gap-2 mb-6">
+                <input
+                  type="text"
+                  placeholder="Enter coupon code"
+                  value={couponCode}
+                  onChange={(e) => setCouponCode(e.target.value)}
+                  className="flex-1 px-4 bg-white py-2 border border-gray-300 rounded-[4px] text-sm focus:outline-none focus:ring-2 focus:ring-yellow-400"
+                />
+                <button className="bg-[#ffd700] hover:bg-[#ffed4e] text-gray-900 font-semibold px-6 py-2 rounded-[4px] text-sm whitespace-nowrap">
+                  Apply Coupon
+                </button>
+              </div>
+
+              {/* Price Breakdown */}
+              <div className="space-y-3 mb-6">
+                <div className="flex justify-between text-sm">
+                  <span className="text-gray-600">Total Items ({totalItems})</span>
+                  <span className="font-semibold text-gray-900">
+                    {totalPrice.toFixed(2)} BDT
+                  </span>
+                </div>
+                <div className="flex justify-between text-sm">
+                  <span className="text-gray-600">Home Installation Service</span>
+                  <span className="font-semibold text-gray-900">
+                    {homeInstallation.toFixed(2)} BDT
+                  </span>
+                </div>
+                <div className="flex justify-between text-sm">
+                  <span className="text-gray-600">Promo Discount</span>
+                  <span className="font-semibold text-gray-900">
+                    {promoDiscount.toFixed(2)} BDT
+                  </span>
+                </div>
+              </div>
+
+              {/* Subtotal */}
+              <div className="flex justify-between text-base font-bold text-gray-900 mb-6 pt-4 border-t border-gray-300">
+                <span>Sub Total:</span>
+                <span>{subTotal.toFixed(2)} BDT</span>
+              </div>
+
+              {/* Action Buttons */}
+              <div className="space-y-3">
+                <button className="w-full bg-[#ffd700] hover:bg-[#ffed4e] text-gray-900 font-semibold py-3 rounded-[4px]">
+                  Proceed to Checkout
+                </button>
+                <button className="w-full bg-white hover:bg-gray-50 text-gray-900 font-semibold py-3 rounded-[4px] border border-gray-300">
+                  Continue Shopping
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* You May Also Like Section */}
+      <YouMayAlsoLike />
+    </div>
+  );
+}

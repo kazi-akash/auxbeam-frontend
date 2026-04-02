@@ -135,7 +135,7 @@ export default function ProductReviews({
   };
 
   return (
-    <div className="bg-white font-sans">
+    <div className="bg-white p-[32px] border border-gray-200 rounded-[6px] font-sans">
       {/* Header */}
       <div className="flex items-start justify-between mb-6">
         <div>
