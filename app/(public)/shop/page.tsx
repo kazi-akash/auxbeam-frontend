@@ -194,7 +194,7 @@ export default function ShopPage() {
       <ShopHero />
 
       {/* Main Content */}
-      <div className="container mx-auto px-4 py-12">
+      <div className="container mx-auto py-12">
         <div className="flex flex-col lg:flex-row gap-8">
           {/* Left Sidebar - Filters */}
           <div className="w-full lg:w-[280px] flex-shrink-0">

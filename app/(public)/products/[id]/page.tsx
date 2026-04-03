@@ -40,7 +40,7 @@ export default function ProductDetailsPage({ params }: { params: Promise<{ id: s
   
   return (
     <div className="min-h-screen pb-16 font-sans">
-      <div className="container mx-auto px-4 pt-8">
+      <div className="container mx-auto pt-8">
         <div className="flex items-center justify-between mb-8">
           <ProductBreadcrumb productName={product.name} />
           <AddToCompareButton />

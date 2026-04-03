@@ -112,7 +112,7 @@ export default function Footer() {
         }}
       />
 
-      <div className="container mx-auto px-4 pt-20 relative z-10">
+      <div className="container mx-auto pt-20 relative z-10">
         {/* Newsletter Section */}
         <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center border-b border-[#333333] pb-12 mb-12 gap-8">
           <h2 className="text-4xl md:text-5xl font-bold leading-tight">
@@ -129,26 +129,28 @@ export default function Footer() {
                 Subscribe
               </button>
             </div>
-            <p className="text-[#A1A1AA] text-sm mt-3">
+            <p className="text-gray-100 text-[16px] font-[400] mt-3">
               Lighting tips and exclusive weekly ofers
             </p>
           </div>
         </div>
 
         {/* Links Section */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-[2fr_1fr_1fr_1fr] gap-12 lg:gap-8 mb-16">
           {/* Brand Info */}
           <div>
-            <div className="w-32 h-14 relative mb-6">
+            <div className="w-20 h-16 relative mb-6">
               <Image
                 src="/auxbeam-logo.png"
                 alt="AuxBeam Bangladesh"
                 fill
-                sizes="128px"
-                className="object-contain"
+                className="object-contain object-left"
+                priority
+                quality={100}
+                unoptimized
               />
             </div>
-            <p className="text-[#D4D4D8] text-sm leading-relaxed mb-8">
+            <p className="text-[#D4D4D8] text-[16px] font-[400] leading-relaxed mb-8 max-w-sm">
               Auxbeam Bangladesh delivers premium automotive lighting and high-performance LED solutions built for Bangladesh roads.
             </p>
             <div className="space-y-4 text-sm text-[#D4D4D8]">
@@ -169,8 +171,8 @@ export default function Footer() {
 
           {/* Company */}
           <div>
-            <h4 className="text-xl font-semibold mb-6">Company</h4>
-            <ul className="space-y-4 text-[15px]">
+            <h4 className="text-[24px] font-[600] mb-6">Company</h4>
+            <ul className="space-y-4 text-[16px] font-[400]">
               <li><Link href="/about" className="text-[#D4D4D8] hover:text-[#FADE4B] transition-colors">About Us</Link></li>
               <li><Link href="/shop" className="text-[#D4D4D8] hover:text-[#FADE4B] transition-colors">Shop</Link></li>
               <li><Link href="/faq" className="text-[#D4D4D8] hover:text-[#FADE4B] transition-colors">Faq</Link></li>
@@ -181,8 +183,8 @@ export default function Footer() {
 
           {/* Categories */}
           <div>
-            <h4 className="text-xl font-semibold mb-6">Categories</h4>
-            <ul className="space-y-4 text-[15px]">
+            <h4 className="text-[24px] font-[600] mb-6">Categories</h4>
+            <ul className="space-y-4 text-[16px] font-[400]">
               <li><Link href="/led-light-bulbs" className="text-[#D4D4D8] hover:text-[#FADE4B] transition-colors">Led Light Bulbs</Link></li>
               <li><Link href="/off-road-lights" className="text-[#D4D4D8] hover:text-[#FADE4B] transition-colors">Off Road Lights</Link></li>
               <li><Link href="/led-light-bars" className="text-[#D4D4D8] hover:text-[#FADE4B] transition-colors">Led Light Bars</Link></li>
@@ -192,9 +194,9 @@ export default function Footer() {
           </div>
 
           {/* Help */}
-          <div>
-            <h4 className="text-xl font-semibold mb-6">Help</h4>
-            <ul className="space-y-4 text-[15px]">
+          <div className="lg:ml-auto">
+            <h4 className="text-[24px] font-[600] mb-6">Help</h4>
+            <ul className="space-y-4 text-[16px] font-[400]">
               <li><Link href="/track-order" className="text-[#D4D4D8] hover:text-[#FADE4B] transition-colors">Track Order</Link></li>
               <li><Link href="/return-policy" className="text-[#D4D4D8] hover:text-[#FADE4B] transition-colors">Return Policy</Link></li>
               <li><Link href="/shipping-policy" className="text-[#D4D4D8] hover:text-[#FADE4B] transition-colors">Shipping & Delivery Policy</Link></li>

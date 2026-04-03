@@ -10,17 +10,17 @@ const categories = [
   },
   {
     title: 'Led Light Bars',
-    image: '/images/landing/shop-by-category/70faa81470560edae1c25a4a8d48913b89134be9.jpg',
+    image: '/images/landing/shop-by-category/fe8b97769c0d6d4329b7bb009525ce660e5fec2f.jpg',
     href: '#',
   },
   {
     title: 'Led Off Road Lights',
-    image: '/images/landing/shop-by-category/f66d8aa9cce7f5894e0242bd72a2805969eae8ea.jpg',
+    image: '/images/landing/shop-by-category/70faa81470560edae1c25a4a8d48913b89134be9.jpg',
     href: '#',
   },
   {
     title: 'RGB Led Light',
-    image: '/images/landing/shop-by-category/fe8b97769c0d6d4329b7bb009525ce660e5fec2f.jpg',
+    image: '/images/landing/shop-by-category/f66d8aa9cce7f5894e0242bd72a2805969eae8ea.jpg',
     href: '#',
   },
 ];
@@ -28,7 +28,7 @@ const categories = [
 export default function ShopByCategory() {
   return (
     <section className="pt-[250px] pb-[100px] md:py-[100px]">
-      <div className="container mx-auto px-4">
+      <div className="container mx-auto">
         <div className="flex items-center justify-between mb-8">
           <h2 className="text-[32px] font-semibold text-gray-900">Shop by Categories</h2>
           <div className="flex items-center gap-3">

@@ -5,7 +5,7 @@ import { ArrowUpRight } from 'lucide-react';
 export default function LightingSolutions() {
   return (
     <section className="py-[100px] bg-white">
-      <div className="container mx-auto px-4">
+      <div className="container mx-auto">
         {/* Top Section - Top-Rated Lighting Solutions */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-16">
           {/* Image Left */}
@@ -24,7 +24,7 @@ export default function LightingSolutions() {
             <h2 className="text-[32px] font-semibold text-[#111827] mb-4">
               Top-Rated Lighting Solutions
             </h2>
-            <p className="text-[#6B7280] text-base leading-relaxed mb-6">
+            <p className="text-[#4D4C44] text-base leading-relaxed mb-6">
               Our best-selling products are trusted by thousands of drivers for superior brightness, durability, and unmatched road visibility. Designed with advanced LED technology and engineered for extreme conditions, these products consistently deliver premium performance.
             </p>
             <div>
@@ -48,7 +48,7 @@ export default function LightingSolutions() {
             <h2 className="text-[32px] font-semibold text-[#111827] mb-4">
               Also Available in New Collection
             </h2>
-            <p className="text-[#6B7280] text-base leading-relaxed mb-6">
+            <p className="text-[#4D4C44] text-base leading-relaxed mb-6">
               Built for adventure seekers and extreme environments, the 2026 Pro Edition light bar delivers powerful flood and spot beam combination lighting for maximum distance and wide coverage. Waterproof, dustproof, and shock-resistant, it's engineered to perform in rain, fog, mud, and rugged terrain.
             </p>
             <div>

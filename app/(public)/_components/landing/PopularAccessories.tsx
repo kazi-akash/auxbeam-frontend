@@ -80,7 +80,7 @@ const products = [
 export default function PopularAccessories() {
   return (
     <section className="py-[100px] bg-white">
-      <div className="container mx-auto px-4">
+      <div className="container mx-auto">
         {/* Header */}
         <div className="flex items-center justify-between mb-10">
           <h2 className="text-[32px] font-semibold text-[#111827]">Popular Accessories</h2>

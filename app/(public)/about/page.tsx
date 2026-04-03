@@ -6,7 +6,7 @@ export const metadata = {
 export default function AboutPage() {
   return (
     <div className="min-h-screen py-16">
-      <div className="container mx-auto px-4">
+      <div className="container mx-auto">
         <h1 className="text-h2 md:text-h1 mb-8 text-center">About Us</h1>
         <div className="max-w-3xl mx-auto prose prose-lg">
           <p className="text-body-lg text-text-secondary mb-6">

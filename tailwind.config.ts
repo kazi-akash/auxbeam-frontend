@@ -10,16 +10,27 @@ const config: Config = {
   theme: {
     container: {
       center: true,
-      padding: '1rem',
+      padding: {
+        DEFAULT: '1rem',
+        sm: '1rem',
+        md: '2rem',
+        lg: '2rem',
+        xl: '3rem',
+        '2xl': '4rem',
+      },
       screens: {
         sm: '640px',
         md: '768px',
         lg: '1024px',
         xl: '1280px',
-        '2xl': '1400px',
+        '2xl': '1440px',
       },
     },
     extend: {
+      fontFamily: {
+        sans: ['var(--font-geist-sans)', 'system-ui', '-apple-system', 'sans-serif'],
+        mono: ['var(--font-geist-mono)', 'monospace'],
+      },
       colors: {
         // Primary Colors (Yellow/Gold)
         primary: {

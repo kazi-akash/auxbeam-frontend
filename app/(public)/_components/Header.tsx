@@ -29,7 +29,7 @@ export default function Header() {
     <header className="sticky top-0 z-50">
       {/* Topbar - Dark Brown */}
       <div className="bg-[#411C09] text-white font-[family-name:var(--font-geist-sans)]">
-        <div className="container mx-auto px-4">
+        <div className="container mx-auto">
           <div className="flex items-center justify-between py-[13.5px] text-sm font-normal">
             {/* Left: Contact Info */}
             <div className="hidden md:flex items-center gap-6">
@@ -66,7 +66,7 @@ export default function Header() {
 
       {/* Main Navbar - White */}
       <div className="bg-[#F9FAFB] font-[family-name:var(--font-geist-sans)]" style={{ fontSize: '16px', fontWeight: 400, color: '#12100E' }}>
-        <div className="container mx-auto px-4">
+        <div className="container mx-auto">
           <div className="flex items-center justify-between h-20">
             {/* Logo */}
             <Link href="/" className="flex items-center">
@@ -218,7 +218,7 @@ export default function Header() {
       {/* Mobile Menu */}
       {mobileMenuOpen && (
         <div className="lg:hidden bg-white border-t border-gray-200 shadow-lg font-[family-name:var(--font-geist-sans)]" style={{ fontSize: '16px', fontWeight: 400, color: '#12100E' }}>
-          <nav className="container mx-auto px-4 py-4 flex flex-col gap-4">
+          <nav className="container mx-auto py-4 flex flex-col gap-4">
             <Link 
               href="/shop" 
               className="flex items-center justify-between hover:text-primary-600 transition-colors py-2"
