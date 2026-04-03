@@ -85,10 +85,10 @@ export default function PopularAccessories() {
       <div className="container mx-auto">
         {/* Header */}
         <div className="flex items-center justify-between mb-10">
-          <h2 className="text-[32px] font-semibold text-[#111827]">Popular Accessories</h2>
+          <h2 className="text-[32px] font-[600] text-[#12100E]">Popular Accessories</h2>
           <Link 
             href="/shop" 
-            className="flex items-center gap-2 text-[#111827] font-medium hover:text-[#FCE32D] transition-colors group"
+            className="flex items-center gap-2 text-[#12100E] font-[600] text-[16px] group"
           >
             <span className="underline">View All Accessories</span>
             <svg 

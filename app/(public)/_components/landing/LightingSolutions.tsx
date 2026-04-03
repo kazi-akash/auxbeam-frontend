@@ -21,7 +21,7 @@ export default function LightingSolutions() {
 
           {/* Content Right */}
           <div className="flex flex-col justify-center">
-            <h2 className="text-[32px] font-semibold text-[#111827] mb-4">
+            <h2 className="text-[32px] font-[600] text-[#12100E] mb-4">
               Top-Rated Lighting Solutions
             </h2>
             <p className="text-[#4D4C44] text-base leading-relaxed mb-6">
@@ -32,7 +32,7 @@ export default function LightingSolutions() {
                 href="/shop"
                 className="inline-flex items-center gap-2 p-2 bg-[#FCE32D] rounded hover:bg-[#e6cc28] transition-colors"
               >
-                <span className="text-base font-semibold text-[#12100E] tracking-[-0.01em] leading-[150%] pl-3">Shop Now</span>
+                <span className="text-[16] font-[600] text-[#12100E] tracking-[-0.01em] leading-[150%] pl-3">Shop Now</span>
                 <div className="w-8 h-8 bg-[#030712] rounded-[2px] flex items-center justify-center">
                   <ArrowUpRight className="w-[24] h-[24] text-white" />
                 </div>
@@ -45,7 +45,7 @@ export default function LightingSolutions() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           {/* Content Left */}
           <div className="flex flex-col justify-center order-2 lg:order-1">
-            <h2 className="text-[32px] font-semibold text-[#111827] mb-4">
+            <h2 className="text-[32px] font-[600] text-[#12100E] mb-4">
               Also Available in New Collection
             </h2>
             <p className="text-[#4D4C44] text-base leading-relaxed mb-6">
@@ -56,7 +56,7 @@ export default function LightingSolutions() {
                 href="/shop"
                 className="inline-flex items-center gap-2 p-2 bg-[#FCE32D] rounded hover:bg-[#e6cc28] transition-colors"
               >
-                <span className="text-base font-semibold text-[#12100E] tracking-[-0.01em] leading-[150%] pl-3">Shop Now</span>
+                <span className="text-[16] font-[600] text-[#12100E] tracking-[-0.01em] leading-[150%] pl-3">Shop Now</span>
                 <div className="w-8 h-8 bg-[#030712] rounded-[2px] flex items-center justify-center">
                   <ArrowUpRight className="w-[24] h-[24] text-white" />
                 </div>

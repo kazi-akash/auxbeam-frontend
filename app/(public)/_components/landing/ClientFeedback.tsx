@@ -38,7 +38,7 @@ export default function ClientFeedback() {
       <div className="container mx-auto">
         {/* Header */}
         <div className="flex items-start justify-between mb-10">
-          <h2 className="text-[32px] font-semibold text-[#111827] max-w-md">
+          <h2 className="text-[32px] font-[600] text-[#12100E] max-w-md">
             Feedback From Our Satisfied Customers
           </h2>
           
@@ -48,13 +48,13 @@ export default function ClientFeedback() {
               className="w-10 h-10 rounded-full bg-[#E5E7EB] flex items-center justify-center hover:bg-[#D1D5DB] transition-colors"
               aria-label="Previous testimonials"
             >
-              <ChevronLeft className="w-5 h-5 text-[#111827]" />
+              <ChevronLeft className="w-5 h-5 text-[#12100E]" />
             </button>
             <button 
               className="w-10 h-10 rounded-full bg-[#FCE32D] flex items-center justify-center hover:bg-[#e6cc28] transition-colors"
               aria-label="Next testimonials"
             >
-              <ChevronRight className="w-5 h-5 text-[#111827]" />
+              <ChevronRight className="w-5 h-5 text-[#12100E]" />
             </button>
           </div>
         </div>
@@ -81,22 +81,22 @@ export default function ClientFeedback() {
                   className="w-16 h-16 rounded-full bg-white/90 backdrop-blur-sm flex items-center justify-center hover:bg-white transition-colors shadow-lg"
                   aria-label="Play video testimonial"
                 >
-                  <Play className="w-6 h-6 text-[#111827] ml-1" fill="currentColor" />
+                  <Play className="w-6 h-6 text-[#12100E] ml-1" fill="currentColor" />
                 </button>
               </div>
 
               {/* Text Overlay at Bottom */}
               <div className="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black/90 via-black/70 to-transparent pt-20">
                 {/* Quote */}
-                <p className="text-white text-sm leading-relaxed mb-4">
+                <p className="text-white text-[14px] font-[400] leading-relaxed mb-4">
                   {testimonial.quote}
                 </p>
                 
                 {/* Customer Info */}
-                <h3 className="text-white text-xl font-semibold mb-1">
+                <h3 className="text-white text-[20px] font-[500] mb-1">
                   {testimonial.name}
                 </h3>
-                <p className="text-white/80 text-sm">
+                <p className="text-white/80 text-[14px] font-[400">
                   {testimonial.role}
                 </p>
               </div>

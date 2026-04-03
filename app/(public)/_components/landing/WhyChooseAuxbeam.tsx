@@ -30,18 +30,18 @@ export default function WhyChooseAuxbeam() {
   ];
 
   return (
-    <section className="relative w-full overflow-hidden">
-      <div className="grid lg:grid-cols-2">
+    <section className="relative w-full overflow-hidden pb-16 lg:pb-20">
+      <div className="grid lg:grid-cols-2 lg:h-[702px]">
         {/* Left Side - Content with brown background */}
-        <div className="bg-[#422006] px-6 py-16 md:px-12 md:py-20 lg:px-20 lg:py-[100px] flex items-center">
-          <div className="max-w-[600px] mx-auto lg:ml-auto lg:mr-10 xl:mr-20">
+        <div className="bg-[#422006] px-6 py-16 md:px-12 md:py-20 lg:p-16 flex items-center">
+          <div className="w-full max-w-[725px] mx-auto lg:ml-auto lg:mr-0">
             {/* Heading */}
-            <h2 className="text-[32px] lg:text-[40px] font-bold text-white mb-6 leading-tight">
+            <h2 className="text-[32px] lg:text-[32px] font-[600] text-white mb-6 leading-tight">
               Why Choose Auxbeam Bangladesh?
             </h2>
 
             {/* Subheading */}
-            <p className="text-[16px] text-white/90 mb-12 leading-relaxed">
+            <p className="text-[16px] font-[400] text-white/90 mb-12 leading-relaxed">
               We don&apos;t just sell car light bulbs — we deliver performance, safety, and
               reliability. Auxbeam Bangladesh brings you authentic, high-performance automotive
               lighting solutions backed by local support and professional service.
@@ -55,17 +55,17 @@ export default function WhyChooseAuxbeam() {
                   <div key={index} className="flex gap-5 lg:gap-6">
                     {/* Icon */}
                     <div className="flex-shrink-0">
-                      <div className="w-[48px] h-[48px] bg-primary-500 rounded-xl flex items-center justify-center">
-                        <Icon className="w-6 h-6 text-black" strokeWidth={2} />
+                      <div className="w-[40px] h-[40px] bg-[#FDB913] rounded-full flex items-center justify-center">
+                        <Icon className="w-6 h-6 text-[#422006]" strokeWidth={2.5} />
                       </div>
                     </div>
 
                     {/* Content */}
                     <div className="flex-1">
-                      <h3 className="text-[20px] font-bold text-white mb-2">
+                      <h3 className="text-[20px] font-[600] text-white mb-2">
                         {feature.title}
                       </h3>
-                      <p className="text-[16px] text-white/80 leading-relaxed">
+                      <p className="text-[14px] font-[400] text-white/80 leading-relaxed">
                         {feature.description}
                       </p>
                     </div>
@@ -77,13 +77,14 @@ export default function WhyChooseAuxbeam() {
         </div>
 
         {/* Right Side - Background Image */}
-        <div className="relative h-80 lg:h-auto min-h-[320px] lg:min-h-[600px] xl:min-h-[700px]">
+        <div className="relative h-[500px] lg:h-full">
           <Image
             src="/images/landing/why-choose-auxbeam/752b5c1c483c65b97ac8407f71b29f6f432d5e81.jpg"
             alt="Auxbeam LED lights on vehicle in forest"
             fill
-            className="object-cover object-center"
+            className="object-cover object-right"
             sizes="(max-width: 1024px) 100vw, 50vw"
+            quality={95}
             priority={false}
           />
         </div>

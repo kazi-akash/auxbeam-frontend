@@ -19,12 +19,12 @@ export default function OffRoadingLights() {
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
           <div className="absolute bottom-0 left-0 p-8 lg:p-10">
-            <h3 className="text-[32px] font-semibold leading-[130%] text-white mb-6">
+            <h3 className="text-[32px] font-[600] leading-[130%] text-white mb-6">
               Led Off Road
               <br />
               Lights
             </h3>
-            <button className="bg-[#FCE32D] text-black px-6 py-3 rounded-[4px] font-semibold hover:bg-[#e6cc28] transition-colors text-base inline-flex items-center gap-2">
+            <button className="bg-[#FDDE35] text-[#12100E] px-6 py-3 rounded-[4px] font-[600] hover:bg-[#e6cc28] transition-colors text-[16px] inline-flex items-center gap-2">
               Shop Off Road Lights
             </button>
           </div>
@@ -47,12 +47,12 @@ export default function OffRoadingLights() {
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
               <div className="absolute bottom-0 left-0 p-6">
-                <h4 className="text-[24px] font-semibold leading-[130%] text-white mb-3">
+                <h4 className="text-[24px] font-[600] leading-[130%] text-white mb-3">
                   Led Light
                   <br />
                   Bar
                 </h4>
-                <span className="text-[#FCE32D] text-sm font-semibold inline-flex items-center gap-2">
+                <span className="text-[#FDDE35] text-[16px] font-[600] inline-flex items-center gap-2">
                   Shop Led Lights Bar
                   <svg
                     className="w-4 h-4"
@@ -84,12 +84,12 @@ export default function OffRoadingLights() {
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
               <div className="absolute bottom-0 left-0 p-6">
-                <h4 className="text-[24px] font-semibold leading-[130%] text-white mb-3">
+                <h4 className="text-[24px] font-[600] leading-[130%] text-white mb-3">
                   Remote Control
                   <br />
                   Switch Panel
                 </h4>
-                <span className="text-[#FCE32D] text-sm font-semibold inline-flex items-center gap-2">
+                <span className="text-[#FDDE35] text-[16px] font-[600] inline-flex items-center gap-2">
                   Shop Switch Panel
                   <svg
                     className="w-4 h-4"
@@ -122,12 +122,12 @@ export default function OffRoadingLights() {
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
             <div className="absolute bottom-0 left-0 p-8">
-              <h4 className="text-[32px] font-semibold leading-[130%] text-white mb-4">
+              <h4 className="text-[32px] font-[600] leading-[130%] text-white mb-4">
                 Led Light
                 <br />
                 Bulbs
               </h4>
-              <span className="bg-[#FCE32D] text-black px-6 py-3 rounded-[4px] font-semibold hover:bg-[#e6cc28] transition-colors text-base inline-flex items-center gap-2">
+              <span className="bg-[#FDDE35] text-[#12100E] px-6 py-3 rounded-[4px] font-[600] hover:bg-[#e6cc28] transition-colors text-[16px] inline-flex items-center gap-2">
                 Shop Led Lights Bulbs
               </span>
             </div>

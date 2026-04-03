@@ -49,7 +49,7 @@ export default function NewArrivalProducts() {
       <div className="container mx-auto">
         {/* Header */}
         <div className="flex items-center justify-between mb-10">
-          <h2 className="text-[32px] font-semibold text-[#111827]">New Arrival Products</h2>
+          <h2 className="text-[32px] font-[600] text-[#12100E]">New Arrival Products</h2>
           
           {/* Navigation Arrows */}
           <div className="flex items-center gap-2">
@@ -57,13 +57,13 @@ export default function NewArrivalProducts() {
               className="w-10 h-10 rounded-full bg-[#E5E7EB] flex items-center justify-center hover:bg-[#D1D5DB] transition-colors"
               aria-label="Previous products"
             >
-              <ChevronLeft className="w-5 h-5 text-[#111827]" />
+              <ChevronLeft className="w-5 h-5 text-[#12100E]" />
             </button>
             <button 
               className="w-10 h-10 rounded-full bg-[#FCE32D] flex items-center justify-center hover:bg-[#e6cc28] transition-colors"
               aria-label="Next products"
             >
-              <ChevronRight className="w-5 h-5 text-[#111827]" />
+              <ChevronRight className="w-5 h-5 text-[#12100E]" />
             </button>
           </div>
         </div>
@@ -167,7 +167,7 @@ export default function NewArrivalProducts() {
             href="/shop"
             className="inline-flex items-center gap-2 px-6 py-3 bg-[#FCE32D] rounded-lg hover:bg-[#e6cc28] transition-colors"
           >
-            <span className="text-sm font-semibold text-[#111827]">View All Products</span>
+            <span className="text-sm font-semibold text-[#12100E]">View All Products</span>
             <svg 
               width="20" 
               height="20" 

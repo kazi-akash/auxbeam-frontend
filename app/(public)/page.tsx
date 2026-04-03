@@ -23,7 +23,7 @@ export default function Home() {
       <NewArrivalProducts />
 
        {/* why choose auxbeam */}
-      {/* <WhyChooseAuxbeam /> */}
+      <WhyChooseAuxbeam />
 
       {/* popular accessories */}
       <PopularAccessories />

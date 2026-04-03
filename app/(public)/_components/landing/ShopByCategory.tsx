@@ -30,7 +30,7 @@ export default function ShopByCategory() {
     <section className="pt-[250px] pb-[100px] md:py-[100px]">
       <div className="container mx-auto">
         <div className="flex items-center justify-between mb-8">
-          <h2 className="text-[32px] font-semibold text-gray-900">Shop by Categories</h2>
+          <h2 className="text-[32px] font-[600] text-[#12100E]">Shop by Categories</h2>
           <div className="flex items-center gap-3">
             <button
               className="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center text-gray-400 hover:bg-gray-200 transition-colors"
