@@ -88,7 +88,7 @@ export default function CheckoutPage() {
             {/* Shipping Information Header */}
             <div className="">
               <div className="flex items-center justify-between mb-6 bg-white rounded-lg p-6 border border-[#E5E7EB]">
-                <h2 className="text-xl font-bold text-gray-900">Shipping Information</h2>
+                <h2 className="text-[24px] font-[600] text-[#12100E]">Shipping Information</h2>
                 <button className="flex items-center gap-2 bg-[#ffd700] hover:bg-[#ffed4e] text-gray-900 font-medium px-4 py-2 rounded text-sm">
                   <Plus size={16} />
                   Add Address
@@ -146,7 +146,7 @@ export default function CheckoutPage() {
                         </svg>
                         Remove
                       </button>
-                      <button className="flex items-center justify-center gap-1.5 flex-1 px-3 py-2 bg-gray-50 text-gray-700 rounded text-sm font-medium hover:bg-gray-100 transition-colors">
+                      <button className="flex items-center justify-center gap-1.5 flex-1 px-3 py-2 bg-[#F3F4F6] text-[#181910] rounded text-sm font-medium hover:bg-gray-100 transition-colors">
                         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                           <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
                           <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
@@ -204,7 +204,7 @@ export default function CheckoutPage() {
                         </svg>
                         Remove
                       </button>
-                      <button className="flex items-center justify-center gap-1.5 flex-1 px-3 py-2 bg-gray-50 text-gray-700 rounded text-sm font-medium hover:bg-gray-100 transition-colors">
+                      <button className="flex items-center justify-center gap-1.5 flex-1 px-3 py-2 bg-[#F3F4F6] text-[#181910] rounded text-sm font-medium hover:bg-gray-100 transition-colors">
                         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                           <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
                           <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
@@ -262,7 +262,7 @@ export default function CheckoutPage() {
                         </svg>
                         Remove
                       </button>
-                      <button className="flex items-center justify-center gap-1.5 flex-1 px-3 py-2 bg-gray-50 text-gray-700 rounded text-sm font-medium hover:bg-gray-100 transition-colors">
+                      <button className="flex items-center justify-center gap-1.5 flex-1 px-3 py-2 bg-[#F3F4F6] text-[#181910] rounded text-sm font-medium hover:bg-gray-100 transition-colors">
                         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                           <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
                           <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
@@ -570,7 +570,7 @@ export default function CheckoutPage() {
           {/* Right Column - Order Summary */}
           <div className="lg:col-span-1">
             <div className="bg-[#E5E7EB] rounded-lg p-6 sticky top-4">
-              <h2 className="text-xl font-bold text-gray-900 mb-6">Order Summary</h2>
+              <h2 className="text-[24px] font-[600] text-[#101114] mb-6">Order Summary</h2>
 
               {/* Product List */}
               <div className="space-y-4 mb-6">
@@ -588,11 +588,11 @@ export default function CheckoutPage() {
 
                     {/* Product Details */}
                     <div className="flex-1 min-w-0">
-                      <h4 className="text-sm font-medium text-gray-900 mb-1 line-clamp-2">
+                      <h4 className="text-[14px] font-[400] text-gray-900 mb-1 line-clamp-2">
                         {item.name}
                       </h4>
                       <div className="flex items-center gap-2">
-                        <span className="text-sm font-bold text-gray-900">
+                        <span className="text-[14px] font-[600] text-gray-900">
                           {item.price.toFixed(2)} BDT
                         </span>
                         {item.originalPrice && (
@@ -612,7 +612,7 @@ export default function CheckoutPage() {
               </div>
 
               {/* Price Breakdown */}
-              <div className="space-y-3 mb-6">
+              <div className="space-y-3 mb-5">
                 <div className="flex justify-between text-sm">
                   <span className="text-gray-600">Total Items ({totalItems})</span>
                   <span className="font-semibold text-gray-900">
@@ -634,7 +634,7 @@ export default function CheckoutPage() {
               </div>
 
               {/* Subtotal */}
-              <div className="flex justify-between text-base font-bold text-gray-900 mb-6 pt-4 border-t border-gray-400">
+              <div className="flex justify-between text-[18px] font-[600] text-[#101114] mb-6 pt-2">
                 <span>Sub Total:</span>
                 <span>{subTotal.toFixed(2)} BDT</span>
               </div>
@@ -642,7 +642,7 @@ export default function CheckoutPage() {
               {/* Checkout Button */}
               <button
                 type="submit"
-                className="w-full bg-[#ffd700] hover:bg-[#ffed4e] text-gray-900 font-semibold py-3 rounded transition-colors"
+                className="w-full bg-[#FDDE35] hover:bg-[#ffed4e] text-[#181910] text-[16px] font-[600] py-3 rounded transition-colors"
               >
                 Proceed to Checkout
               </button>
