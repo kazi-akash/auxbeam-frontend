@@ -76,8 +76,8 @@ export default function CartPage() {
         { label: 'Home', href: '/' },
         { label: 'Add to Cart' }
       ]} />
-      <div className="max-w-7xl mx-auto py-8 px-4">
-        <h1 className="text-2xl font-bold text-gray-900 mb-6">
+      <div className="max-w-7xl mx-auto py-8">
+        <h1 className="text-[24px] font-[600] text-[#161617] mb-6">
           My Shopping Cart ({totalItems} items)
         </h1>
 
@@ -102,23 +102,23 @@ export default function CartPage() {
 
                   {/* Product Details */}
                   <div className="flex-1">
-                    <h3 className="text-base font-semibold text-gray-900 mb-2">
+                    <h3 className="text-[20px] font-[500] text-[#12100E] mb-2">
                       {item.name}
                     </h3>
-                    <p className="text-sm text-gray-500 mb-4">
+                    <p className="text-[14px] font-400 text-[#4D4C44] mb-4">
                       Bulb Size: {item.bulbSize}
                     </p>
 
                     <div className="flex items-center gap-3 mb-4">
-                      <span className="text-xl font-bold text-gray-900">
+                      <span className="text-[16px] font-[400] text-[#12100E]">
                         {item.price.toFixed(2)} BDT
                       </span>
                       {item.originalPrice && (
                         <>
-                          <span className="text-sm text-gray-400 line-through">
+                          <span className="text-[16px] font-[400] text-gray-400 line-through">
                             BDT {item.originalPrice.toFixed(2)}
                           </span>
-                          <span className="bg-red-500 text-white text-xs px-2 py-1 rounded">
+                          <span className="bg-red-500 text-white text-[12px] font-[600] px-2 py-1 rounded">
                             {item.discount}% off
                           </span>
                         </>
@@ -131,16 +131,16 @@ export default function CartPage() {
                     <div className="flex items-center gap-3 bg-gray-100 rounded-lg px-4 py-2">
                       <button
                         onClick={() => updateQuantity(item.id, -1)}
-                        className="text-gray-600 hover:text-gray-900 w-6 h-6 flex items-center justify-center"
+                        className="text-[#4D4C44] text-[16px] font-400 text-[16px] font-[600] hover:text-gray-900 w-6 h-6 flex items-center justify-center"
                       >
                         -
                       </button>
-                      <span className="text-gray-900 font-medium w-8 text-center">
+                      <span className="text-[#030712] text-[16px] font-[400] w-8 text-center">
                         {item.quantity}
                       </span>
                       <button
                         onClick={() => updateQuantity(item.id, 1)}
-                        className="text-gray-600 hover:text-gray-900 w-6 h-6 flex items-center justify-center"
+                        className="ext-[#6A7282] text-[16px] font-[400] hover:text-gray-900 w-6 h-6 flex items-center justify-center"
                       >
                         +
                       </button>
@@ -162,20 +162,20 @@ export default function CartPage() {
           {/* Order Summary */}
           <div className="lg:col-span-1">
             <div className="bg-[#E5E7EB] rounded-lg p-6 shadow-sm sticky top-4">
-              <h2 className="text-xl font-bold text-gray-900 mb-6">
+              <h2 className="text-[20px] font-[600] text-[#101114] mb-[20px]">
                 Order Summary
               </h2>
 
               {/* Coupon Input */}
-              <div className="flex gap-2 mb-6">
+              <div className="relative mb-[24px]">
                 <input
                   type="text"
                   placeholder="Enter coupon code"
                   value={couponCode}
                   onChange={(e) => setCouponCode(e.target.value)}
-                  className="flex-1 px-4 bg-white py-2 border border-gray-300 rounded-[4px] text-sm focus:outline-none focus:ring-2 focus:ring-yellow-400"
+                  className="w-full h-[52px] px-4 pr-40 bg-white border border-gray-300 rounded-[4px] text-base font-normal placeholder:text-gray-500 placeholder:text-base placeholder:font-normal focus:outline-none focus:ring-2 focus:ring-yellow-400"
                 />
-                <button className="bg-[#ffd700] hover:bg-[#ffed4e] text-gray-900 font-semibold px-6 py-2 rounded-[4px] text-sm whitespace-nowrap">
+                <button className="absolute right-2 top-1/2 -translate-y-1/2 w-[115px] h-[40px] bg-[#FDDE35] hover:bg-[#ffed4e] text-[#12100E] text-[14px] font-[600] p-[10px] rounded-[4px] text-sm whitespace-nowrap">
                   Apply Coupon
                 </button>
               </div>
@@ -183,34 +183,34 @@ export default function CartPage() {
               {/* Price Breakdown */}
               <div className="space-y-3 mb-6">
                 <div className="flex justify-between text-sm">
-                  <span className="text-gray-600">Total Items ({totalItems})</span>
-                  <span className="font-semibold text-gray-900">
+                  <span className="text-[#4D4C44] text-[16px] font-400">Total Items ({totalItems})</span>
+                  <span className="font-[500] text-[16px] text-[#101114]">
                     {totalPrice.toFixed(2)} BDT
                   </span>
                 </div>
                 <div className="flex justify-between text-sm">
-                  <span className="text-gray-600">Home Installation Service</span>
-                  <span className="font-semibold text-gray-900">
+                  <span className="text-[#4D4C44] text-[16px] font-400">Home Installation Service</span>
+                  <span className="font-[500] text-[16px] text-[#101114]">
                     {homeInstallation.toFixed(2)} BDT
                   </span>
                 </div>
                 <div className="flex justify-between text-sm">
-                  <span className="text-gray-600">Promo Discount</span>
-                  <span className="font-semibold text-gray-900">
+                  <span className="text-[#4D4C44] text-[16px] font-400">Promo Discount</span>
+                  <span className="font-[500] text-[16px] text-[#101114]">
                     {promoDiscount.toFixed(2)} BDT
                   </span>
                 </div>
               </div>
 
               {/* Subtotal */}
-              <div className="flex justify-between text-base font-bold text-gray-900 mb-6 pt-4 border-t border-gray-300">
+              <div className="flex justify-between text-[18px] font-[600] text-[#101114] mb-6 pt-4 border-t border-gray-300">
                 <span>Sub Total:</span>
                 <span>{subTotal.toFixed(2)} BDT</span>
               </div>
 
               {/* Action Buttons */}
               <div className="space-y-3">
-                <a href="/checkout" className="block w-full bg-[#ffd700] hover:bg-[#ffed4e] text-gray-900 font-semibold py-3 rounded-[4px] text-center">
+                <a href="/checkout" className="block w-full bg-[#FDDE35] hover:bg-[#ffed4e] text-[#181910] text-[16px] font-[600] py-3 rounded-[4px] text-center">
                   Proceed to Checkout
                 </a>
                 <a href="/shop" className="block w-full bg-white hover:bg-gray-50 text-gray-900 font-semibold py-3 rounded-[4px] border border-gray-300 text-center">
