@@ -14,6 +14,7 @@ const nextConfig: NextConfig = {
         hostname: '**', // Allow all HTTPS images
       },
     ],
+    qualities: [100, 75],
   },
 };
 
