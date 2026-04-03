@@ -27,7 +27,7 @@ const categories = [
 
 export default function ShopByCategory() {
   return (
-    <section className="pt-[250px] pb-[100px] md:py-[100px]">
+    <section className="pt-[250px] pb-[100px] md:py-[100px] bg-white">
       <div className="container mx-auto">
         <div className="flex items-center justify-between mb-8">
           <h2 className="text-[32px] font-[600] text-[#12100E]">Shop by Categories</h2>

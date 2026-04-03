@@ -3,8 +3,8 @@ import Link from 'next/link';
 
 export default function OffRoadingLights() {
   return (
-    <section className="py-16">
-      <div className="container mx-auto">
+    <section className="py-16 bg-white">
+      <div className="container mx-auto bg-white">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* Large Left Card - Led Off Road Lights */}
         <Link
