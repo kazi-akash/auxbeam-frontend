@@ -27,7 +27,7 @@ export default function Hero() {
             Starts Here
           </h1>
           <p className="font-sans text-[14px] sm:text-[15px] md:text-[16px] font-normal leading-[150%] tracking-[-0.01em] text-gray-200 mb-6 sm:mb-8 md:mb-10 max-w-lg">
-            Upgrade your ride with powerful, durable Auxbeam Led snow available across Bangladesh.
+            Upgrade your ride with powerful, durable Auxbeam <br className="hidden lg:block" />Led snow available across Bangladesh.
           </p>
           <Link
             href="/shop"
