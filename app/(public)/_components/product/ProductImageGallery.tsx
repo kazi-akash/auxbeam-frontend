@@ -20,14 +20,14 @@ export default function ProductImageGallery({ images }: ProductImageGalleryProps
   };
 
   return (
-    <div className="flex gap-4 h-[600px]">
+    <div className="flex gap-4 w-[757px] h-[682px]">
       {/* Thumbnails */}
       <div className="flex flex-col gap-3 overflow-y-auto w-24 flex-shrink-0 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
         {images.map((img, idx) => (
           <button
             key={idx}
             onClick={() => setCurrentIndex(idx)}
-            className={`relative w-24 h-24 rounded-lg overflow-hidden border-2 transition-colors flex-shrink-0 ${
+            className={`relative w-[91px] h-[87px] rounded-lg overflow-hidden border-2 transition-colors flex-shrink-0 ${
               idx === currentIndex ? 'border-yellow-400' : 'border-transparent hover:border-gray-200'
             }`}
           >
@@ -48,24 +48,24 @@ export default function ProductImageGallery({ images }: ProductImageGalleryProps
       </div>
 
       {/* Main Image */}
-      <div className="relative flex-1 bg-white rounded-2xl overflow-hidden border border-gray-100 flex items-center justify-center shadow-sm">
+      <div className="relative flex-1 bg-white rounded-[8px] overflow-hidden border border-gray-200 flex items-center justify-center">
         {/* Navigation Arrows */}
         <button
           onClick={prevImage}
-          className="absolute left-4 top-1/2 -translate-y-1/2 w-10 h-10 bg-white rounded-lg shadow-md flex items-center justify-center hover:bg-gray-50 transition-colors z-10 border border-gray-100"
+          className="absolute left-4 top-1/2 -translate-y-1/2 w-[48px] h-[48px] bg-white rounded-[8px] shadow-md flex items-center justify-center hover:bg-gray-50 transition-colors z-10"
         >
-          <ChevronLeft className="w-5 h-5 text-gray-700" />
+          <ChevronLeft className="w-[24px] h-[24px] text-[#000000]" />
         </button>
 
         <button
           onClick={nextImage}
-          className="absolute right-4 top-1/2 -translate-y-1/2 w-10 h-10 bg-[#FDE047] rounded-lg shadow-md flex items-center justify-center hover:bg-[#FACC15] transition-colors z-10"
+          className="absolute right-4 top-1/2 -translate-y-1/2 w-[48px] h-[48px] bg-[#FDDE35] rounded-lg shadow-md flex items-center justify-center hover:bg-[#FACC15] transition-colors z-10"
         >
-          <ChevronRight className="w-5 h-5 text-gray-900" />
+          <ChevronRight className="w-[24px] h-[24px] text-[#000000]" />
         </button>
 
         {/* Favorite Button */}
-        <button className="absolute top-4 right-4 w-10 h-10 bg-gray-50 rounded-full flex items-center justify-center hover:bg-gray-100 transition-colors z-10">
+        <button className="absolute top-4 right-4 w-10 h-10 bg-[#F3F4F6] rounded-full flex items-center justify-center hover:bg-gray-100 transition-colors z-10">
           <Heart className="w-5 h-5 text-gray-400" />
         </button>
 

@@ -45,10 +45,10 @@ export default function ClientFeedback() {
           {/* Navigation Arrows */}
           <div className="flex items-center gap-2">
             <button 
-              className="w-10 h-10 rounded-full bg-[#E5E7EB] flex items-center justify-center hover:bg-[#D1D5DB] transition-colors"
+              className="w-10 h-10 rounded-full bg-[#F3F4F6] flex items-center justify-center hover:bg-[#D1D5DB] transition-colors"
               aria-label="Previous testimonials"
             >
-              <ChevronLeft className="w-5 h-5 text-[#12100E]" />
+              <ChevronLeft className="w-5 h-5 text-[#6A7282]" />
             </button>
             <button 
               className="w-10 h-10 rounded-full bg-[#FCE32D] flex items-center justify-center hover:bg-[#e6cc28] transition-colors"

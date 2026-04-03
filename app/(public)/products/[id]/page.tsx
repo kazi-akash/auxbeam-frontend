@@ -10,14 +10,14 @@ import YouMayAlsoLike from '../../_components/shop/YouMayAlsoLike';
 
 // Mock product data - replace with API call
 const productImages = [
+  '/images/product-page/e289c177b94614ad421b2a48e6ed78c26793555a.png',
+  '/images/product-page/e7aa12090fbb37ec36b731b528b68a0fd475cff2.png',
   '/images/product-page/0a36f9424ceea4dd8e2c5771a4fe667bf06b1c05.png',
   '/images/product-page/175cb2045d9eadebb9b3646538100cceec977f5b.png',
   '/images/product-page/601fefc1be330aa0950697206cca431407646b2c.png',
   '/images/product-page/970bcc58ca13f00990838ef6d3390b3dbfaf58a2.png',
   '/images/product-page/ac3cbd43533b64de853fe18576e1cbeea2508ce9.png',
   '/images/product-page/b6a4b256e3c6103db64e0d72fe0ec678c04ba54b.png',
-  '/images/product-page/e289c177b94614ad421b2a48e6ed78c26793555a.png',
-  '/images/product-page/e7aa12090fbb37ec36b731b528b68a0fd475cff2.png',
 ];
 
 const mockProduct = {
@@ -46,14 +46,14 @@ export default function ProductDetailsPage({ params }: { params: Promise<{ id: s
           <AddToCompareButton />
         </div>
         
-        <div className="bg-white flex flex-col lg:flex-row gap-10 mb-12">
+        <div className="bg-white flex flex-col lg:flex-row gap-10 mb-[100px]">
           {/* Left Column: Image Gallery */}
-          <div className="w-full lg:w-1/2">
+          <div className="w-full lg:w-[757px] lg:h-[682px]">
             <ProductImageGallery images={productImages} />
           </div>
 
           {/* Right Column: Product Info */}
-          <div className="w-full lg:w-1/2">
+          <div className="w-full  lg:h-[783px]">
             <ProductInfo product={product} />
           </div>
         </div>

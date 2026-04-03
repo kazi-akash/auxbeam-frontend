@@ -33,7 +33,7 @@ export default function ShopByCategory() {
           <h2 className="text-[32px] font-[600] text-[#12100E]">Shop by Categories</h2>
           <div className="flex items-center gap-3">
             <button
-              className="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center text-gray-400 hover:bg-gray-200 transition-colors"
+              className="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center text-[#6A7282] hover:bg-gray-200 transition-colors"
               aria-label="Previous categories"
             >
               <ChevronLeft className="w-5 h-5" />

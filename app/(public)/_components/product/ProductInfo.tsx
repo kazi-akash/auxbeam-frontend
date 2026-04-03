@@ -27,8 +27,8 @@ export default function ProductInfo({ product }: ProductInfoProps) {
   const bulbSizes = [
     '(2pcs) 9005/HB3/H10',
     '(2pcs) 9006/HB4',
-    '(2pcs) H11/H9/H8',
-    '(2pcs) H11/H9/H8',
+    // '(2pcs) H11/H9/H8',
+    // '(2pcs) H11/H9/H8',
     '(2pcs) H1',
     '(2pcs) H13/9008',
     '(2pcs) H7'
@@ -37,49 +37,49 @@ export default function ProductInfo({ product }: ProductInfoProps) {
   return (
     <div className="flex flex-col w-full font-sans">
       {/* Brand */}
-      <div className="text-red-500 text-sm font-medium mb-2">{product.brand}</div>
+      <div className="text-[#FF3B30] text-[14px] font-[500] mb-2">{product.brand}</div>
       
       {/* Title */}
-      <h1 className="text-3xl font-medium text-gray-900 leading-tight mb-4">
+      <h1 className="text-[24px] font-[500] text-[#181910] leading-tight mb-4">
         {product.name}
       </h1>
 
       {/* Ratings and SKU */}
       <div className="flex items-center gap-6 text-sm mb-3">
         <div className="flex items-center gap-2">
-          <div className="flex text-[#F59E0B]">
+          <div className="flex text-[#FF8904]">
             {[...Array(5)].map((_, i) => (
-              <Star key={i} className={`w-4 h-4 ${i < product.rating ? 'fill-current' : 'text-gray-300'}`} />
+              <Star key={i} className={`w-[16px] h-[16px] ${i < product.rating ? 'fill-current' : 'text-gray-300'}`} />
             ))}
           </div>
-          <span className="text-gray-500 underline decoration-gray-400 underline-offset-2 cursor-pointer hover:text-gray-700">
+          <span className="text-[#4D4C44] text-[14px] font-[400] underline decoration-gray-400 underline-offset-2 cursor-pointer hover:text-gray-700">
             ({product.reviews} Reviews)
           </span>
         </div>
-        <div className="text-gray-500">
+        <div className="text-[#12100E] text-[16px] font-[400]">
           Sku: {product.sku}
         </div>
       </div>
 
       {/* Pricing */}
-      <div className="flex items-center gap-4 mb-3">
-        <span className="text-[28px] font-bold text-gray-900">{product.price.toFixed(2)} BDT</span>
-        <span className="text-gray-500 line-through text-base font-medium">BDT {product.originalPrice.toFixed(2)}</span>
-        <span className="bg-red-500 text-white text-xs font-bold px-2 py-1 rounded">
+      <div className="flex items-center gap-4 pb-4 border-b border-[#E5E7EB] mb-5">
+        <span className="text-[24px] font-[600] text-[#12100E]">{product.price.toFixed(2)} BDT</span>
+        <span className="text-[#4D4C44] line-through text-[16px] font-[400]">BDT {product.originalPrice.toFixed(2)}</span>
+        <span className="bg-[#FF3B30] text-white text-[12px] font-[600] px-2 py-1 rounded-[2px]">
           -{product.discount}% off
         </span>
       </div>
 
       {/* Stock Status */}
-      <div className="flex items-center gap-2 text-green-600 font-medium mb-3">
-        <div className="w-2.5 h-2.5 rounded-full bg-green-500"></div>
-        <span>Available in stock</span>
+      <div className="flex items-center gap-2 text-[#00A63E] font-medium mb-3">
+        <div className="w-[16px] h-[16px] rounded-full bg-[#00A63E] border-2 border-[#E5E7EB]"></div>
+        <span className="text-[160x] font-[600]">Available in stock</span>
       </div>
 
       {/* Series Selection */}
-      <div className="flex flex-col gap-3 mb-3">
-        <span className="text-gray-900 font-medium">
-          Series: <span className="text-gray-500 font-normal ml-1">{selectedSeries}</span>
+      <div className="flex flex-col gap-3 mb-[20px]">
+        <span className="text-[#12100E] text-[16px] font-[500]">
+          Series: <span className="text-[#4D4C44] text-[16px] font-[400] ml-1">{selectedSeries}</span>
         </span>
         <div className="flex flex-wrap gap-2">
           {seriesOptions.map((series) => (
@@ -88,8 +88,8 @@ export default function ProductInfo({ product }: ProductInfoProps) {
               onClick={() => setSelectedSeries(series)}
               className={`px-4 py-2 border rounded-md text-sm transition-colors ${
                 selectedSeries === series
-                  ? 'border-gray-900 text-gray-900 font-medium'
-                  : 'border-gray-200 text-gray-500 hover:border-gray-300'
+                  ? 'border-[#030712] text-[#12100E] text-[16px] font-[500]'
+                  : 'border-gray-200 text-[16px] font-[400] text-[#6A7282] hover:border-gray-500'
               }`}
             >
               {series}
@@ -99,18 +99,18 @@ export default function ProductInfo({ product }: ProductInfoProps) {
       </div>
 
       {/* Bulb Size Selection */}
-      <div className="flex flex-col gap-3 mb-3">
-        <span className="text-gray-900 font-medium">
-          Bulb Size: <span className="text-gray-500 font-normal ml-1">{selectedSeries}</span>
+      <div className="flex flex-col gap-3 mb-[20px]">
+        <span className="text-[#12100E] text-[16px] font-[500]">
+          Bulb Size: <span className="text-[#4D4C44] text-16px font-[400] ml-1">{selectedSeries}</span>
         </span>
         <div className="flex flex-wrap gap-2">
           {bulbSizes.map((size, index) => (
             <button
               key={index}
               onClick={() => setSelectedBulbSize(size)}
-              className={`px-4 py-2 border rounded-md text-sm transition-colors ${
+              className={`p-[8px] border rounded-md text-[16px] font-500 transition-colors ${
                 selectedBulbSize === size
-                  ? 'border-gray-900 text-gray-900 font-medium'
+                  ? 'border-gray-900 text-[#181910]'
                   : 'border-gray-200 text-gray-500 hover:border-gray-300'
               }`}
             >
@@ -121,32 +121,32 @@ export default function ProductInfo({ product }: ProductInfoProps) {
       </div>
 
       {/* Quantity and Service */}
-      <div className="grid grid-cols-2 gap-6 mb-3">
-        <div className="flex flex-col gap-2">
-          <span className="text-gray-900 font-medium">Quantity:</span>
-          <div className="flex items-center border border-gray-200 rounded-md h-12 w-32 justify-between px-4">
+      <div className="flex gap-6 mb-[20px]">
+        <div className="flex flex-col gap-2 w-[206px]">
+          <span className="text-[#12100E] text-[16px] font-[500]">Quantity:</span>
+          <div className="flex items-center border border-gray-200 rounded-md h-12 w-full justify-between px-4">
             <button
               onClick={() => setQuantity(Math.max(1, quantity - 1))}
-              className="text-gray-400 hover:text-gray-900"
+              className="text-gray-400 hover:text-[#181910]"
             >
-              <Minus className="w-4 h-4" />
+              <Minus className="w-[10px] h-[24px] text-[#6A7282]" />
             </button>
-            <span className="font-medium text-gray-900">{quantity}</span>
+            <span className="text-[16px] font-[600]] text-[#12100E]">{quantity}</span>
             <button
               onClick={() => setQuantity(quantity + 1)}
-              className="text-gray-400 hover:text-gray-900"
+              className="text-gray-400 hover:text-[#181910]"
             >
-              <Plus className="w-4 h-4" />
+              <Plus className="w-[10px] h-[24px] text-[#161617] text-[16px] font-[600]" />
             </button>
           </div>
         </div>
 
-        <div className="flex flex-col gap-2">
-          <span className="text-gray-900 font-medium">
+        <div className="flex flex-col gap-2 w-[206px]">
+          <span className="text-[#181910] text-[16px] font-[500]">
             Service <span className="text-red-500">*</span>
           </span>
           <div className="relative">
-            <select className="w-full h-12 border border-gray-200 rounded-md px-4 appearance-none text-gray-700 bg-white focus:outline-none focus:ring-1 focus:ring-gray-900 cursor-pointer">
+            <select className="w-full h-12 border border-gray-200 rounded-md px-4 appearance-none text-[14px] font-[400] text-[#6A7282] bg-white focus:outline-none focus:ring-1 focus:ring-gray-900 cursor-pointer">
               <option>Home Installation</option>
               <option>Store Installation</option>
               <option>No Installation</option>
@@ -157,45 +157,45 @@ export default function ProductInfo({ product }: ProductInfoProps) {
       </div>
 
       {/* Payment Options */}
-      <div className="flex flex-col gap-3 mb-3">
-        <span className="text-gray-900 font-medium">Payment Options</span>
+      <div className="flex flex-col gap-3 mb-[20px]">
+        <span className="text-[#12100E] text-[16px] font-[500]">Payment Options</span>
         <div className="grid grid-cols-2 gap-4">
           {/* Full Payment */}
           <button
             onClick={() => setPaymentOption('full')}
-            className={`flex items-start gap-3 p-4 border rounded-lg text-left transition-colors ${
-              paymentOption === 'full' ? 'border-yellow-400 bg-yellow-50/20' : 'border-gray-200 hover:border-gray-300'
+            className={`flex items-center gap-3 p-4 border rounded-lg text-left transition-colors ${
+              paymentOption === 'full' ? 'border-[#E5E7EB]' : 'border-gray-200 hover:border-gray-300'
             }`}
           >
-            <div className={`mt-1 w-4 h-4 rounded-full border flex items-center justify-center flex-shrink-0 ${
+            <div className={`w-4 h-4 rounded-full border flex items-center justify-center flex-shrink-0 ${
               paymentOption === 'full' ? 'border-yellow-400' : 'border-gray-300'
             }`}>
-              {paymentOption === 'full' && <div className="w-2.5 h-2.5 bg-yellow-400 rounded-full" />}
+              {paymentOption === 'full' && <div className="w-2.5 h-2.5 bg-[#FACD15] rounded-full" />}
             </div>
             <div className="flex flex-col gap-1">
-              <div className="font-bold text-gray-900 text-base">{product.price.toFixed(2)} BDT</div>
-              <div className="text-xs text-gray-500">Online / Cash Payment</div>
+              <div className="text-[16px] font-[500] text-[#12100E] text-base">{product.price.toFixed(2)} BDT</div>
+              <div className="text-[12px] text-[#4D4C44] font-[400]">Online / Cash Payment</div>
             </div>
           </button>
 
           {/* EMI Option */}
           <button
             onClick={() => setPaymentOption('emi')}
-            className={`flex items-start gap-3 p-4 border rounded-lg text-left transition-colors ${
-              paymentOption === 'emi' ? 'border-yellow-400 bg-yellow-50/20' : 'border-gray-200 hover:border-gray-300'
+            className={`flex items-center gap-3 p-4 border rounded-lg text-left transition-colors ${
+              paymentOption === 'emi' ? 'border-[#E5E7EB]' : 'border-gray-200 hover:border-gray-300'
             }`}
           >
-            <div className={`mt-1 w-4 h-4 rounded-full border flex items-center justify-center flex-shrink-0 ${
+            <div className={`w-4 h-4 rounded-full border flex items-center justify-center flex-shrink-0 ${
               paymentOption === 'emi' ? 'border-yellow-400' : 'border-gray-300'
             }`}>
               {paymentOption === 'emi' && <div className="w-2.5 h-2.5 bg-yellow-400 rounded-full" />}
             </div>
             <div className="flex flex-col gap-1">
-              <div className="font-bold text-gray-900 text-base">
-                499.99 BDT <span className="text-gray-500 font-normal text-xs">/month</span>
+              <div className="text-[16px] font-[500] text-[#12100E] text-base">
+                499.99 BDT <span className="text-[#4D4C44] font-[500] text-[16px]">/month</span>
               </div>
-              <div className="text-xs text-gray-900">Regular Price {product.price.toFixed(2)} BDT</div>
-              <div className="text-xs text-gray-500">0% EMI for up to 12 Months</div>
+              <div className="text-[12px] font-[400] text-[#12100E]">Regular Price {product.price.toFixed(2)} BDT</div>
+              <div className="text-[12px] font-[400] text-[#4D4C44]">0% EMI for up to 12 Months</div>
             </div>
           </button>
         </div>
@@ -203,12 +203,12 @@ export default function ProductInfo({ product }: ProductInfoProps) {
 
       {/* Action Buttons */}
       <div className="grid grid-cols-2 gap-4">
-        <button className="h-12 bg-[#FDE047] hover:bg-[#FACC15] text-gray-900 font-semibold rounded-md flex items-center justify-center gap-2 transition-colors">
-          <ShoppingBag className="w-5 h-5" />
+        <button className="h-12 bg-[#FDDE35] hover:bg-[#FACC15] text-[#181910] text-[14px] font-[600] rounded-md flex items-center justify-center gap-2 transition-colors">
+          <ShoppingBag className="w-[16px] h-[16px]" />
           Add to Cart
         </button>
-        <button className="h-12 border border-gray-900 text-gray-900 font-semibold rounded-md flex items-center justify-center gap-2 hover:bg-gray-50 transition-colors">
-          <ShoppingBag className="w-5 h-5" />
+        <button className="h-12 border border-gray-900 text-[#181910] text-[14px] font-[600] rounded-md flex items-center justify-center gap-2 hover:bg-gray-50 transition-colors">
+          <ShoppingBag className="w-[16px] h-[16px]" />
           Buy It Now
         </button>
       </div>

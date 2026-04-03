@@ -70,40 +70,47 @@ export default function YouMayAlsoLike() {
   };
 
   return (
-    <section className="py-12 bg-white">
+    <section className="py-[100px] bg-[#F9FAFB]">
       <div className="container mx-auto">
         {/* Header */}
-        <div className="flex items-center justify-between mb-8">
-          <h2 className="text-3xl font-bold text-gray-900">You May Also Like</h2>
+        <div className="flex items-center justify-between mb-10">
+          <h2 className="text-[32px] font-[600] text-[#12100E]">You May Also Like</h2>
+          {/* Navigation Arrows */}
           <div className="flex items-center gap-2">
-            <button className="w-10 h-10 rounded-full bg-white hover:bg-gray-100 flex items-center justify-center shadow-sm transition-colors border border-gray-200">
-              <ChevronLeft className="w-5 h-5 text-gray-600" />
+            <button 
+              className="w-10 h-10 rounded-full bg-[#F3F4F6] flex items-center justify-center hover:bg-[#D1D5DB] transition-colors"
+              aria-label="Previous products"
+            >
+              <ChevronLeft className="w-5 h-5 text-[#6A7282]" />
             </button>
-            <button className="w-10 h-10 rounded-full bg-[#ffd700] hover:bg-[#ffc700] flex items-center justify-center shadow-sm transition-colors">
-              <ChevronRight className="w-5 h-5 text-gray-900" />
+            <button 
+              className="w-10 h-10 rounded-full bg-[#FCE32D] flex items-center justify-center hover:bg-[#e6cc28] transition-colors"
+              aria-label="Next products"
+            >
+              <ChevronRight className="w-5 h-5 text-[#12100E]" />
             </button>
           </div>
         </div>
 
         {/* Product Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 justify-items-center">
           {products.map((product) => (
             <Link
               key={product.id}
               href={`/products/${product.id}`}
-              className="bg-white rounded-[16px] overflow-hidden border border-[#E5E7EB] transition-shadow group cursor-pointer hover:shadow-lg block"
+              className="bg-white rounded-[16px] overflow-hidden border border-[#E5E7EB] transition-shadow group cursor-pointer hover:shadow-lg block w-[313px] h-[405px] flex flex-col"
               style={{ boxShadow: '0px 2px 30px 0px rgba(0, 0, 0, 0.08)' }}
             >
               {/* Image Container */}
-              <div className="relative aspect-square bg-white p-6">
-                {/* New Badge */}
-                {product.isNew && (
-                  <div className="absolute top-3 left-3 z-10">
+              <div className="relative w-full h-[250px] bg-white p-6 flex-shrink-0">
+                {/* Badges */}
+                <div className="absolute top-3 left-3 z-10 flex flex-col gap-2">
+                  {product.isNew && (
                     <span className="bg-[#3B82F6] text-white text-xs font-medium px-2.5 py-1 rounded">
                       New
                     </span>
-                  </div>
-                )}
+                  )}
+                </div>
 
                 {/* Wishlist Button */}
                 <button
@@ -112,7 +119,7 @@ export default function YouMayAlsoLike() {
                     e.stopPropagation();
                     toggleWishlist(product.id);
                   }}
-                  className="absolute top-3 right-3 z-10 w-8 h-8 rounded-full bg-white flex items-center justify-center hover:bg-gray-100 transition-colors shadow-sm"
+                  className="absolute top-3 right-3 z-10 w-8 h-8 rounded-full bg-[#F3F4F6] flex items-center justify-center hover:bg-gray-100 transition-colors"
                   aria-label="Add to wishlist"
                 >
                   <Heart
@@ -137,35 +144,33 @@ export default function YouMayAlsoLike() {
               </div>
 
               {/* Product Info */}
-              <div className="p-4 bg-[#F6F5F4]">
+              <div className="p-4 bg-[#F6F5F4] flex-1 flex flex-col">
                 {/* Product Name */}
-                <h3 className="text-sm text-[#111827] font-normal mb-3 line-clamp-2 min-h-[40px]">
+                <h3 className="text-[14px] text-[#12100E] font-[400] mb-2 line-clamp-2 min-h-[40px]">
                   {product.name}
                 </h3>
 
                 {/* Rating */}
-                <div className="flex items-center gap-2 mb-3">
+                <div className="flex items-center gap-2">
                   <div className="flex items-center gap-0.5">
                     {[...Array(5)].map((_, i) => (
-                      <Star
-                        key={i}
-                        className={`w-4 h-4 ${
-                          i < product.rating
-                            ? 'fill-[#FBBF24] text-[#FBBF24]'
+                      <Star 
+                        key={i} 
+                        className={`w-3.5 h-3.5 ${
+                          i < product.rating 
+                            ? 'fill-[#ff8904] text-[#ff8904]' 
                             : 'fill-gray-200 text-gray-200'
                         }`}
                       />
                     ))}
                   </div>
-                  <span className="text-xs text-[#6B7280]">
-                    ({product.reviews} Reviews)
-                  </span>
+                  <span className="text-[11px] text-[#4D4C44] underline">({product.reviews} Reviews)</span>
                 </div>
 
                 {/* Price and Cart */}
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-2">
-                    <span className="text-base font-semibold text-[#111827]">
+                <div className="flex items-center justify-between mt-[16px]">
+                  <div className="flex items-center gap-3">
+                    <span className="text-[16px] font-[600] text-[#12100E]">
                       {product.price.toFixed(2)} BDT
                     </span>
                   </div>
@@ -175,11 +180,11 @@ export default function YouMayAlsoLike() {
                       e.stopPropagation();
                       // Add to cart logic here
                     }}
-                    className="h-9 px-4 rounded bg-[#FCE32D] flex items-center justify-center gap-1 hover:bg-[#e6cc28] transition-colors"
+                    className="h-8 px-2 rounded bg-[#FCE32D] flex items-center justify-center gap-1 hover:bg-[#e6cc28] transition-colors flex-shrink-0"
                     aria-label="Add to cart"
                   >
-                    <Plus className="w-5 h-5 text-black" />
-                    <span className="text-sm font-medium text-black">Cart</span>
+                    <Plus className="w-4 h-4 text-black" />
+                    <span className="text-[14px] font-[600] text-black">Cart</span>
                   </button>
                 </div>
               </div>

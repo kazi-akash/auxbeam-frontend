@@ -22,16 +22,16 @@ export default function ProductDetails({ reviewCount = 132 }: ProductDetailsProp
   return (
     <div className="w-full font-sans">
       {/* Tab Navigation */}
-      <div className="flex items-center gap-2 border-b border-gray-200 mb-8">
+      <div className="flex items-center gap-[16px] mb-[16px]">
         {tabs.map((tab) => (
           <button
             key={tab.id}
             onClick={() => setActiveTab(tab.id)}
-            className={`px-6 py-3 text-sm font-medium transition-colors relative ${
+            className={`px-6 py-3 text-[14px] font-[600] transition-colors rounded-[4px] ${
               activeTab === tab.id
-                ? 'bg-[#FDE047] text-gray-900'
-                : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
-            } ${tab.id === 'description' ? 'rounded-tl-lg' : ''}`}
+                ? 'bg-[#FDDE35] text-[#12100E]'
+                : 'bg-[#FFFFFF] text-[#4D4C44] hover:bg-gray-50 border border-[#E5E7EB]'
+            }`}
           >
             {tab.label}
           </button>
