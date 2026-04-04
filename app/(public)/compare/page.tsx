@@ -3,6 +3,8 @@
 import { useState } from 'react';
 import { Search, Trash2, ChevronDown, ChevronUp } from 'lucide-react';
 import Image from 'next/image';
+import Breadcrumb from '../_components/Breadcrumb';
+import Link from 'next/link';
 
 interface Product {
   id: string;
@@ -80,8 +82,16 @@ export default function ComparePage() {
   };
 
   return (
-    <div className="min-h-screen bg-[#F5F5F5] pt-24 pb-12 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-7xl mx-auto">
+    <div className="min-h-screen bg-[#F9FAFB]">
+          <Breadcrumb
+            items={[
+              { label: 'Home', href: '/' },
+              { label: 'Compare' },
+            ]}
+          />
+      <div className="max-w-7xl mx-auto py-8">
+        {/* Breadcrumb */}
+
         {/* Single Comparison Card */}
         <div className="bg-white rounded-lg border border-[#E5E7EB]">
           {/* Product Headers */}
