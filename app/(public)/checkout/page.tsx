@@ -81,77 +81,77 @@ export default function CheckoutPage() {
         ]}
       />
 
-      <div className="max-w-7xl mx-auto py-8">
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-6">
           {/* Left Column - Shipping Information */}
-          <div className="lg:col-span-2 space-y-6">
+          <div className="lg:col-span-2 space-y-4 sm:space-y-6">
             {/* Shipping Information Header */}
             <div className="">
-              <div className="flex items-center justify-between mb-6 bg-white rounded-lg p-6 border border-[#E5E7EB]">
-                <h2 className="text-[24px] font-[600] text-[#12100E]">Shipping Information</h2>
-                <button className="flex items-center gap-2 bg-[#ffd700] hover:bg-[#ffed4e] text-gray-900 font-medium px-4 py-2 rounded text-sm">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-0 mb-4 sm:mb-6 bg-white rounded-lg p-4 sm:p-6 border border-[#E5E7EB]">
+                <h2 className="text-[20px] sm:text-[24px] font-[600] text-[#12100E]">Shipping Information</h2>
+                <button className="flex items-center justify-center gap-2 bg-[#ffd700] hover:bg-[#ffed4e] text-gray-900 font-medium px-4 py-2 rounded text-sm">
                   <Plus size={16} />
                   Add Address
                 </button>
               </div>
 
               {/* Saved Addresses Section */}
-              <div className="mb-6 bg-white rounded-lg p-6 border border-[#E5E7EB]">
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+              <div className="mb-4 sm:mb-6 bg-white rounded-lg p-4 sm:p-6 border border-[#E5E7EB]">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
                   {/* Address Card 1 - Selected */}
-                  <div className="border-2 border-[#ffd700] rounded-lg p-5 bg-white relative flex flex-col">
-                    <div className="space-y-3 flex-grow">
+                  <div className="border-2 border-[#ffd700] rounded-lg p-4 sm:p-5 bg-white relative flex flex-col">
+                    <div className="space-y-2.5 sm:space-y-3 flex-grow">
                       {/* Name */}
                       <div className="flex items-center gap-2 text-gray-900">
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="flex-shrink-0">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="flex-shrink-0 sm:w-[18px] sm:h-[18px]">
                           <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
                           <circle cx="12" cy="7" r="4"></circle>
                         </svg>
-                        <span className="text-sm font-normal">Tracy Craig</span>
+                        <span className="text-[13px] sm:text-sm font-normal">Tracy Craig</span>
                       </div>
 
                       {/* Email */}
                       <div className="flex items-center gap-2 text-gray-700">
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="flex-shrink-0">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="flex-shrink-0 sm:w-[18px] sm:h-[18px]">
                           <rect x="2" y="4" width="20" height="16" rx="2"></rect>
                           <path d="m2 7 10 7 10-7"></path>
                         </svg>
-                        <span className="text-sm">jamie_robertson@icloud.com</span>
+                        <span className="text-[13px] sm:text-sm truncate">jamie_robertson@icloud.com</span>
                       </div>
 
                       {/* Phone */}
                       <div className="flex items-center gap-2 text-gray-700">
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="flex-shrink-0">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="flex-shrink-0 sm:w-[18px] sm:h-[18px]">
                           <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
                         </svg>
-                        <span className="text-sm">+1567673241662</span>
+                        <span className="text-[13px] sm:text-sm">+1567673241662</span>
                       </div>
 
                       {/* Address */}
                       <div className="flex items-start gap-2 text-gray-700">
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="flex-shrink-0 mt-0.5">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="flex-shrink-0 mt-0.5 sm:w-[18px] sm:h-[18px]">
                           <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
                           <circle cx="12" cy="10" r="3"></circle>
                         </svg>
-                        <span className="text-sm">262 Swansea, Swansea</span>
+                        <span className="text-[13px] sm:text-sm">262 Swansea, Swansea</span>
                       </div>
                     </div>
 
                     {/* Action Buttons */}
-                    <div className="flex gap-2 mt-2">
-                      <button className="flex items-center justify-center gap-1.5 flex-1 px-3 py-2 bg-red-50 text-red-500 rounded text-sm font-medium hover:bg-red-100 transition-colors">
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                    <div className="flex gap-2 mt-3 sm:mt-2">
+                      <button className="flex items-center justify-center gap-1 sm:gap-1.5 flex-1 px-2 sm:px-3 py-2 bg-red-50 text-red-500 rounded text-[13px] sm:text-sm font-medium hover:bg-red-100 transition-colors">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="sm:w-4 sm:h-4">
                           <polyline points="3 6 5 6 21 6"></polyline>
                           <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
                         </svg>
-                        Remove
+                        <span className="hidden sm:inline">Remove</span>
                       </button>
-                      <button className="flex items-center justify-center gap-1.5 flex-1 px-3 py-2 bg-[#F3F4F6] text-[#181910] rounded text-sm font-medium hover:bg-gray-100 transition-colors">
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                      <button className="flex items-center justify-center gap-1 sm:gap-1.5 flex-1 px-2 sm:px-3 py-2 bg-[#F3F4F6] text-[#181910] rounded text-[13px] sm:text-sm font-medium hover:bg-gray-100 transition-colors">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="sm:w-4 sm:h-4">
                           <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
                           <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
                         </svg>
-                        Edit
+                        <span className="hidden sm:inline">Edit</span>
                       </button>
                     </div>
                   </div>
@@ -276,13 +276,13 @@ export default function CheckoutPage() {
 
               <form onSubmit={handleSubmit}>
                 {/* Contact Information */}
-                <div className="mb-8 bg-white rounded-lg p-6 border border-[#E5E7EB]">
-                  <h3 className="text-lg font-semibold text-gray-900 mb-3 pb-3 border-b border-gray-300">Contact Information</h3>
+                <div className="mb-6 sm:mb-8 bg-white rounded-lg p-4 sm:p-6 border border-[#E5E7EB]">
+                  <h3 className="text-base sm:text-lg font-semibold text-gray-900 mb-3 pb-3 border-b border-gray-300">Contact Information</h3>
                   
-                  <div className="space-y-4">
+                  <div className="space-y-3 sm:space-y-4">
                     {/* Full Name */}
                     <div>
-                      <label htmlFor="fullName" className="block text-sm font-medium text-gray-700 mb-2">
+                      <label htmlFor="fullName" className="block text-[13px] sm:text-sm font-medium text-gray-700 mb-2">
                         Full Name <span className="text-red-500">*</span>
                       </label>
                       <input
@@ -293,13 +293,13 @@ export default function CheckoutPage() {
                         onChange={handleInputChange}
                         placeholder="Full Name"
                         required
-                        className="w-full px-4 py-3 bg-white border border-gray-300 rounded text-sm text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:border-transparent"
+                        className="w-full px-3 sm:px-4 py-2.5 sm:py-3 bg-white border border-gray-300 rounded text-[13px] sm:text-sm text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:border-transparent"
                       />
                     </div>
 
                     {/* Phone Number */}
                     <div>
-                      <label htmlFor="phoneNumber" className="block text-sm font-medium text-gray-700 mb-2">
+                      <label htmlFor="phoneNumber" className="block text-[13px] sm:text-sm font-medium text-gray-700 mb-2">
                         Phone Number <span className="text-red-500">*</span>
                       </label>
                       <input
@@ -310,20 +310,20 @@ export default function CheckoutPage() {
                         onChange={handleInputChange}
                         placeholder="Phone Number"
                         required
-                        className="w-full px-4 py-3 bg-white border border-gray-300 rounded text-sm text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:border-transparent"
+                        className="w-full px-3 sm:px-4 py-2.5 sm:py-3 bg-white border border-gray-300 rounded text-[13px] sm:text-sm text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:border-transparent"
                       />
                     </div>
                   </div>
                 </div>
 
                 {/* Shipping Address */}
-                <div className='mb-8 bg-white rounded-lg p-6 border border-[#E5E7EB]'>
-                  <h3 className="text-lg font-semibold text-gray-900 mb-3 pb-3 border-b border-gray-300">Shipping Address</h3>
+                <div className='mb-6 sm:mb-8 bg-white rounded-lg p-4 sm:p-6 border border-[#E5E7EB]'>
+                  <h3 className="text-base sm:text-lg font-semibold text-gray-900 mb-3 pb-3 border-b border-gray-300">Shipping Address</h3>
                   
-                  <div className="space-y-4">
+                  <div className="space-y-3 sm:space-y-4">
                     {/* Street Address */}
                     <div>
-                      <label htmlFor="streetAddress" className="block text-sm font-medium text-gray-700 mb-2">
+                      <label htmlFor="streetAddress" className="block text-[13px] sm:text-sm font-medium text-gray-700 mb-2">
                         Street, House, Apartment <span className="text-red-500">*</span>
                       </label>
                       <input
@@ -334,15 +334,15 @@ export default function CheckoutPage() {
                         onChange={handleInputChange}
                         placeholder="Enter Street Address, House No, Apartment No"
                         required
-                        className="w-full px-4 py-3 bg-white border border-gray-300 rounded text-sm text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:border-transparent"
+                        className="w-full px-3 sm:px-4 py-2.5 sm:py-3 bg-white border border-gray-300 rounded text-[13px] sm:text-sm text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:border-transparent"
                       />
                     </div>
 
                     {/* City, District, Zip-code */}
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 sm:gap-4">
                       {/* City */}
                       <div>
-                        <label htmlFor="city" className="block text-sm font-medium text-gray-700 mb-2">
+                        <label htmlFor="city" className="block text-[13px] sm:text-sm font-medium text-gray-700 mb-2">
                           City <span className="text-red-500">*</span>
                         </label>
                         <select
@@ -351,7 +351,7 @@ export default function CheckoutPage() {
                           value={formData.city}
                           onChange={handleInputChange}
                           required
-                          className="w-full px-4 py-3 bg-white border border-gray-300 rounded text-sm text-gray-500 focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:border-transparent appearance-none bg-[url('data:image/svg+xml;charset=UTF-8,%3csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 24 24%27 fill=%27none%27 stroke=%27currentColor%27 stroke-width=%272%27 stroke-linecap=%27round%27 stroke-linejoin=%27round%27%3e%3cpolyline points=%276 9 12 15 18 9%27%3e%3c/polyline%3e%3c/svg%3e')] bg-[length:1.25rem] bg-[right_0.5rem_center] bg-no-repeat"
+                          className="w-full px-3 sm:px-4 py-2.5 sm:py-3 bg-white border border-gray-300 rounded text-[13px] sm:text-sm text-gray-500 focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:border-transparent appearance-none bg-[url('data:image/svg+xml;charset=UTF-8,%3csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 24 24%27 fill=%27none%27 stroke=%27currentColor%27 stroke-width=%272%27 stroke-linecap=%27round%27 stroke-linejoin=%27round%27%3e%3cpolyline points=%276 9 12 15 18 9%27%3e%3c/polyline%3e%3c/svg%3e')] bg-[length:1.25rem] bg-[right_0.5rem_center] bg-no-repeat"
                         >
                           <option value="">Select City</option>
                           <option value="dhaka">Dhaka</option>
@@ -362,7 +362,7 @@ export default function CheckoutPage() {
 
                       {/* District */}
                       <div>
-                        <label htmlFor="district" className="block text-sm font-medium text-gray-700 mb-2">
+                        <label htmlFor="district" className="block text-[13px] sm:text-sm font-medium text-gray-700 mb-2">
                           District <span className="text-red-500">*</span>
                         </label>
                         <select
@@ -371,7 +371,7 @@ export default function CheckoutPage() {
                           value={formData.district}
                           onChange={handleInputChange}
                           required
-                          className="w-full px-4 py-3 bg-white border border-gray-300 rounded text-sm text-gray-500 focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:border-transparent appearance-none bg-[url('data:image/svg+xml;charset=UTF-8,%3csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 24 24%27 fill=%27none%27 stroke=%27currentColor%27 stroke-width=%272%27 stroke-linecap=%27round%27 stroke-linejoin=%27round%27%3e%3cpolyline points=%276 9 12 15 18 9%27%3e%3c/polyline%3e%3c/svg%3e')] bg-[length:1.25rem] bg-[right_0.5rem_center] bg-no-repeat"
+                          className="w-full px-3 sm:px-4 py-2.5 sm:py-3 bg-white border border-gray-300 rounded text-[13px] sm:text-sm text-gray-500 focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:border-transparent appearance-none bg-[url('data:image/svg+xml;charset=UTF-8,%3csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 24 24%27 fill=%27none%27 stroke=%27currentColor%27 stroke-width=%272%27 stroke-linecap=%27round%27 stroke-linejoin=%27round%27%3e%3cpolyline points=%276 9 12 15 18 9%27%3e%3c/polyline%3e%3c/svg%3e')] bg-[length:1.25rem] bg-[right_0.5rem_center] bg-no-repeat"
                         >
                           <option value="">Select District</option>
                           <option value="dhaka">Dhaka</option>
@@ -382,7 +382,7 @@ export default function CheckoutPage() {
 
                       {/* Zip-code */}
                       <div>
-                        <label htmlFor="zipCode" className="block text-sm font-medium text-gray-700 mb-2">
+                        <label htmlFor="zipCode" className="block text-[13px] sm:text-sm font-medium text-gray-700 mb-2">
                           Zip-code
                         </label>
                         <input
@@ -392,7 +392,7 @@ export default function CheckoutPage() {
                           value={formData.zipCode}
                           onChange={handleInputChange}
                           placeholder="Enter Zip code"
-                          className="w-full px-4 py-3 bg-white border border-gray-300 rounded text-sm text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:border-transparent"
+                          className="w-full px-3 sm:px-4 py-2.5 sm:py-3 bg-white border border-gray-300 rounded text-[13px] sm:text-sm text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:border-transparent"
                         />
                       </div>
                     </div>
@@ -403,23 +403,23 @@ export default function CheckoutPage() {
 
             {/* Payment Method Section */}
             <div className="bg-white rounded-lg border border-[#E5E7EB]">
-              <div className="flex items-center justify-between p-6 border-b border-[#E5E7EB]">
-                <h2 className="text-xl font-bold text-gray-900">Select a Payment Method</h2>
+              <div className="flex items-center justify-between p-4 sm:p-6 border-b border-[#E5E7EB]">
+                <h2 className="text-lg sm:text-xl font-bold text-gray-900">Select a Payment Method</h2>
                 <button 
                   onClick={() => setIsPaymentExpanded(!isPaymentExpanded)}
                   className="text-gray-400 hover:text-gray-600 transition-transform"
                   style={{ transform: isPaymentExpanded ? 'rotate(0deg)' : 'rotate(180deg)' }}
                 >
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="sm:w-6 sm:h-6">
                     <polyline points="6 9 12 15 18 9"></polyline>
                   </svg>
                 </button>
               </div>
 
               {isPaymentExpanded && (
-                <div className="p-6">
+                <div className="p-4 sm:p-6">
                   {/* Payment Options */}
-                  <div className="space-y-4 mb-8">
+                  <div className="space-y-3 sm:space-y-4 mb-6 sm:mb-8">
                 {/* Credit/Debit Card */}
                 <label className="flex items-center justify-between p-4 bg-gray-50 rounded-lg cursor-pointer hover:bg-gray-100 transition-colors">
                   <div className="flex items-center gap-3">
@@ -476,13 +476,13 @@ export default function CheckoutPage() {
               </div>
 
               {/* Secure Card Details */}
-              <div className='bg-white rounded-lg p-6 border border-[#E5E7EB]'>
-                <h3 className="text-xl font-bold text-gray-900 mb-6">Secure Card Details</h3>
+              <div className='bg-white rounded-lg p-4 sm:p-6 border border-[#E5E7EB]'>
+                <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-4 sm:mb-6">Secure Card Details</h3>
 
-                <div className="space-y-4">
+                <div className="space-y-3 sm:space-y-4">
                   {/* Name on Card */}
                   <div>
-                    <label htmlFor="cardName" className="block text-base font-medium text-gray-900 mb-2">
+                    <label htmlFor="cardName" className="block text-[13px] sm:text-base font-medium text-gray-900 mb-2">
                       Name on Card
                     </label>
                     <input
@@ -490,13 +490,13 @@ export default function CheckoutPage() {
                       id="cardName"
                       name="cardName"
                       placeholder="Jon Doe"
-                      className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded text-base text-gray-500 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:border-transparent"
+                      className="w-full px-3 sm:px-4 py-2.5 sm:py-3 bg-gray-50 border border-gray-200 rounded text-[13px] sm:text-base text-gray-500 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:border-transparent"
                     />
                   </div>
 
                   {/* Card Number */}
                   <div>
-                    <label htmlFor="cardNumber" className="block text-base font-medium text-gray-900 mb-2">
+                    <label htmlFor="cardNumber" className="block text-[13px] sm:text-base font-medium text-gray-900 mb-2">
                       Card Number
                     </label>
                     <input
@@ -505,21 +505,21 @@ export default function CheckoutPage() {
                       name="cardNumber"
                       placeholder="435 298 771 563"
                       maxLength={19}
-                      className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded text-base text-gray-500 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:border-transparent"
+                      className="w-full px-3 sm:px-4 py-2.5 sm:py-3 bg-gray-50 border border-gray-200 rounded text-[13px] sm:text-base text-gray-500 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:border-transparent"
                     />
                   </div>
 
                   {/* Expiry Date and CVC */}
-                  <div className="grid grid-cols-2 gap-4">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
                     {/* Expiry Date */}
                     <div>
-                      <label htmlFor="expiryDate" className="block text-base font-medium text-gray-900 mb-2">
+                      <label htmlFor="expiryDate" className="block text-[13px] sm:text-base font-medium text-gray-900 mb-2">
                         Expiry Date <span className="text-red-500">*</span>
                       </label>
                       <select
                         id="expiryDate"
                         name="expiryDate"
-                        className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded text-base text-gray-500 focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:border-transparent appearance-none bg-[url('data:image/svg+xml;charset=UTF-8,%3csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 24 24%27 fill=%27none%27 stroke=%27currentColor%27 stroke-width=%272%27 stroke-linecap=%27round%27 stroke-linejoin=%27round%27%3e%3cpolyline points=%276 9 12 15 18 9%27%3e%3c/polyline%3e%3c/svg%3e')] bg-[length:1.25rem] bg-[right_0.5rem_center] bg-no-repeat"
+                        className="w-full px-3 sm:px-4 py-2.5 sm:py-3 bg-gray-50 border border-gray-200 rounded text-[13px] sm:text-base text-gray-500 focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:border-transparent appearance-none bg-[url('data:image/svg+xml;charset=UTF-8,%3csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 24 24%27 fill=%27none%27 stroke=%27currentColor%27 stroke-width=%272%27 stroke-linecap=%27round%27 stroke-linejoin=%27round%27%3e%3cpolyline points=%276 9 12 15 18 9%27%3e%3c/polyline%3e%3c/svg%3e')] bg-[length:1.25rem] bg-[right_0.5rem_center] bg-no-repeat"
                       >
                         <option value="">MM/YY</option>
                         <option value="01/25">01/25</option>
@@ -530,13 +530,13 @@ export default function CheckoutPage() {
 
                     {/* CVC */}
                     <div>
-                      <label htmlFor="cvc" className="block text-base font-medium text-gray-900 mb-2">
-                        Card Verification Code (CVC) <span className="text-red-500">*</span>
+                      <label htmlFor="cvc" className="block text-[13px] sm:text-base font-medium text-gray-900 mb-2">
+                        CVC <span className="text-red-500">*</span>
                       </label>
                       <select
                         id="cvc"
                         name="cvc"
-                        className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded text-base text-gray-500 focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:border-transparent appearance-none bg-[url('data:image/svg+xml;charset=UTF-8,%3csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 24 24%27 fill=%27none%27 stroke=%27currentColor%27 stroke-width=%272%27 stroke-linecap=%27round%27 stroke-linejoin=%27round%27%3e%3cpolyline points=%276 9 12 15 18 9%27%3e%3c/polyline%3e%3c/svg%3e')] bg-[length:1.25rem] bg-[right_0.5rem_center] bg-no-repeat"
+                        className="w-full px-3 sm:px-4 py-2.5 sm:py-3 bg-gray-50 border border-gray-200 rounded text-[13px] sm:text-base text-gray-500 focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:border-transparent appearance-none bg-[url('data:image/svg+xml;charset=UTF-8,%3csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 24 24%27 fill=%27none%27 stroke=%27currentColor%27 stroke-width=%272%27 stroke-linecap=%27round%27 stroke-linejoin=%27round%27%3e%3cpolyline points=%276 9 12 15 18 9%27%3e%3c/polyline%3e%3c/svg%3e')] bg-[length:1.25rem] bg-[right_0.5rem_center] bg-no-repeat"
                       >
                         <option value="">123</option>
                         <option value="123">123</option>
@@ -550,14 +550,14 @@ export default function CheckoutPage() {
                 </div>
 
                 {/* Save Information Checkbox */}
-                <div className="mt-6">
-                  <label className="flex items-center gap-3 cursor-pointer">
+                <div className="mt-4 sm:mt-6">
+                  <label className="flex items-start sm:items-center gap-2 sm:gap-3 cursor-pointer">
                     <input
                       type="checkbox"
-                      className="w-5 h-5 text-yellow-400 bg-yellow-400 border-yellow-400 rounded focus:ring-yellow-400 checked:bg-yellow-400"
+                      className="w-4 h-4 sm:w-5 sm:h-5 text-yellow-400 bg-yellow-400 border-yellow-400 rounded focus:ring-yellow-400 checked:bg-yellow-400 mt-0.5 sm:mt-0 flex-shrink-0"
                       defaultChecked
                     />
-                    <span className="text-base text-gray-700">
+                    <span className="text-[13px] sm:text-base text-gray-700">
                       Save my information for faster checkout next time
                     </span>
                   </label>
@@ -569,15 +569,15 @@ export default function CheckoutPage() {
 
           {/* Right Column - Order Summary */}
           <div className="lg:col-span-1">
-            <div className="bg-[#E5E7EB] rounded-lg p-6 sticky top-4">
-              <h2 className="text-[24px] font-[600] text-[#101114] mb-6">Order Summary</h2>
+            <div className="bg-[#E5E7EB] rounded-lg p-4 sm:p-6 lg:sticky lg:top-4">
+              <h2 className="text-[20px] sm:text-[24px] font-[600] text-[#101114] mb-4 sm:mb-6">Order Summary</h2>
 
               {/* Product List */}
-              <div className="space-y-4 mb-6">
+              <div className="space-y-3 sm:space-y-4 mb-4 sm:mb-6">
                 {checkoutItems.map((item) => (
-                  <div key={item.id} className="flex gap-3">
+                  <div key={item.id} className="flex gap-2 sm:gap-3">
                     {/* Product Image */}
-                    <div className="w-16 h-16 bg-white rounded flex-shrink-0 relative">
+                    <div className="w-14 h-14 sm:w-16 sm:h-16 bg-white rounded flex-shrink-0 relative">
                       <Image
                         src={item.image}
                         alt={item.name}
@@ -588,19 +588,19 @@ export default function CheckoutPage() {
 
                     {/* Product Details */}
                     <div className="flex-1 min-w-0">
-                      <h4 className="text-[14px] font-[400] text-gray-900 mb-1 line-clamp-2">
+                      <h4 className="text-[13px] sm:text-[14px] font-[400] text-gray-900 mb-1 line-clamp-2">
                         {item.name}
                       </h4>
-                      <div className="flex items-center gap-2">
-                        <span className="text-[14px] font-[600] text-gray-900">
+                      <div className="flex items-center gap-1.5 sm:gap-2 flex-wrap">
+                        <span className="text-[13px] sm:text-[14px] font-[600] text-gray-900">
                           {item.price.toFixed(2)} BDT
                         </span>
                         {item.originalPrice && (
                           <>
-                            <span className="text-xs text-gray-400 line-through">
+                            <span className="text-[11px] sm:text-xs text-gray-400 line-through">
                               BDT {item.originalPrice.toFixed(2)}
                             </span>
-                            <span className="bg-red-500 text-white text-[10px] px-1.5 py-0.5 rounded">
+                            <span className="bg-red-500 text-white text-[9px] sm:text-[10px] px-1 sm:px-1.5 py-0.5 rounded">
                               {item.discount}% off
                             </span>
                           </>
@@ -612,20 +612,20 @@ export default function CheckoutPage() {
               </div>
 
               {/* Price Breakdown */}
-              <div className="space-y-3 mb-5">
-                <div className="flex justify-between text-sm">
+              <div className="space-y-2 sm:space-y-3 mb-4 sm:mb-5">
+                <div className="flex justify-between text-[13px] sm:text-sm">
                   <span className="text-gray-600">Total Items ({totalItems})</span>
                   <span className="font-semibold text-gray-900">
                     {totalPrice.toFixed(2)} BDT
                   </span>
                 </div>
-                <div className="flex justify-between text-sm">
+                <div className="flex justify-between text-[13px] sm:text-sm">
                   <span className="text-gray-600">Home Installation Service</span>
                   <span className="font-semibold text-gray-900">
                     {homeInstallation.toFixed(2)} BDT
                   </span>
                 </div>
-                <div className="flex justify-between text-sm">
+                <div className="flex justify-between text-[13px] sm:text-sm">
                   <span className="text-gray-600">Promo Discount</span>
                   <span className="font-semibold text-gray-900">
                     {promoDiscount.toFixed(2)} BDT
@@ -634,7 +634,7 @@ export default function CheckoutPage() {
               </div>
 
               {/* Subtotal */}
-              <div className="flex justify-between text-[18px] font-[600] text-[#101114] mb-6 pt-2">
+              <div className="flex justify-between text-base sm:text-[18px] font-[600] text-[#101114] mb-4 sm:mb-6 pt-2">
                 <span>Sub Total:</span>
                 <span>{subTotal.toFixed(2)} BDT</span>
               </div>
@@ -642,7 +642,7 @@ export default function CheckoutPage() {
               {/* Checkout Button */}
               <button
                 type="submit"
-                className="w-full bg-[#FDDE35] hover:bg-[#ffed4e] text-[#181910] text-[16px] font-[600] py-3 rounded transition-colors"
+                className="w-full bg-[#FDDE35] hover:bg-[#ffed4e] text-[#181910] text-[14px] sm:text-[16px] font-[600] py-2.5 sm:py-3 rounded transition-colors"
               >
                 Proceed to Checkout
               </button>

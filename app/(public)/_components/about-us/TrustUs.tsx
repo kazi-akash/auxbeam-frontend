@@ -31,24 +31,24 @@ export default function TrustUs() {
   ];
 
   return (
-    <section className="py-16 md:py-24 bg-white">
-      <div className="container mx-auto px-4">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-start">
+    <section className="py-12 sm:py-16 md:py-24 bg-white">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-16 items-start">
           {/* Left: Content */}
-          <div>
+          <div className="order-2 lg:order-1">
             {/* Heading */}
-            <h2 className="text-3xl md:text-[32px] font-[600] text-[#12100E] mb-4">
+            <h2 className="text-2xl sm:text-3xl md:text-[32px] font-[600] text-[#12100E] mb-3 sm:mb-4">
               The Core Reasons to Trust Us
             </h2>
 
             {/* Description */}
-            <p className="text-[#4D4C44] text-[16px] font-[400] leading-relaxed mb-8">
+            <p className="text-[#4D4C44] text-[14px] sm:text-[16px] font-[400] leading-relaxed mb-6 sm:mb-8">
               We're committed to delivering premium automotive lighting with unmatched service and
               support across Bangladesh.
             </p>
 
             {/* Accordion */}
-            <div className="space-y-4">
+            <div className="space-y-3 sm:space-y-4">
               {accordionItems.map((item, index) => (
                 <div
                   key={index}
@@ -59,28 +59,28 @@ export default function TrustUs() {
                   {/* Accordion Header */}
                   <button
                     onClick={() => setOpenIndex(openIndex === index ? -1 : index)}
-                    className="w-full flex items-center justify-between p-4 text-left"
+                    className="w-full flex items-center justify-between p-3 sm:p-4 text-left"
                   >
-                    <span className="text-[20px] font-[500] text-[#12100E]">
+                    <span className="text-[16px] sm:text-[20px] font-[500] text-[#12100E] pr-2">
                       {item.title}
                     </span>
                     <div
-                      className={`flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center ${
+                      className={`flex-shrink-0 w-7 h-7 sm:w-8 sm:h-8 rounded-full flex items-center justify-center ${
                         openIndex === index ? 'bg-[#FCE32D]' : 'bg-[#E5E7EB]'
                       }`}
                     >
                       {openIndex === index ? (
-                        <ChevronUp className="w-[16px] h-[16px] text-black" />
+                        <ChevronUp className="w-[14px] h-[14px] sm:w-[16px] sm:h-[16px] text-black" />
                       ) : (
-                        <ChevronDown className="w-[16px] h-[16px] text-[#6B7280]" />
+                        <ChevronDown className="w-[14px] h-[14px] sm:w-[16px] sm:h-[16px] text-[#6B7280]" />
                       )}
                     </div>
                   </button>
 
                   {/* Accordion Content */}
                   {openIndex === index && (
-                    <div className="px-4 pb-4">
-                      <p className="text-[#4D4C44] text-[14px] font-[400] leading-relaxed">
+                    <div className="px-3 sm:px-4 pb-3 sm:pb-4">
+                      <p className="text-[#4D4C44] text-[13px] sm:text-[14px] font-[400] leading-relaxed">
                         {item.content}
                       </p>
                     </div>
@@ -91,8 +91,8 @@ export default function TrustUs() {
           </div>
 
           {/* Right: Image */}
-          <div className="relative">
-            <div className="relative w-full max-w-[602px] h-[592px] rounded-[8px] overflow-hidden ml-auto">
+          <div className="relative order-1 lg:order-2">
+            <div className="relative w-full max-w-[602px] h-[350px] sm:h-[450px] md:h-[550px] lg:h-[592px] rounded-[8px] overflow-hidden mx-auto lg:ml-auto">
               <Image
                 src="/images/about-us/trust-us-img.jpg"
                 alt="White Toyota truck with Auxbeam lighting in snowy terrain"

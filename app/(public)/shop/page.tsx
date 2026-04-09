@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { Filter, X, Search } from 'lucide-react';
 import Pagination from '@/components/ui/Pagination';
 import ShopHero from '@/app/(public)/_components/shop/ShopHero';
 import ShopFilters from '@/app/(public)/_components/shop/ShopFilters';
@@ -181,6 +182,8 @@ export default function ShopPage() {
   const [selectedBulbSizes, setSelectedBulbSizes] = useState<string[]>([]);
   const [sortBy, setSortBy] = useState('products');
   const [currentPage, setCurrentPage] = useState(1);
+  const [showFilters, setShowFilters] = useState(false);
+  const [searchQuery, setSearchQuery] = useState('');
   
   const itemsPerPage = 9;
   const totalPages = Math.ceil(mockProducts.length / itemsPerPage);
@@ -194,39 +197,123 @@ export default function ShopPage() {
       <ShopHero />
 
       {/* Main Content */}
-      <div className="container mx-auto py-12">
-        <div className="flex flex-col lg:flex-row gap-8">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8 lg:py-12">
+        <div className="flex flex-col lg:flex-row gap-6 lg:gap-8">
+          {/* Mobile Filter Toggle & Search */}
+          <div className="lg:hidden space-y-4">
+            {/* Search Bar - Mobile */}
+            <div className="relative">
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
+              <input
+                type="text"
+                placeholder="Search products..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-gray-900 focus:border-transparent"
+              />
+            </div>
+
+            {/* Filter Button */}
+            <button
+              onClick={() => setShowFilters(true)}
+              className="w-full flex items-center justify-center gap-2 px-4 py-3 bg-gray-900 text-white rounded-lg hover:bg-gray-800 transition-colors"
+            >
+              <Filter className="w-5 h-5" />
+              <span className="font-medium">Filters</span>
+            </button>
+          </div>
+
           {/* Left Sidebar - Filters */}
-          <div className="w-full lg:w-[280px] flex-shrink-0">
-            <ShopFilters
-              selectedCategory={undefined}
-              onCategoryChange={() => {}}
-              priceRange={priceRange}
-              onPriceRangeChange={setPriceRange}
-              selectedSeries={selectedSeries}
-              onSeriesChange={setSelectedSeries}
-              selectedBulbSizes={selectedBulbSizes}
-              onBulbSizeChange={setSelectedBulbSizes}
+          <div className={`
+            fixed lg:static inset-0 z-50 lg:z-auto
+            ${showFilters ? 'block' : 'hidden lg:block'}
+          `}>
+            {/* Mobile Overlay */}
+            <div 
+              className="fixed inset-0 bg-black/50 lg:hidden"
+              onClick={() => setShowFilters(false)}
             />
+            
+            {/* Filter Panel */}
+            <div className={`
+              fixed lg:static top-0 right-0 h-full lg:h-auto
+              w-[85%] sm:w-[400px] lg:w-[280px]
+              bg-white lg:bg-transparent
+              overflow-y-auto lg:overflow-visible
+              transform lg:transform-none transition-transform duration-300
+              ${showFilters ? 'translate-x-0' : 'translate-x-full lg:translate-x-0'}
+              flex-shrink-0
+            `}>
+              {/* Mobile Header */}
+              <div className="lg:hidden sticky top-0 bg-white border-b border-gray-200 px-6 py-4 flex items-center justify-between">
+                <h2 className="text-lg font-semibold text-gray-900">Filters</h2>
+                <button
+                  onClick={() => setShowFilters(false)}
+                  className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
+                >
+                  <X className="w-5 h-5" />
+                </button>
+              </div>
+
+              {/* Filters Content */}
+              <div className="p-4 lg:p-0">
+                <ShopFilters
+                  selectedCategory={undefined}
+                  onCategoryChange={() => {}}
+                  priceRange={priceRange}
+                  onPriceRangeChange={setPriceRange}
+                  selectedSeries={selectedSeries}
+                  onSeriesChange={setSelectedSeries}
+                  selectedBulbSizes={selectedBulbSizes}
+                  onBulbSizeChange={setSelectedBulbSizes}
+                />
+              </div>
+
+              {/* Mobile Apply Button */}
+              <div className="lg:hidden sticky bottom-0 bg-white border-t border-gray-200 p-4">
+                <button
+                  onClick={() => setShowFilters(false)}
+                  className="w-full py-3 bg-gray-900 text-white rounded-lg font-medium hover:bg-gray-800 transition-colors"
+                >
+                  Apply Filters
+                </button>
+              </div>
+            </div>
           </div>
 
           {/* Right Side - Products */}
-          <div className="flex-1">
-            {/* Header with count and sort */}
-            <div className="flex items-center justify-between mb-6">
-              <p className="text-sm text-gray-600">
+          <div className="flex-1 min-w-0">
+            {/* Header with count, search and sort */}
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
+              {/* Product Count */}
+              <p className="text-sm text-gray-600 order-2 sm:order-1">
                 {mockProducts.length} products are available
               </p>
-              {/* add here a beautifule search for product search */}
-              <div className="flex items-center gap-2">
-                <label htmlFor="sort" className="text-sm text-gray-600">
+
+              {/* Search Bar - Desktop/Tablet */}
+              <div className="hidden lg:block flex-1 max-w-md mx-4 order-1 sm:order-2">
+                <div className="relative">
+                  <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
+                  <input
+                    type="text"
+                    placeholder="Search products..."
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-gray-900 focus:border-transparent"
+                  />
+                </div>
+              </div>
+
+              {/* Sort Dropdown */}
+              <div className="flex items-center gap-2 order-3">
+                <label htmlFor="sort" className="text-sm text-gray-600 whitespace-nowrap hidden sm:block">
                   Sort By
                 </label>
                 <select
                   id="sort"
                   value={sortBy}
                   onChange={(e) => setSortBy(e.target.value)}
-                  className="px-4 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white"
+                  className="w-full sm:w-auto px-3 sm:px-4 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-gray-900 focus:border-transparent bg-white"
                 >
                   <option value="products">Products</option>
                   <option value="price-asc">Price: Low to High</option>
@@ -243,7 +330,7 @@ export default function ShopPage() {
 
             {/* Pagination */}
             {totalPages > 1 && (
-              <div className="mt-12">
+              <div className="mt-8 sm:mt-12">
                 <Pagination
                   currentPage={currentPage}
                   totalPages={totalPages}
@@ -251,7 +338,6 @@ export default function ShopPage() {
                 />
               </div>
             )}
-
           </div>
         </div>
       </div>

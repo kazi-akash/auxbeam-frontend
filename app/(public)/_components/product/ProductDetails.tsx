@@ -22,12 +22,12 @@ export default function ProductDetails({ reviewCount = 132 }: ProductDetailsProp
   return (
     <div className="w-full font-sans">
       {/* Tab Navigation */}
-      <div className="flex items-center gap-[16px] mb-[16px]">
+      <div className="flex items-center gap-[16px] mb-[16px] overflow-x-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] snap-x snap-mandatory touch-pan-x">
         {tabs.map((tab) => (
           <button
             key={tab.id}
             onClick={() => setActiveTab(tab.id)}
-            className={`px-6 py-3 text-[14px] font-[600] transition-colors rounded-[4px] ${
+            className={`px-3 lg:px-6 py-2.5 lg:py-3 text-[12px] lg:text-[14px] font-[600] transition-colors rounded-[4px] whitespace-nowrap flex-shrink-0 snap-start ${
               activeTab === tab.id
                 ? 'bg-[#FDDE35] text-[#12100E]'
                 : 'bg-[#FFFFFF] text-[#4D4C44] hover:bg-gray-50 border border-[#E5E7EB]'
@@ -40,7 +40,7 @@ export default function ProductDetails({ reviewCount = 132 }: ProductDetailsProp
 
       {/* Tab Content */}
       {activeTab === 'description' && (
-        <div className="bg-white p-[32px] border border-gray-200 rounded-[6px]">
+        <div className="bg-white p-4 lg:p-[32px] border border-gray-200 rounded-[6px]">
           {/* Product Description */}
           <section className="mb-8">
             <h2 className="text-2xl font-bold text-gray-900 mb-6">Product Description</h2>
@@ -147,7 +147,7 @@ export default function ProductDetails({ reviewCount = 132 }: ProductDetailsProp
       )}
 
       {activeTab === 'specifications' && (
-        <div className="bg-white p-[32px] border border-gray-200 rounded-[6px]">
+        <div className="bg-white p-4 lg:p-[32px] border border-gray-200 rounded-[6px]">
           <section>
             <h2 className="text-2xl font-bold text-gray-900 mb-6">Product Specifications</h2>
             <ul className="list-disc pl-5 space-y-2">
@@ -171,7 +171,7 @@ export default function ProductDetails({ reviewCount = 132 }: ProductDetailsProp
       )}
 
       {activeTab === 'shipping' && (
-        <div className="bg-white p-[32px] border border-gray-200 rounded-[6px]">
+        <div className="bg-white p-4 lg:p-[32px] border border-gray-200 rounded-[6px]">
           {/* International Shipping */}
           <section className="mb-8">
             <h2 className="text-2xl font-bold text-gray-900 mb-6">International Shipping</h2>

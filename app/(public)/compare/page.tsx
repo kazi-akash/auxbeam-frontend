@@ -89,21 +89,21 @@ export default function ComparePage() {
               { label: 'Compare' },
             ]}
           />
-      <div className="max-w-7xl mx-auto py-8">
+      <div className="max-w-7xl mx-auto py-4 md:py-8 px-4 md:px-6 lg:px-8">
         {/* Breadcrumb */}
 
         {/* Single Comparison Card */}
         <div className="bg-white rounded-lg border border-[#E5E7EB]">
           {/* Product Headers */}
-          <div className="grid grid-cols-4 border-b border-gray-200">
-            <div className="col-span-1 flex flex-col justify-start px-6 border-r border-[#E5E7EB] px-[20px] py-[22px]">
-              <h2 className="text-[24px] font-[600] text-[#101114] mb-2">Compare Products</h2>
+          <div className="grid grid-cols-1 lg:grid-cols-4 border-b border-gray-200">
+            <div className="col-span-1 flex flex-col justify-start border-r border-[#E5E7EB] px-4 md:px-[20px] py-[22px] lg:border-r">
+              <h2 className="text-[20px] md:text-[24px] font-[600] text-[#101114] mb-2">Compare Products</h2>
               <p className="text-[#4D4C44] text-[14px] font-[400] leading-relaxed">
                 Select up to 3 products to compare specifications side by side.
               </p>
             </div>
             {products.map((product, index) => (
-              <div key={index} className="col-span-1 border-r border-[#E5E7EB] px-[20px] last:border-r-0">
+              <div key={index} className="col-span-1 border-b lg:border-b-0 lg:border-r border-[#E5E7EB] px-4 md:px-[20px] last:border-r-0 last:border-b-0">
                 {product ? (
                   <div className='py-[22px]'>
                     {/* Search Bar */}
@@ -117,28 +117,28 @@ export default function ComparePage() {
                     </div>
 
                     {/* Product Image */}
-                    <div className="relative h-48 mb-6 flex items-center justify-center">
+                    <div className="relative h-32 md:h-48 mb-4 md:mb-6 flex items-center justify-center">
                       <Image
                         src={product.image}
                         alt={product.name}
                         width={150}
                         height={150}
-                        className="object-contain"
+                        className="object-contain w-24 h-24 md:w-[150px] md:h-[150px]"
                       />
                     </div>
 
                     {/* Product Name */}
-                    <h3 className="text-[16px] font-[400] text-[#181910] text-center mb-[12px] min-h-[40px] leading-tight">
+                    <h3 className="text-[14px] md:text-[16px] font-[400] text-[#181910] text-center mb-[12px] min-h-[40px] leading-tight">
                       {product.name}
                     </h3>
 
                     {/* Price */}
-                    <p className="text-[20px] font-[600] text-[#12100E] text-center mb-[24px]">
+                    <p className="text-[18px] md:text-[20px] font-[600] text-[#12100E] text-center mb-[20px] md:mb-[24px]">
                       {product.price}
                     </p>
 
                     {/* Action Buttons */}
-                    <div className="flex gap-3">
+                    <div className="flex flex-col sm:flex-row gap-3">
                       <button
                         onClick={() => removeProduct(index)}
                         className="flex items-center justify-center gap-2 px-4 py-2.5 bg-[#FFEDEC] text-[#FF3B30] rounded-[4px] text-[14px] font-[400] hover:bg-red-100 transition-colors flex-1"
@@ -154,7 +154,7 @@ export default function ComparePage() {
                 ) : (
                   <div className='py-[22px]'>
                     {/* Empty State */}
-                    <div className="relative mb-6">
+                    <div className="relative mb-4 md:mb-6">
                       <input
                         type="text"
                         placeholder="Search Products"
@@ -162,7 +162,7 @@ export default function ComparePage() {
                       />
                       <Search className="absolute right-3 top-2 w-6 h-6 text-[#6A7282]" />
                     </div>
-                    <div className="h-48 flex items-center justify-center text-gray-400 text-sm">
+                    <div className="h-32 md:h-48 flex items-center justify-center text-gray-400 text-sm">
                       Find and select product to compare
                     </div>
                   </div>
@@ -281,12 +281,21 @@ export default function ComparePage() {
 
 function ComparisonRow({ label, values, isEven = false }: { label: string; values: string[]; isEven?: boolean }) {
   return (
-    <div className="grid grid-cols-4 border-b border-[#E5E7EB] bg-white">
-      <div className="col-span-1 text-[16px] font-[500] text-[#6B7280] px-5 py-4 border-r border-[#E5E7EB] flex items-center">
+    <div className="grid grid-cols-1 lg:grid-cols-4 border-b border-[#E5E7EB] bg-white">
+      <div className="col-span-1 text-[14px] md:text-[16px] font-[500] text-[#6B7280] px-4 md:px-5 py-3 md:py-4 border-b lg:border-b-0 lg:border-r border-[#E5E7EB] flex items-center bg-[#F9FAFB] lg:bg-white">
         {label}
       </div>
+      <div className="col-span-1 lg:hidden">
+        {values.map((value, index) => (
+          value && (
+            <div key={index} className="text-[14px] md:text-[16px] font-[500] text-[#101114] whitespace-pre-line px-4 md:px-5 py-3 md:py-4 border-b border-[#E5E7EB] last:border-b-0 flex items-center">
+              <span className="text-[#6B7280] mr-2">Product {index + 1}:</span> {value}
+            </div>
+          )
+        ))}
+      </div>
       {values.map((value, index) => (
-        <div key={index} className="col-span-1 text-[16px] font-[500] text-[#101114] whitespace-pre-line px-5 py-4 border-r border-[#E5E7EB] last:border-r-0 flex items-center">
+        <div key={index} className="hidden lg:flex col-span-1 text-[16px] font-[500] text-[#101114] whitespace-pre-line px-5 py-4 border-r border-[#E5E7EB] last:border-r-0 items-center">
           {value}
         </div>
       ))}

@@ -4,12 +4,12 @@ import { ArrowUpRight, CircleCheck } from 'lucide-react';
 
 export default function ShapingTheFuture() {
   return (
-    <section className="py-16 md:py-24 bg-white">
-      <div className="container mx-auto px-4">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+    <section className="py-12 sm:py-16 md:py-24 bg-white">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-16 items-center">
           {/* Left: Image */}
-          <div className="relative">
-            <div className="relative w-full max-w-[602px] h-[592px] rounded-[8px] overflow-hidden">
+          <div className="relative order-2 lg:order-1">
+            <div className="relative w-full max-w-[602px] h-[350px] sm:h-[450px] md:h-[550px] lg:h-[592px] rounded-[8px] overflow-hidden mx-auto lg:mx-0">
               <Image
                 src="/images/about-us/automotive-light-img.jpg"
                 alt="Toyota truck with Auxbeam lighting in desert terrain"
@@ -20,36 +20,36 @@ export default function ShapingTheFuture() {
           </div>
 
           {/* Right: Content */}
-          <div className='max-w-[646px] h-[382px]'>
+          <div className='max-w-[646px] order-1 lg:order-2'>
             {/* Heading */}
-            <h2 className="text-[3xl] md:text-[32px] font-[600] text-[#12100E] mb-[16px]">
+            <h2 className="text-2xl sm:text-3xl md:text-[32px] font-[600] text-[#12100E] mb-4 sm:mb-[16px]">
               Shaping The Future of Automotive Light.
             </h2>
 
             {/* Description */}
-            <p className="text-[#4D4C44] text-[16px] font-[400] leading-relaxed mb-[40px]">
+            <p className="text-[#4D4C44] text-[14px] sm:text-[16px] font-[400] leading-relaxed mb-8 sm:mb-[40px]">
               We envision a Bangladesh where every vehicle on the road is equipped with reliable,
               energy-efficient lighting solutions. From city commuters to off-road adventurers — we aim
               to be the go-to brand for automotive illumination.
             </p>
 
             {/* Features List */}
-            <div className="space-y-4 mb-[64px]">
-              <div className="flex items-start gap-3">
-                <CircleCheck className="w-[20px] h-[20px] text-gray-700 flex-shrink-0 mt-0.5" />
-                <span className="text-[#4D4C44] text-[16px] font-[400]">
+            <div className="space-y-3 sm:space-y-4 mb-10 sm:mb-[64px]">
+              <div className="flex items-start gap-2 sm:gap-3">
+                <CircleCheck className="w-[18px] h-[18px] sm:w-[20px] sm:h-[20px] text-gray-700 flex-shrink-0 mt-0.5" />
+                <span className="text-[#4D4C44] text-[14px] sm:text-[16px] font-[400]">
                   Become Bangladesh's automotive lighting brand
                 </span>
               </div>
-              <div className="flex items-start gap-3">
-                <CircleCheck className="w-[20px] h-[20px] text-gray-700 flex-shrink-0 mt-0.5" />
-                <span className="text-[#4D4C44] text-[16px] font-[400]">
+              <div className="flex items-start gap-2 sm:gap-3">
+                <CircleCheck className="w-[18px] h-[18px] sm:w-[20px] sm:h-[20px] text-gray-700 flex-shrink-0 mt-0.5" />
+                <span className="text-[#4D4C44] text-[14px] sm:text-[16px] font-[400]">
                   Expand product range to cover all vehicle categories
                 </span>
               </div>
-              <div className="flex items-start gap-3">
-                <CircleCheck className="w-[20px] h-[20px] text-gray-700 flex-shrink-0 mt-0.5" />
-                <span className="text-[#4D4C44] text-[16px] font-[400]">
+              <div className="flex items-start gap-2 sm:gap-3">
+                <CircleCheck className="w-[18px] h-[18px] sm:w-[20px] sm:h-[20px] text-gray-700 flex-shrink-0 mt-0.5" />
+                <span className="text-[#4D4C44] text-[14px] sm:text-[16px] font-[400]">
                   Innovate with smart lighting technology solutions
                 </span>
               </div>

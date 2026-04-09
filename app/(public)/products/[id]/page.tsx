@@ -39,21 +39,21 @@ export default function ProductDetailsPage({ params }: { params: Promise<{ id: s
   const product = mockProduct;
   
   return (
-    <div className="min-h-screen pb-16 font-sans">
-      <div className="container mx-auto pt-8">
-        <div className="flex items-center justify-between mb-8">
+    <div className="min-h-screen pb-16 font-sans bg-[#F9FAFB]">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 pt-6 sm:pt-8">
+        <div className="flex items-center justify-between mb-6 sm:mb-8">
           <ProductBreadcrumb productName={product.name} />
           <AddToCompareButton />
         </div>
         
-        <div className="bg-white flex flex-col lg:flex-row gap-10 mb-[100px]">
+        <div className="flex flex-col lg:flex-row gap-10 mb-[100px]">
           {/* Left Column: Image Gallery */}
-          <div className="w-full lg:w-[757px] lg:h-[682px]">
+          <div className="w-full lg:w-[700px] lg:h-[682px]">
             <ProductImageGallery images={productImages} />
           </div>
 
           {/* Right Column: Product Info */}
-          <div className="w-full  lg:h-[783px]">
+          <div className="w-full lg:h-[783px]">
             <ProductInfo product={product} />
           </div>
         </div>

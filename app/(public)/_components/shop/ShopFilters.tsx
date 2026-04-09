@@ -94,15 +94,15 @@ export default function ShopFilters({
   };
 
   return (
-    <aside className="w-full bg-white rounded-lg border border-gray-200 p-6 space-y-8">
+    <aside className="w-full bg-white rounded-lg border border-gray-200 p-4 sm:p-6 space-y-6 sm:space-y-8">
       {/* Search Section */}
       <div>
-        <h3 className="text-[20px] font-semibold text-gray-900 mb-4">Search</h3>
+        <h3 className="text-[18px] sm:text-[20px] font-semibold text-gray-900 mb-3 sm:mb-4">Search</h3>
         <div className="relative">
           <input
             type="text"
             placeholder="Search products..."
-            className="w-full pl-10 pr-4 py-2.5 border border-gray-300 rounded-lg text-[15px] text-gray-900 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-gray-900 focus:border-transparent transition-all"
+            className="w-full pl-10 pr-4 py-2.5 border border-gray-300 rounded-lg text-[14px] sm:text-[15px] text-gray-900 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-gray-900 focus:border-transparent transition-all"
           />
           <svg
             className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400"
@@ -122,24 +122,24 @@ export default function ShopFilters({
 
       {/* Availability Section */}
       <div>
-        <div className="flex items-center justify-between mb-4">
-          <h3 className="text-[20px] font-semibold text-gray-900">Availability</h3>
+        <div className="flex items-center justify-between mb-3 sm:mb-4">
+          <h3 className="text-[18px] sm:text-[20px] font-semibold text-gray-900">Availability</h3>
           <button className="text-gray-400 hover:text-gray-600">
             <Minus className="w-5 h-5" />
           </button>
         </div>
-        <div className="space-y-3">
+        <div className="space-y-2.5 sm:space-y-3">
           <label className="flex items-center justify-between cursor-pointer group">
             <div className="flex items-center">
               <input
                 type="checkbox"
                 className="w-4 h-4 rounded border-gray-300 text-gray-900 focus:ring-gray-900"
               />
-              <span className="ml-3 text-[15px] text-gray-600 group-hover:text-gray-900">
+              <span className="ml-3 text-[14px] sm:text-[15px] text-gray-600 group-hover:text-gray-900">
                 In Stock
               </span>
             </div>
-            <span className="text-[15px] text-gray-400">(55)</span>
+            <span className="text-[14px] sm:text-[15px] text-gray-400">(55)</span>
           </label>
           <label className="flex items-center justify-between cursor-pointer group">
             <div className="flex items-center">
@@ -147,19 +147,19 @@ export default function ShopFilters({
                 type="checkbox"
                 className="w-4 h-4 rounded border-gray-300 text-gray-900 focus:ring-gray-900"
               />
-              <span className="ml-3 text-[15px] text-gray-600 group-hover:text-gray-900">
+              <span className="ml-3 text-[14px] sm:text-[15px] text-gray-600 group-hover:text-gray-900">
                 Out of Stock
               </span>
             </div>
-            <span className="text-[15px] text-gray-400">(08)</span>
+            <span className="text-[14px] sm:text-[15px] text-gray-400">(08)</span>
           </label>
         </div>
       </div>
 
       {/* Price Range Section */}
       <div>
-        <div className="flex items-center justify-between mb-4">
-          <h3 className="text-[20px] font-semibold text-gray-900">Price Range</h3>
+        <div className="flex items-center justify-between mb-3 sm:mb-4">
+          <h3 className="text-[18px] sm:text-[20px] font-semibold text-gray-900">Price Range</h3>
           <button className="text-gray-400 hover:text-gray-600">
             <Minus className="w-5 h-5" />
           </button>
@@ -177,10 +177,10 @@ export default function ShopFilters({
           </div>
           <div className="grid grid-cols-2 gap-3">
             <div className="border border-gray-200 rounded px-3 py-2 text-center">
-              <span className="text-[13px] text-gray-600">BDT {priceRange[0].toFixed(2)}</span>
+              <span className="text-[12px] sm:text-[13px] text-gray-600">BDT {priceRange[0].toFixed(2)}</span>
             </div>
             <div className="border border-gray-200 rounded px-3 py-2 text-center">
-              <span className="text-[13px] text-gray-600">BDT {priceRange[1].toFixed(2)}</span>
+              <span className="text-[12px] sm:text-[13px] text-gray-600">BDT {priceRange[1].toFixed(2)}</span>
             </div>
           </div>
         </div>
@@ -188,13 +188,13 @@ export default function ShopFilters({
 
       {/* Series Section */}
       <div>
-        <div className="flex items-center justify-between mb-4">
-          <h3 className="text-[20px] font-semibold text-gray-900">Series</h3>
+        <div className="flex items-center justify-between mb-3 sm:mb-4">
+          <h3 className="text-[18px] sm:text-[20px] font-semibold text-gray-900">Series</h3>
           <button className="text-gray-400 hover:text-gray-600">
             <Minus className="w-5 h-5" />
           </button>
         </div>
-        <div className="space-y-3">
+        <div className="space-y-2.5 sm:space-y-3">
           {seriesOptions.map((series) => (
             <label key={series.id} className="flex items-center cursor-pointer group">
               <input
@@ -203,7 +203,7 @@ export default function ShopFilters({
                 onChange={() => handleSeriesToggle(series.id)}
                 className="w-4 h-4 rounded border-gray-300 text-gray-900 focus:ring-gray-900"
               />
-              <span className="ml-3 text-[15px] text-gray-600 group-hover:text-gray-900">
+              <span className="ml-3 text-[14px] sm:text-[15px] text-gray-600 group-hover:text-gray-900">
                 {series.name}
               </span>
             </label>
@@ -213,13 +213,13 @@ export default function ShopFilters({
 
       {/* Bulb Size Section */}
       <div>
-        <div className="flex items-center justify-between mb-4">
-          <h3 className="text-[20px] font-semibold text-gray-900">Bulb Size</h3>
+        <div className="flex items-center justify-between mb-3 sm:mb-4">
+          <h3 className="text-[18px] sm:text-[20px] font-semibold text-gray-900">Bulb Size</h3>
           <button className="text-gray-400 hover:text-gray-600">
             <Minus className="w-5 h-5" />
           </button>
         </div>
-        <div className="space-y-3">
+        <div className="space-y-2.5 sm:space-y-3">
           {bulbSizeOptions.map((size) => (
             <label key={size.id} className="flex items-center cursor-pointer group">
               <input
@@ -228,7 +228,7 @@ export default function ShopFilters({
                 onChange={() => handleBulbSizeToggle(size.id)}
                 className="w-4 h-4 rounded border-gray-300 text-gray-900 focus:ring-gray-900"
               />
-              <span className="ml-3 text-[15px] text-gray-600 group-hover:text-gray-900">
+              <span className="ml-3 text-[14px] sm:text-[15px] text-gray-600 group-hover:text-gray-900">
                 {size.name}
               </span>
             </label>
@@ -238,13 +238,13 @@ export default function ShopFilters({
 
       {/* Light Bar Shape Section */}
       <div>
-        <div className="flex items-center justify-between mb-4">
-          <h3 className="text-[20px] font-semibold text-gray-900">Light Bar Shape</h3>
+        <div className="flex items-center justify-between mb-3 sm:mb-4">
+          <h3 className="text-[18px] sm:text-[20px] font-semibold text-gray-900">Light Bar Shape</h3>
           <button className="text-gray-400 hover:text-gray-600">
             <Minus className="w-5 h-5" />
           </button>
         </div>
-        <div className="space-y-3">
+        <div className="space-y-2.5 sm:space-y-3">
           {lightBarShapeOptions.map((shape) => (
             <label key={shape.id} className="flex items-center cursor-pointer group">
               <input
@@ -253,7 +253,7 @@ export default function ShopFilters({
                 onChange={() => handleLightBarShapeToggle(shape.id)}
                 className="w-4 h-4 rounded border-gray-300 text-gray-900 focus:ring-gray-900"
               />
-              <span className="ml-3 text-[15px] text-gray-600 group-hover:text-gray-900">
+              <span className="ml-3 text-[14px] sm:text-[15px] text-gray-600 group-hover:text-gray-900">
                 {shape.name}
               </span>
             </label>

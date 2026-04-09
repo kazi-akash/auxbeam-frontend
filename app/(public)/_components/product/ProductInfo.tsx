@@ -159,16 +159,16 @@ export default function ProductInfo({ product }: ProductInfoProps) {
       {/* Payment Options */}
       <div className="flex flex-col gap-3 mb-[20px]">
         <span className="text-[#12100E] text-[16px] font-[500]">Payment Options</span>
-        <div className="grid grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
           {/* Full Payment */}
           <button
             onClick={() => setPaymentOption('full')}
-            className={`flex items-center gap-3 p-4 border rounded-lg text-left transition-colors ${
-              paymentOption === 'full' ? 'border-[#E5E7EB]' : 'border-gray-200 hover:border-gray-300'
+            className={`flex items-center gap-3 p-4 border-2 rounded-lg text-left transition-colors ${
+              paymentOption === 'full' ? 'border-[#FACD15]' : 'border-gray-200 hover:border-gray-300'
             }`}
           >
-            <div className={`w-4 h-4 rounded-full border flex items-center justify-center flex-shrink-0 ${
-              paymentOption === 'full' ? 'border-yellow-400' : 'border-gray-300'
+            <div className={`w-5 h-5 rounded-full border-2 flex items-center justify-center flex-shrink-0 ${
+              paymentOption === 'full' ? 'border-[#FACD15]' : 'border-gray-300'
             }`}>
               {paymentOption === 'full' && <div className="w-2.5 h-2.5 bg-[#FACD15] rounded-full" />}
             </div>
@@ -181,14 +181,14 @@ export default function ProductInfo({ product }: ProductInfoProps) {
           {/* EMI Option */}
           <button
             onClick={() => setPaymentOption('emi')}
-            className={`flex items-center gap-3 p-4 border rounded-lg text-left transition-colors ${
-              paymentOption === 'emi' ? 'border-[#E5E7EB]' : 'border-gray-200 hover:border-gray-300'
+            className={`flex items-center gap-3 p-4 border-2 rounded-lg text-left transition-colors ${
+              paymentOption === 'emi' ? 'border-[#FACD15]' : 'border-gray-200 hover:border-gray-300'
             }`}
           >
-            <div className={`w-4 h-4 rounded-full border flex items-center justify-center flex-shrink-0 ${
-              paymentOption === 'emi' ? 'border-yellow-400' : 'border-gray-300'
+            <div className={`w-5 h-5 rounded-full border-2 flex items-center justify-center flex-shrink-0 ${
+              paymentOption === 'emi' ? 'border-[#FACD15]' : 'border-gray-300'
             }`}>
-              {paymentOption === 'emi' && <div className="w-2.5 h-2.5 bg-yellow-400 rounded-full" />}
+              {paymentOption === 'emi' && <div className="w-2.5 h-2.5 bg-[#FACD15] rounded-full" />}
             </div>
             <div className="flex flex-col gap-1">
               <div className="text-[16px] font-[500] text-[#12100E] text-base">

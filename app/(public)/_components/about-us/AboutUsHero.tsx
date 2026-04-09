@@ -17,25 +17,25 @@ export default function AboutUsHero() {
       <div className="absolute inset-0 bg-gradient-to-b from-black/50 to-black/50" />
       
       {/* Content */}
-      <div className="relative h-full container mx-auto px-4 flex flex-col justify-center">
+      <div className="relative h-full container mx-auto px-4 sm:px-6 lg:px-8 flex flex-col justify-center">
         {/* Breadcrumb */}
-        <nav className="mb-6">
+        <nav className="mb-4 sm:mb-6">
           <ol className="flex items-center text-sm text-white/90">
             <li>
               <Link 
                 href="/"
-                className="hover:text-white transition-colors text-[14px] font-[400]"
+                className="hover:text-white transition-colors text-[13px] sm:text-[14px] font-[400]"
               >
                 Home
               </Link>
             </li>
             <li className="mx-2 text-white/60 font-[600]">/</li>
-            <li className="text-white text-[14px] font-[600] font-medium">About Us</li>
+            <li className="text-white text-[13px] sm:text-[14px] font-[600] font-medium">About Us</li>
           </ol>
         </nav>
         
         {/* Heading */}
-        <h1 className="text-5xl md:text-6xl font-bold text-white">
+        <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white">
           About Us
         </h1>
       </div>

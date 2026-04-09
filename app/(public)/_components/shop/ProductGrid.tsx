@@ -45,7 +45,7 @@ export default function ProductGrid({ products, isLoading }: ProductGridProps) {
   }
 
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 justify-items-center">
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
       {products.map((product) => {
         const discount = product.compare_price
           ? Math.round(((product.compare_price - product.price) / product.compare_price) * 100)
@@ -55,7 +55,7 @@ export default function ProductGrid({ products, isLoading }: ProductGridProps) {
           <Link
             key={product.id}
             href={`/products/${product.id}`}
-            className="bg-white rounded-[16px] overflow-hidden border border-[#E5E7EB] transition-shadow group cursor-pointer hover:shadow-lg block w-[313px] h-[405px] flex flex-col"
+            className="bg-white rounded-[16px] overflow-hidden border border-[#E5E7EB] transition-shadow group cursor-pointer hover:shadow-lg block w-full max-w-[313px] mx-auto h-[405px] flex flex-col"
             style={{ boxShadow: '0px 2px 30px 0px rgba(0, 0, 0, 0.08)' }}
           >
             {/* Image Container */}

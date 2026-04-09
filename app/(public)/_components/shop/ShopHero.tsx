@@ -15,7 +15,7 @@ export default function ShopHero() {
         <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/50 to-transparent"></div>
       </div>
 
-      <div className="relative h-full container mx-auto flex flex-col justify-center">
+      <div className="relative h-full container mx-auto px-4 sm:px-6 lg:px-8 flex flex-col justify-center">
         <div className="max-w-xl">
           <nav className="text-gray-300 text-sm md:text-base font-medium mb-4 flex items-center space-x-2">
             <Link href="/" className="hover:text-white transition-colors font-normal text-[14px]">

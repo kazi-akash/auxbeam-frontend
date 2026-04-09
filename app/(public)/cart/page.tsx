@@ -113,19 +113,22 @@ export default function CartPage() {
                         </p>
 
                         {/* Price and Discount */}
-                        <div className="flex items-center gap-3 mb-0 md:mb-0">
+                        <div className="flex flex-col md:flex-row md:items-center gap-1 md:gap-3 mb-0 md:mb-0">
+                          {/* Discounted Price */}
                           <span className="text-[12px] md:text-[16px] font-[400] md:font-[600] text-[#1F2937]">
                             {item.price.toFixed(2)} BDT
                           </span>
+                          
+                          {/* Original Price and Discount Badge - Mobile: on second line, Desktop: inline */}
                           {item.originalPrice && (
-                            <>
+                            <div className="flex items-center justify-between md:justify-start gap-2 md:gap-3">
                               <span className="text-[12px] md:text-[16px] font-[400] text-[#9CA3AF] line-through">
                                 BDT {item.originalPrice.toFixed(2)}
                               </span>
-                              <span className="bg-[#EF4444] text-white text-[13px] md:text-[12px] font-[700] px-3 py-1 rounded-md">
+                              <span className="bg-[#EF4444] text-white text-[11px] md:text-[12px] font-[700] px-2 md:px-3 py-0.5 md:py-1 rounded-md">
                                 -{item.discount}% off
                               </span>
-                            </>
+                            </div>
                           )}
                         </div>
                       </div>
@@ -210,7 +213,7 @@ export default function CartPage() {
                   onChange={(e) => setCouponCode(e.target.value)}
                   className="w-full h-[48px] md:h-[52px] px-3 md:px-4 pr-28 md:pr-40 bg-white border border-gray-300 rounded-[4px] text-[14px] md:text-base font-normal placeholder:text-gray-500 placeholder:text-[14px] md:placeholder:text-base placeholder:font-normal focus:outline-none focus:ring-2 focus:ring-yellow-400"
                 />
-                <button className="absolute right-2 top-1/2 -translate-y-1/2 w-[90px] md:w-[115px] h-[36px] md:h-[40px] bg-[#FDDE35] hover:bg-[#ffed4e] text-[#12100E] text-[13px] md:text-[14px] font-[600] p-[8px] md:p-[10px] rounded-[4px] whitespace-nowrap">
+                <button className="absolute right-2 top-1/2 -translate-y-1/2 w-[100px] md:w-[115px] h-[36px] md:h-[40px] bg-[#FDDE35] hover:bg-[#ffed4e] text-[#12100E] text-[11px] md:text-[14px] font-[600] px-2 md:px-[10px] py-[8px] md:py-[10px] rounded-[4px] whitespace-nowrap">
                   Apply Coupon
                 </button>
               </div>
