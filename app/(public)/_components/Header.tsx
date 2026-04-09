@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import Image from 'next/image';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useAuth } from '@/lib/context/AuthContext';
 import { useCart } from '@/lib/context/CartContext';
 import { 
@@ -24,15 +24,21 @@ export default function Header() {
   const { itemCount } = useCart();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
+  const [mobileSearchOpen, setMobileSearchOpen] = useState(false);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   return (
     <header className="sticky top-0 z-50">
       {/* Topbar - Dark Brown */}
       <div className="bg-[#411C09] text-white font-[family-name:var(--font-geist-sans)]">
-        <div className="container mx-auto">
+        <div className="container mx-auto px-4">
           <div className="flex items-center justify-between py-[13.5px] text-sm font-normal">
-            {/* Left: Contact Info */}
-            <div className="hidden md:flex items-center gap-6">
+            {/* Left: Contact Info - Hidden on mobile and tablet */}
+            <div className="hidden lg:flex items-center gap-6">
               <a href="tel:+8809647245931" className="flex items-center gap-2 hover:text-primary-500 transition-colors">
                 <Phone className="w-3 h-3" />
                 <span>+8809647245931</span>
@@ -43,13 +49,13 @@ export default function Header() {
               </a>
             </div>
 
-            {/* Center: Promo Message */}
+            {/* Center: Promo Message - Full width on mobile, centered on all devices */}
             <div className="flex-1 text-center">
-              <span>Free Shipping Inside the Dhaka !</span>
+              <span className="text-[14px] font-normal lg:text-sm">Free Shipping Inside the Dhaka !</span>
             </div>
 
-            {/* Right: Utility Links */}
-            <div className="hidden md:flex items-center gap-6">
+            {/* Right: Utility Links - Hidden on mobile and tablet */}
+            <div className="hidden lg:flex items-center gap-6">
               <Link href="/compare" className="flex items-center gap-2 text-white hover:text-gray-200 transition-colors">
                 <GitCompare className="w-5 h-5" />
                 <span>Compare</span>
@@ -66,11 +72,32 @@ export default function Header() {
 
       {/* Main Navbar - White */}
       <div className="bg-[#F9FAFB] font-[family-name:var(--font-geist-sans)]" style={{ fontSize: '16px', fontWeight: 400, color: '#12100E' }}>
-        <div className="container mx-auto">
+        <div className="container mx-auto px-4">
           <div className="flex items-center justify-between h-20">
-            {/* Logo */}
-            <Link href="/" className="flex items-center">
-              <div className="w-20 h-16 relative">
+            {/* Mobile Left Section - Menu & Search Icon */}
+            <div className="flex lg:hidden items-center gap-4">
+              {/* Mobile Menu Toggle */}
+              <button
+                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                className="hover:text-primary-600 transition-colors"
+                style={{ color: '#12100E' }}
+              >
+                {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+              </button>
+              
+              {/* Mobile Search Icon */}
+              <button
+                onClick={() => setMobileSearchOpen(!mobileSearchOpen)}
+                className="hover:text-primary-600 transition-colors"
+                style={{ color: '#12100E' }}
+              >
+                <Search className="w-5 h-5" />
+              </button>
+            </div>
+
+            {/* Logo - Centered on mobile, left on desktop */}
+            <Link href="/" className="flex items-center absolute left-1/2 -translate-x-1/2 lg:static lg:translate-x-0">
+              <div className="w-14 h-[49px] lg:w-20 lg:h-16 relative">
                 <Image 
                   src="/auxbeam-logo.png" 
                   alt="AuxBeam Bangladesh" 
@@ -83,8 +110,8 @@ export default function Header() {
               </div>
             </Link>
 
-            {/* Desktop Navigation */}
-            <nav className="hidden lg:flex items-center gap-8">
+            {/* Desktop Navigation - Centered */}
+            <nav className="hidden lg:flex items-center gap-8 flex-1 justify-center">
               <Link 
                 href="/shop" 
                 className="flex items-center gap-1 hover:text-primary-600 transition-colors group"
@@ -118,19 +145,17 @@ export default function Header() {
               </Link>
             </nav>
 
-            
-
-            {/* Actions */}
-            <div className="flex items-center gap-6">
-              {/* Search Bar */}
-              <div className="hidden md:flex items-center flex-1 max-w-2xs">
-                <div className="relative w-full">
+            {/* Desktop Actions - Right side */}
+            <div className="hidden lg:flex items-center gap-6">
+              {/* Desktop Search Bar */}
+              <div className="flex items-center">
+                <div className="relative w-full max-w-xs">
                   <input
                     type="text"
                     placeholder="Search Products"
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
-                    className="w-full pl-5 pr-12 py-2.5 bg-[#F3F4F6] border-none rounded-full focus:ring-2 focus:ring-primary-500 placeholder:text-[#6B7280]"
+                    className="w-full pl-5 pr-12 py-2.5 bg-[#F3F4F6] border-none rounded-full focus:ring-2 focus:ring-primary-500 placeholder:text-[#6B7280] outline-none"
                     style={{ fontSize: '15px', fontWeight: 400, color: '#12100E' }}
                   />
                   <button className="absolute right-4 top-1/2 -translate-y-1/2 text-[#6B7280] hover:text-primary-600 transition-colors">
@@ -138,6 +163,7 @@ export default function Header() {
                   </button>
                 </div>
               </div>
+              
               {/* Cart */}
               <Link 
                 href="/cart" 
@@ -146,17 +172,17 @@ export default function Header() {
               >
                 <div className="relative">
                   <ShoppingBag className="w-5 h-5" />
-                  {itemCount > 0 && (
+                  {mounted && itemCount > 0 && (
                     <span className="absolute -top-2 -right-2 bg-primary-500 text-text-primary text-caption-bold rounded-full w-5 h-5 flex items-center justify-center">
                       {itemCount}
                     </span>
                   )}
                 </div>
-                <span className="hidden lg:inline">Cart</span>
+                <span>Cart</span>
               </Link>
 
               {/* User */}
-              {user ? (
+              {mounted && user ? (
                 <div className="flex items-center gap-3">
                   <Link 
                     href="/dashboard" 
@@ -164,7 +190,7 @@ export default function Header() {
                     style={{ fontSize: '15px', fontWeight: 400, color: '#12100E' }}
                   >
                     <User className="w-5 h-5" />
-                    <span className="hidden lg:inline">Account</span>
+                    <span>Account</span>
                   </Link>
                   <button
                     onClick={() => logout()}
@@ -181,37 +207,72 @@ export default function Header() {
                   style={{ fontSize: '15px', fontWeight: 400, color: '#12100E' }}
                 >
                   <User className="w-5 h-5" />
-                  <span className="hidden lg:inline">Login</span>
+                  <span>Login</span>
                 </Link>
               )}
-
-              {/* Mobile Menu Toggle */}
-              <button
-                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                className="lg:hidden hover:text-primary-600 transition-colors"
-                style={{ color: '#12100E' }}
-              >
-                {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-              </button>
             </div>
-          </div>
 
-          {/* Mobile Search */}
-          <div className="md:hidden pb-4">
-            <div className="relative w-full">
-              <input
-                type="text"
-                placeholder="Search Products"
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full pl-5 pr-12 py-2.5 bg-[#F3F4F6] border-none rounded-full focus:ring-2 focus:ring-primary-500 placeholder:text-[#6B7280]"
+            {/* Mobile Actions - Right side */}
+            <div className="flex lg:hidden items-center gap-4">
+              {/* Cart */}
+              <Link 
+                href="/cart" 
+                className="flex items-center gap-2 hover:text-primary-600 transition-colors"
                 style={{ fontSize: '15px', fontWeight: 400, color: '#12100E' }}
-              />
-              <button className="absolute right-4 top-1/2 -translate-y-1/2 text-[#6B7280] hover:text-primary-600 transition-colors">
-                <Search className="w-5 h-5" />
-              </button>
+              >
+                <div className="relative">
+                  <ShoppingBag className="w-5 h-5" />
+                  {mounted && itemCount > 0 && (
+                    <span className="absolute -top-2 -right-2 bg-primary-500 text-text-primary text-caption-bold rounded-full w-5 h-5 flex items-center justify-center">
+                      {itemCount}
+                    </span>
+                  )}
+                </div>
+              </Link>
+
+              {/* User */}
+              {mounted && user ? (
+                <Link 
+                  href="/dashboard" 
+                  className="flex items-center gap-2 hover:text-primary-600 transition-colors"
+                  style={{ fontSize: '15px', fontWeight: 400, color: '#12100E' }}
+                >
+                  <User className="w-5 h-5" />
+                </Link>
+              ) : (
+                <Link
+                  href="/login"
+                  className="flex items-center gap-2 hover:text-primary-600 transition-colors"
+                  style={{ fontSize: '15px', fontWeight: 400, color: '#12100E' }}
+                >
+                  <User className="w-5 h-5" />
+                </Link>
+              )}
             </div>
           </div>
+
+          {/* Mobile Search Bar - Toggleable */}
+          {mobileSearchOpen && (
+            <div className="lg:hidden pb-4 pt-2">
+              <div className="relative w-full">
+                <input
+                  type="text"
+                  placeholder="Search Products"
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  className="w-full pl-5 pr-12 py-2.5 bg-[#F3F4F6] border-none rounded-full focus:ring-2 focus:ring-primary-500 placeholder:text-[#6B7280] outline-none"
+                  style={{ fontSize: '15px', fontWeight: 400, color: '#12100E' }}
+                  autoFocus
+                />
+                <button 
+                  type="button"
+                  className="absolute right-4 top-1/2 -translate-y-1/2 text-[#6B7280] hover:text-primary-600 transition-colors"
+                >
+                  <Search className="w-5 h-5" />
+                </button>
+              </div>
+            </div>
+          )}
         </div>
       </div>
 
