@@ -4,7 +4,7 @@ import { ArrowUpRight } from "lucide-react";
 
 export default function Hero() {
   return (
-    <section className="relative w-full min-h-[500px] h-[550px] sm:h-[600px] md:h-[650px] lg:h-[700px] flex flex-col justify-center bg-gray-900">
+    <section className="relative w-full h-[400px] sm:h-[600px] md:h-[650px] lg:h-[700px] flex flex-col justify-center bg-gray-900">
       {/* Background Image */}
       <div className="absolute inset-0 w-full h-full z-0">
         <Image

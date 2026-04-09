@@ -612,7 +612,7 @@ export default function CheckoutPage() {
               </div>
 
               {/* Price Breakdown */}
-              <div className="space-y-2 sm:space-y-3 mb-4 sm:mb-5">
+              <div className="space-y-2 sm:space-y-3 mb-4 sm:mb-5 border-t border-b py-4 border-[#D1D5DC]">
                 <div className="flex justify-between text-[13px] sm:text-sm">
                   <span className="text-gray-600">Total Items ({totalItems})</span>
                   <span className="font-semibold text-gray-900">

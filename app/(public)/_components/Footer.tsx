@@ -173,7 +173,7 @@ export default function Footer() {
           <div>
             <h4 className="text-lg md:text-xl lg:text-[24px] font-[600] mb-4 md:mb-6">Company</h4>
             <ul className="space-y-3 md:space-y-4 text-sm md:text-[16px] font-[400]">
-              <li><Link href="/about" className="text-[#D4D4D8] hover:text-[#FADE4B] transition-colors">About Us</Link></li>
+              <li><Link href="/about-us" className="text-[#D4D4D8] hover:text-[#FADE4B] transition-colors">About Us</Link></li>
               <li><Link href="/shop" className="text-[#D4D4D8] hover:text-[#FADE4B] transition-colors">Shop</Link></li>
               <li><Link href="/faq" className="text-[#D4D4D8] hover:text-[#FADE4B] transition-colors">Faq</Link></li>
               <li><Link href="/contact" className="text-[#D4D4D8] hover:text-[#FADE4B] transition-colors">Contact Us</Link></li>
@@ -263,7 +263,7 @@ export default function Footer() {
 
         {/* Huge Watermark Background */}
         <div className="relative w-full overflow-hidden select-none pointer-events-none flex justify-center z-10 pt-3 md:pt-4 pb-0">
-          <h1 className="text-[8vw] sm:text-[10vw] md:text-[9vw] lg:text-[110px] xl:text-[123px] font-bold whitespace-nowrap leading-none tracking-tight text-[#6A7282] opacity-[0.27]">
+          <h1 className="text-[8vw] sm:text-[10vw] md:text-[9vw] lg:text-[110px] xl:text-[115px] font-bold whitespace-nowrap leading-none tracking-tight text-[#6A7282] opacity-[0.27]">
             Auxbeam Bangladesh
           </h1>
         </div>

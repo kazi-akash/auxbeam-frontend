@@ -27,7 +27,7 @@ const categories = [
 
 export default function ShopByCategory() {
   return (
-    <section className="pt-10 md:pt-[250px] pb-12 md:pb-[100px] md:py-[100px] bg-white">
+    <section className="pt-10 md:pt-[100px] pb-12 md:pb-[100px] md:py-[100px] bg-white">
       <div className="container mx-auto px-4 sm:px-6 md:px-8">
         <div className="flex items-center justify-between mb-8 gap-4">
           <h2 className="text-xl md:text-2xl lg:text-[32px] font-[600] text-[#12100E] leading-tight break-words">Shop by Categories</h2>
@@ -52,7 +52,7 @@ export default function ShopByCategory() {
             <Link
               key={index}
               href={category.href}
-              className="group relative w-full max-w-[300px] lg:max-w-none h-[350px] sm:h-[400px] md:h-[424px] mx-auto rounded-[8px] overflow-hidden block"
+              className="group relative w-full sm:max-w-[313px] lg:max-w-none h-[350px] sm:h-[400px] md:h-[424px] mx-auto rounded-[8px] overflow-hidden block"
             >
               <Image
                 src={category.image}

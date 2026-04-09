@@ -98,7 +98,7 @@ export default function YouMayAlsoLike() {
             <Link
               key={product.id}
               href={`/products/${product.id}`}
-              className="bg-white rounded-[16px] overflow-hidden border border-[#E5E7EB] transition-shadow group cursor-pointer hover:shadow-lg block w-full max-w-[313px] h-[405px] flex flex-col"
+              className="bg-white rounded-[16px] overflow-hidden border border-[#E5E7EB] transition-shadow group cursor-pointer hover:shadow-lg block w-full sm:max-w-[313px] h-[405px] flex flex-col"
               style={{ boxShadow: '0px 2px 30px 0px rgba(0, 0, 0, 0.08)' }}
             >
               {/* Image Container */}
