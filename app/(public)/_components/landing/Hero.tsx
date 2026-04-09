@@ -19,19 +19,19 @@ export default function Hero() {
       </div>
 
       {/* Main Content */}
-      <div className="container mx-auto z-10 pt-12 sm:pt-16 md:pt-20">
+      <div className="container mx-auto z-10 pt-12 sm:pt-16 md:pt-20 px-4 sm:px-6 md:px-8">
         <div className="max-w-2xl">
-          <h1 className="font-sans text-[28px] xs:text-[32px] sm:text-[40px] md:text-[48px] lg:text-[56px] font-semibold leading-[120%] tracking-[-0.01em] text-white mb-4 sm:mb-5 md:mb-6">
+          <h1 className="font-sans text-2xl xs:text-[32px] sm:text-[40px] md:text-[48px] lg:text-[56px] font-semibold leading-tight tracking-[-0.01em] text-white mb-4 sm:mb-5 md:mb-6 break-words">
             Next-Level <br />
             Automotive Lighting <br />
             Starts Here
           </h1>
-          <p className="font-sans text-[14px] sm:text-[15px] md:text-[16px] font-normal leading-[150%] tracking-[-0.01em] text-gray-200 mb-6 sm:mb-8 md:mb-10 max-w-lg">
+          <p className="font-sans text-sm sm:text-[15px] md:text-[16px] font-normal leading-relaxed tracking-[-0.01em] text-gray-200 mb-6 sm:mb-8 md:mb-10 max-w-lg break-words">
             Upgrade your ride with powerful, durable Auxbeam <br className="hidden lg:block" />Led snow available across Bangladesh.
           </p>
           <Link
             href="/shop"
-            className="inline-flex items-center gap-2 sm:gap-3 bg-[#FCE32D] text-black py-2 sm:py-[8px] px-2 sm:px-[8px] pl-4 sm:pl-5 rounded-[4px] font-bold hover:bg-[#e6cc28] transition-colors text-sm sm:text-base"
+            className="inline-flex items-center gap-2 sm:gap-3 bg-[#FCE32D] text-black py-2 sm:py-[8px] px-2 sm:px-[8px] pl-4 sm:pl-5 rounded-[4px] font-bold hover:bg-[#e6cc28] transition-colors text-sm sm:text-base sm:w-auto justify-center"
           >
             <span>Explore Our Lights</span>
             <div className="bg-black p-1 rounded-sm flex items-center justify-center">

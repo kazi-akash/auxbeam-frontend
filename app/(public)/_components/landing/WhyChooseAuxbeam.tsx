@@ -30,42 +30,42 @@ export default function WhyChooseAuxbeam() {
   ];
 
   return (
-    <section className="relative w-full overflow-hidden pb-16 lg:pb-20">
+    <section className="relative w-full overflow-hidden py-10 md:pb-16 lg:pb-20">
       <div className="grid lg:grid-cols-2 lg:h-[702px]">
         {/* Left Side - Content with brown background */}
-        <div className="bg-[#422006] px-6 py-16 md:px-12 md:py-20 lg:p-16 flex items-center">
+        <div className="bg-[#422006] px-4 py-12 sm:px-6 sm:py-16 md:px-12 md:py-20 lg:p-16 flex items-center">
           <div className="w-full max-w-[725px] mx-auto lg:ml-auto lg:mr-0">
             {/* Heading */}
-            <h2 className="text-[32px] lg:text-[32px] font-[600] text-white mb-6 leading-tight">
+            <h2 className="text-xl md:text-2xl lg:text-[32px] font-[600] text-white mb-4 md:mb-6 leading-tight break-words">
               Why Choose Auxbeam Bangladesh?
             </h2>
 
             {/* Subheading */}
-            <p className="text-[16px] font-[400] text-white/90 mb-12 leading-relaxed">
+            <p className="text-sm md:text-base lg:text-[16px] font-[400] text-white/90 mb-8 md:mb-12 leading-relaxed break-words">
               We don&apos;t just sell car light bulbs — we deliver performance, safety, and
               reliability. Auxbeam Bangladesh brings you authentic, high-performance automotive
               lighting solutions backed by local support and professional service.
             </p>
 
             {/* Features */}
-            <div className="space-y-8">
+            <div className="space-y-6 md:space-y-8">
               {features.map((feature, index) => {
                 const Icon = feature.icon;
                 return (
-                  <div key={index} className="flex gap-5 lg:gap-6">
+                  <div key={index} className="flex gap-4 sm:gap-5 lg:gap-6">
                     {/* Icon */}
                     <div className="flex-shrink-0">
-                      <div className="w-[40px] h-[40px] bg-[#FDB913] rounded-full flex items-center justify-center">
-                        <Icon className="w-6 h-6 text-[#422006]" strokeWidth={2.5} />
+                      <div className="w-[36px] h-[36px] sm:w-[40px] sm:h-[40px] bg-[#FDB913] rounded-full flex items-center justify-center">
+                        <Icon className="w-5 h-5 sm:w-6 sm:h-6 text-[#422006]" strokeWidth={2.5} />
                       </div>
                     </div>
 
                     {/* Content */}
                     <div className="flex-1">
-                      <h3 className="text-[20px] font-[600] text-white mb-2">
+                      <h3 className="text-base md:text-lg lg:text-[20px] font-[600] text-white mb-2 leading-snug break-words">
                         {feature.title}
                       </h3>
-                      <p className="text-[14px] font-[400] text-white/80 leading-relaxed">
+                      <p className="text-sm md:text-[14px] font-[400] text-white/80 leading-relaxed break-words">
                         {feature.description}
                       </p>
                     </div>

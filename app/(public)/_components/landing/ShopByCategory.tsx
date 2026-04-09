@@ -27,22 +27,22 @@ const categories = [
 
 export default function ShopByCategory() {
   return (
-    <section className="pt-[250px] pb-[100px] md:py-[100px] bg-white">
-      <div className="container mx-auto">
-        <div className="flex items-center justify-between mb-8">
-          <h2 className="text-[32px] font-[600] text-[#12100E]">Shop by Categories</h2>
-          <div className="flex items-center gap-3">
+    <section className="pt-10 md:pt-[250px] pb-12 md:pb-[100px] md:py-[100px] bg-white">
+      <div className="container mx-auto px-4 sm:px-6 md:px-8">
+        <div className="flex items-center justify-between mb-8 gap-4">
+          <h2 className="text-xl md:text-2xl lg:text-[32px] font-[600] text-[#12100E] leading-tight break-words">Shop by Categories</h2>
+          <div className="flex items-center gap-2 sm:gap-3 flex-shrink-0">
             <button
-              className="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center text-[#6A7282] hover:bg-gray-200 transition-colors"
+              className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-gray-100 flex items-center justify-center text-[#6A7282] hover:bg-gray-200 transition-colors"
               aria-label="Previous categories"
             >
-              <ChevronLeft className="w-5 h-5" />
+              <ChevronLeft className="w-4 h-4 sm:w-5 sm:h-5" />
             </button>
             <button
-              className="w-10 h-10 rounded-full bg-[#FCE32D] flex items-center justify-center text-black hover:bg-[#e6cc28] transition-colors"
+              className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-[#FCE32D] flex items-center justify-center text-black hover:bg-[#e6cc28] transition-colors"
               aria-label="Next categories"
             >
-              <ChevronRight className="w-5 h-5" />
+              <ChevronRight className="w-4 h-4 sm:w-5 sm:h-5" />
             </button>
           </div>
         </div>
@@ -52,7 +52,7 @@ export default function ShopByCategory() {
             <Link
               key={index}
               href={category.href}
-              className="group relative w-full max-w-[300px] lg:max-w-none h-[424px] mx-auto rounded-[8px] overflow-hidden block"
+              className="group relative w-full max-w-[300px] lg:max-w-none h-[350px] sm:h-[400px] md:h-[424px] mx-auto rounded-[8px] overflow-hidden block"
             >
               <Image
                 src={category.image}
@@ -64,8 +64,8 @@ export default function ShopByCategory() {
               {/* Gradient Overlay */}
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
               
-              <div className="absolute bottom-0 left-0 p-6 w-full">
-                <h3 className="text-white text-[24px] font-semibold">
+              <div className="absolute bottom-0 left-0 p-4 sm:p-6 w-full">
+                <h3 className="text-white text-lg md:text-xl lg:text-[24px] font-semibold leading-snug break-words">
                   {category.title}
                 </h3>
               </div>

@@ -34,37 +34,37 @@ const testimonials = [
 
 export default function ClientFeedback() {
   return (
-    <section className="py-[100px] bg-[#F9FAFB]">
-      <div className="container mx-auto">
+    <section className="py-10 md:py-16 lg:py-[100px] bg-[#F9FAFB]">
+      <div className="container mx-auto px-4 sm:px-6 md:px-8">
         {/* Header */}
-        <div className="flex items-start justify-between mb-10">
-          <h2 className="text-[32px] font-[600] text-[#12100E] max-w-md">
+        <div className="flex items-start justify-between mb-8 md:mb-10 gap-4">
+          <h2 className="text-xl md:text-2xl lg:text-[32px] font-[600] text-[#12100E] max-w-md leading-tight break-words">
             Feedback From Our Satisfied Customers
           </h2>
           
           {/* Navigation Arrows */}
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2 flex-shrink-0">
             <button 
-              className="w-10 h-10 rounded-full bg-[#F3F4F6] flex items-center justify-center hover:bg-[#D1D5DB] transition-colors"
+              className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-[#F3F4F6] flex items-center justify-center hover:bg-[#D1D5DB] transition-colors"
               aria-label="Previous testimonials"
             >
-              <ChevronLeft className="w-5 h-5 text-[#6A7282]" />
+              <ChevronLeft className="w-4 h-4 sm:w-5 sm:h-5 text-[#6A7282]" />
             </button>
             <button 
-              className="w-10 h-10 rounded-full bg-[#FCE32D] flex items-center justify-center hover:bg-[#e6cc28] transition-colors"
+              className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-[#FCE32D] flex items-center justify-center hover:bg-[#e6cc28] transition-colors"
               aria-label="Next testimonials"
             >
-              <ChevronRight className="w-5 h-5 text-[#12100E]" />
+              <ChevronRight className="w-4 h-4 sm:w-5 sm:h-5 text-[#12100E]" />
             </button>
           </div>
         </div>
 
         {/* Testimonials Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
           {testimonials.map((testimonial) => (
             <div 
               key={testimonial.id} 
-              className="relative rounded-[8px] overflow-hidden h-[480px] group cursor-pointer"
+              className="relative rounded-[8px] overflow-hidden h-[400px] sm:h-[440px] md:h-[480px] group cursor-pointer"
             >
               {/* Full Card Image */}
               <Image
@@ -86,17 +86,17 @@ export default function ClientFeedback() {
               </div>
 
               {/* Text Overlay at Bottom */}
-              <div className="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black/90 via-black/70 to-transparent pt-20">
+              <div className="absolute bottom-0 left-0 right-0 p-4 sm:p-6 bg-gradient-to-t from-black/90 via-black/70 to-transparent pt-16 sm:pt-20">
                 {/* Quote */}
-                <p className="text-white text-[14px] font-[400] leading-relaxed mb-4">
+                <p className="text-white text-sm md:text-[14px] font-[400] leading-relaxed mb-3 sm:mb-4 break-words">
                   {testimonial.quote}
                 </p>
                 
                 {/* Customer Info */}
-                <h3 className="text-white text-[20px] font-[500] mb-1">
+                <h3 className="text-white text-base md:text-lg lg:text-[20px] font-[500] mb-1 leading-snug break-words">
                   {testimonial.name}
                 </h3>
-                <p className="text-white/80 text-[14px] font-[400">
+                <p className="text-white/80 text-sm md:text-[14px] font-[400] break-words">
                   {testimonial.role}
                 </p>
               </div>

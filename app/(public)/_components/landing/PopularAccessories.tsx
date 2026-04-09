@@ -81,22 +81,23 @@ const products = [
 
 export default function PopularAccessories() {
   return (
-    <section className="py-[100px] bg-white">
-      <div className="container mx-auto">
+    <section className="py-10 md:py-16 lg:py-[100px] bg-white">
+      <div className="container mx-auto px-4 sm:px-6 md:px-8">
         {/* Header */}
-        <div className="flex items-center justify-between mb-10">
-          <h2 className="text-[32px] font-[600] text-[#12100E]">Popular Accessories</h2>
+        <div className="flex items-center justify-between mb-8 md:mb-10 gap-4">
+          <h2 className="text-xl md:text-2xl lg:text-[32px] font-[600] text-[#12100E] leading-tight break-words">Popular Accessories</h2>
           <Link 
             href="/shop" 
-            className="flex items-center gap-2 text-[#12100E] font-[600] text-[16px] group"
+            className="flex items-center gap-1 sm:gap-2 text-[#12100E] font-[600] text-sm md:text-base lg:text-[16px] group flex-shrink-0"
           >
-            <span className="underline">View All Accessories</span>
+            <span className="underline hidden sm:inline">View All Accessories</span>
+            <span className="underline sm:hidden">View All</span>
             <svg 
               width="20" 
               height="20" 
               viewBox="0 0 20 20" 
               fill="none" 
-              className="group-hover:translate-x-1 transition-transform"
+              className="group-hover:translate-x-1 transition-transform w-4 h-4 sm:w-5 sm:h-5"
             >
               <path 
                 d="M7.5 15L12.5 10L7.5 5" 
@@ -110,12 +111,12 @@ export default function PopularAccessories() {
         </div>
 
         {/* Products Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 justify-items-center">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-5 justify-items-center">
           {products.map((product) => (
             <Link
               key={product.id}
               href={`/products/${product.id}`}
-              className="bg-white rounded-[16px] overflow-hidden border border-[#E5E7EB] transition-shadow group cursor-pointer hover:shadow-lg block w-[313px] h-[405px] flex flex-col"
+              className="bg-white rounded-[16px] overflow-hidden border border-[#E5E7EB] transition-shadow group cursor-pointer hover:shadow-lg block w-full max-w-[313px] h-[405px] flex flex-col"
               style={{ boxShadow: '0px 2px 30px 0px rgba(0, 0, 0, 0.08)' }}
             >
               {/* Image Container */}
@@ -156,7 +157,7 @@ export default function PopularAccessories() {
               {/* Product Info */}
               <div className="p-4 bg-[#F6F5F4] flex-1 flex flex-col">
                 {/* Product Name */}
-                <h3 className="text-[14px] text-[#12100E] font-[400] mb-2 line-clamp-2 min-h-[40px]">
+                <h3 className="text-sm md:text-[14px] text-[#12100E] font-[400] mb-2 line-clamp-2 min-h-[40px] leading-relaxed break-words">
                   {product.name}
                 </h3>
 
@@ -174,13 +175,13 @@ export default function PopularAccessories() {
                       />
                     ))}
                   </div>
-                  <span className="text-[11px] text-[#4D4C44] underline">({product.reviews} Reviews)</span>
+                  <span className="text-xs md:text-[11px] text-[#4D4C44] underline">({product.reviews} Reviews)</span>
                 </div>
 
                 {/* Price and Cart */}
                 <div className="flex items-center justify-between mt-[16px]">
                   <div className="flex items-center gap-3">
-                    <span className="text-[16px] font-[600] text-[#12100E]">
+                    <span className="text-sm md:text-base lg:text-[16px] font-[600] text-[#12100E]">
                       {product.price.toFixed(2)} BDT
                     </span>
                   </div>
@@ -194,7 +195,7 @@ export default function PopularAccessories() {
                     aria-label="Add to cart"
                   >
                     <Plus className="w-4 h-4 text-black" />
-                    <span className="text-[14px] font-[600] text-black">Cart</span>
+                    <span className="text-sm md:text-[14px] font-[600] text-black">Cart</span>
                   </button>
                 </div>
               </div>

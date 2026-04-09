@@ -112,34 +112,34 @@ export default function Footer() {
         }}
       />
 
-      <div className="container mx-auto pt-20 relative z-10">
+      <div className="container mx-auto pt-12 md:pt-16 lg:pt-20 relative z-10 px-4 sm:px-6 md:px-8">
         {/* Newsletter Section */}
-        <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center border-b border-[#333333] pb-12 mb-12 gap-8">
-          <h2 className="text-4xl md:text-5xl font-bold leading-tight">
+        <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center border-b border-[#333333] pb-8 md:pb-10 lg:pb-12 mb-8 md:mb-10 lg:mb-12 gap-6 md:gap-8">
+          <h2 className="text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold leading-tight break-words">
             Sign Up For Our<br />Newsletter Today
           </h2>
           <div className="w-full lg:w-auto">
-            <div className="flex w-full lg:w-[450px] bg-white rounded overflow-hidden h-14">
+            <div className="flex w-full lg:w-[450px] bg-white rounded overflow-hidden h-12 sm:h-14">
               <input
                 type="email"
                 placeholder="Your Email Address"
-                className="flex-1 px-5 text-black outline-none placeholder:text-gray-500 min-w-0"
+                className="flex-1 px-4 sm:px-5 text-sm sm:text-base text-black outline-none placeholder:text-gray-500 min-w-0"
               />
-              <button className="bg-[#FADE4B] text-black font-semibold px-6 md:px-8 hover:bg-[#e5c93d] transition-colors whitespace-nowrap flex-shrink-0">
+              <button className="bg-[#FADE4B] text-black font-semibold px-4 sm:px-6 md:px-8 hover:bg-[#e5c93d] transition-colors whitespace-nowrap flex-shrink-0 text-sm sm:text-base">
                 Subscribe
               </button>
             </div>
-            <p className="text-gray-100 text-[16px] font-[400] mt-3">
+            <p className="text-gray-100 text-sm md:text-[16px] font-[400] mt-2 md:mt-3 break-words">
               Lighting tips and exclusive weekly ofers
             </p>
           </div>
         </div>
 
         {/* Links Section */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-[2fr_1fr_1fr_1fr] gap-12 lg:gap-8 mb-16">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-[2fr_1fr_1fr_1fr] gap-8 md:gap-10 lg:gap-8 mb-12 md:mb-14 lg:mb-16">
           {/* Brand Info */}
           <div>
-            <div className="w-20 h-16 relative mb-6">
+            <div className="w-16 h-12 sm:w-20 sm:h-16 relative mb-4 md:mb-6">
               <Image
                 src="/auxbeam-logo.png"
                 alt="AuxBeam Bangladesh"
@@ -150,29 +150,29 @@ export default function Footer() {
                 unoptimized
               />
             </div>
-            <p className="text-[#D4D4D8] text-[16px] font-[400] leading-relaxed mb-8 max-w-sm">
+            <p className="text-[#D4D4D8] text-sm md:text-[16px] font-[400] leading-relaxed mb-6 md:mb-8 max-w-sm break-words">
               Auxbeam Bangladesh delivers premium automotive lighting and high-performance LED solutions built for Bangladesh roads.
             </p>
-            <div className="space-y-4 text-sm text-[#D4D4D8]">
-              <div className="flex items-center gap-3">
-                <Phone className="w-4 h-4" />
-                <span>+8809647245931</span>
+            <div className="space-y-3 md:space-y-4 text-sm text-[#D4D4D8]">
+              <div className="flex items-center gap-2 md:gap-3">
+                <Phone className="w-4 h-4 flex-shrink-0" />
+                <span className="break-words">+8809647245931</span>
               </div>
-              <div className="flex items-center gap-3">
-                <Mail className="w-4 h-4" />
-                <span>auxbeambangladesh@gmail.com</span>
+              <div className="flex items-center gap-2 md:gap-3">
+                <Mail className="w-4 h-4 flex-shrink-0" />
+                <span className="break-all">auxbeambangladesh@gmail.com</span>
               </div>
-              <div className="flex items-start gap-3">
+              <div className="flex items-start gap-2 md:gap-3">
                 <MapPin className="w-4 h-4 mt-1 flex-shrink-0" />
-                <span>House-127, Road-3, Block-A, Mirpur-12, Dhaka, 1216</span>
+                <span className="break-words">House-127, Road-3, Block-A, Mirpur-12, Dhaka, 1216</span>
               </div>
             </div>
           </div>
 
           {/* Company */}
           <div>
-            <h4 className="text-[24px] font-[600] mb-6">Company</h4>
-            <ul className="space-y-4 text-[16px] font-[400]">
+            <h4 className="text-lg md:text-xl lg:text-[24px] font-[600] mb-4 md:mb-6">Company</h4>
+            <ul className="space-y-3 md:space-y-4 text-sm md:text-[16px] font-[400]">
               <li><Link href="/about" className="text-[#D4D4D8] hover:text-[#FADE4B] transition-colors">About Us</Link></li>
               <li><Link href="/shop" className="text-[#D4D4D8] hover:text-[#FADE4B] transition-colors">Shop</Link></li>
               <li><Link href="/faq" className="text-[#D4D4D8] hover:text-[#FADE4B] transition-colors">Faq</Link></li>
@@ -183,8 +183,8 @@ export default function Footer() {
 
           {/* Categories */}
           <div>
-            <h4 className="text-[24px] font-[600] mb-6">Categories</h4>
-            <ul className="space-y-4 text-[16px] font-[400]">
+            <h4 className="text-lg md:text-xl lg:text-[24px] font-[600] mb-4 md:mb-6">Categories</h4>
+            <ul className="space-y-3 md:space-y-4 text-sm md:text-[16px] font-[400]">
               <li><Link href="/led-light-bulbs" className="text-[#D4D4D8] hover:text-[#FADE4B] transition-colors">Led Light Bulbs</Link></li>
               <li><Link href="/off-road-lights" className="text-[#D4D4D8] hover:text-[#FADE4B] transition-colors">Off Road Lights</Link></li>
               <li><Link href="/led-light-bars" className="text-[#D4D4D8] hover:text-[#FADE4B] transition-colors">Led Light Bars</Link></li>
@@ -195,8 +195,8 @@ export default function Footer() {
 
           {/* Help */}
           <div className="lg:ml-auto">
-            <h4 className="text-[24px] font-[600] mb-6">Help</h4>
-            <ul className="space-y-4 text-[16px] font-[400]">
+            <h4 className="text-lg md:text-xl lg:text-[24px] font-[600] mb-4 md:mb-6">Help</h4>
+            <ul className="space-y-3 md:space-y-4 text-sm md:text-[16px] font-[400]">
               <li><Link href="/track-order" className="text-[#D4D4D8] hover:text-[#FADE4B] transition-colors">Track Order</Link></li>
               <li><Link href="/return-policy" className="text-[#D4D4D8] hover:text-[#FADE4B] transition-colors">Return Policy</Link></li>
               <li><Link href="/shipping-policy" className="text-[#D4D4D8] hover:text-[#FADE4B] transition-colors">Shipping & Delivery Policy</Link></li>
@@ -207,63 +207,63 @@ export default function Footer() {
         </div>
 
         {/* Bottom Section */}
-        <div className="flex flex-col lg:flex-row items-center justify-between pt-8 pb-12 gap-6 relative z-20">
+        <div className="flex flex-col lg:flex-row items-center justify-between pt-6 md:pt-8 pb-8 md:pb-10 lg:pb-12 gap-4 md:gap-6 relative z-20">
           {/* Socials */}
-          <div className="flex items-center gap-4">
-            <a href="#" className="w-[42px] h-[42px] rounded-full bg-[#FADE4B] flex items-center justify-center text-black hover:bg-white transition-colors">
-              <Facebook className="w-[22px] h-[22px]" />
+          <div className="flex items-center gap-3 md:gap-4 order-1 lg:order-1">
+            <a href="#" className="w-[38px] h-[38px] sm:w-[42px] sm:h-[42px] rounded-full bg-[#FADE4B] flex items-center justify-center text-black hover:bg-white transition-colors">
+              <Facebook className="w-[20px] h-[20px] sm:w-[22px] sm:h-[22px]" />
             </a>
-            <a href="#" className="w-[42px] h-[42px] rounded-full bg-[#FADE4B] flex items-center justify-center text-black hover:bg-white transition-colors">
-              <Instagram className="w-[22px] h-[22px]" />
+            <a href="#" className="w-[38px] h-[38px] sm:w-[42px] sm:h-[42px] rounded-full bg-[#FADE4B] flex items-center justify-center text-black hover:bg-white transition-colors">
+              <Instagram className="w-[20px] h-[20px] sm:w-[22px] sm:h-[22px]" />
             </a>
-            <a href="#" className="w-[42px] h-[42px] rounded-full bg-[#FADE4B] flex items-center justify-center text-black hover:bg-white transition-colors">
-              <Twitter className="w-[22px] h-[22px]" />
+            <a href="#" className="w-[38px] h-[38px] sm:w-[42px] sm:h-[42px] rounded-full bg-[#FADE4B] flex items-center justify-center text-black hover:bg-white transition-colors">
+              <Twitter className="w-[20px] h-[20px] sm:w-[22px] sm:h-[22px]" />
             </a>
-            <a href="#" className="w-[42px] h-[42px] rounded-full bg-[#FADE4B] flex items-center justify-center text-black hover:bg-white transition-colors">
-              <Youtube className="w-[22px] h-[22px]" />
+            <a href="#" className="w-[38px] h-[38px] sm:w-[42px] sm:h-[42px] rounded-full bg-[#FADE4B] flex items-center justify-center text-black hover:bg-white transition-colors">
+              <Youtube className="w-[20px] h-[20px] sm:w-[22px] sm:h-[22px]" />
             </a>
-          </div>
-
-          {/* Copyright */}
-          <div className="text-[15px] text-[#D4D4D8]">
-            {new Date().getFullYear()} <span className="font-semibold text-white">Auxbeam Bangladesh</span> All Rights Reserved.
           </div>
 
           {/* Payments Mockup */}
-          <div className="flex items-center gap-1.5">
-            <div className="bg-white h-8 w-12 rounded-sm flex items-center justify-center px-1">
-              <span className="text-[9px] font-bold text-[#142C8E] italic">PayPal</span>
+          <div className="flex items-center gap-1 sm:gap-1.5 flex-wrap justify-center order-2 lg:order-3">
+            <div className="bg-white h-7 w-11 sm:h-8 sm:w-12 rounded-sm flex items-center justify-center px-1">
+              <span className="text-[8px] sm:text-[9px] font-bold text-[#142C8E] italic">PayPal</span>
             </div>
-            <div className="bg-white h-8 w-12 rounded-sm flex items-center justify-center">
+            <div className="bg-white h-7 w-11 sm:h-8 sm:w-12 rounded-sm flex items-center justify-center">
               <div className="flex -space-x-1.5">
-                <div className="w-3.5 h-3.5 rounded-full bg-[#EB001B] opacity-90"></div>
-                <div className="w-3.5 h-3.5 rounded-full bg-[#F79E1B] opacity-90"></div>
+                <div className="w-3 h-3 sm:w-3.5 sm:h-3.5 rounded-full bg-[#EB001B] opacity-90"></div>
+                <div className="w-3 h-3 sm:w-3.5 sm:h-3.5 rounded-full bg-[#F79E1B] opacity-90"></div>
               </div>
             </div>
-            <div className="bg-white h-8 w-12 rounded-sm flex items-center justify-center px-1">
-              <span className="text-[11px] font-bold text-[#1A1F71] italic">VISA</span>
+            <div className="bg-white h-7 w-11 sm:h-8 sm:w-12 rounded-sm flex items-center justify-center px-1">
+              <span className="text-[10px] sm:text-[11px] font-bold text-[#1A1F71] italic">VISA</span>
             </div>
-            <div className="bg-white h-8 w-14 rounded-sm flex items-center justify-center px-1">
-              <span className="text-[8px] font-bold text-black tracking-tighter">DISCOVER</span>
+            <div className="bg-white h-7 w-12 sm:h-8 sm:w-14 rounded-sm flex items-center justify-center px-1">
+              <span className="text-[7px] sm:text-[8px] font-bold text-black tracking-tighter">DISCOVER</span>
             </div>
-            <div className="bg-white h-8 w-12 rounded-sm flex items-center justify-center">
-              <span className="text-[#E60050] font-bold text-lg leading-none transform -skew-x-12">bkash</span>
+            <div className="bg-white h-7 w-11 sm:h-8 sm:w-12 rounded-sm flex items-center justify-center">
+              <span className="text-[#E60050] font-bold text-base sm:text-lg leading-none transform -skew-x-12">bkash</span>
             </div>
-            <div className="bg-white h-8 w-12 rounded-sm flex items-center justify-center">
-               <span className="text-[#E2136E] font-bold text-[10px]">Nagad</span>
+            <div className="bg-white h-7 w-11 sm:h-8 sm:w-12 rounded-sm flex items-center justify-center">
+               <span className="text-[#E2136E] font-bold text-[9px] sm:text-[10px]">Nagad</span>
             </div>
-            <div className="bg-white h-8 w-12 rounded-sm flex items-center justify-center">
-               <span className="text-[#006A4E] font-bold text-[10px]">Upay</span>
+            <div className="bg-white h-7 w-11 sm:h-8 sm:w-12 rounded-sm flex items-center justify-center">
+               <span className="text-[#006A4E] font-bold text-[9px] sm:text-[10px]">Upay</span>
             </div>
+          </div>
+
+          {/* Copyright */}
+          <div className="text-sm md:text-[15px] text-[#D4D4D8] text-center lg:text-left break-words order-3 lg:order-2">
+            {new Date().getFullYear()} <span className="font-semibold text-white">Auxbeam Bangladesh</span> All Rights Reserved.
           </div>
         </div>
 
         {/* Divider above watermark */}
-        <div className="w-full h-px bg-[#1A1A1A] relative z-20 mb-4"></div>
+        <div className="w-full h-px bg-[#1A1A1A] relative z-20 mb-3 md:mb-4"></div>
 
         {/* Huge Watermark Background */}
-        <div className="relative w-full overflow-hidden select-none pointer-events-none flex justify-center z-10 pt-4 pb-0">
-          <h1 className="text-[9vw] lg:text-[110px] xl:text-[123px] font-bold whitespace-nowrap leading-none tracking-tight text-[#6A7282] opacity-[0.27]">
+        <div className="relative w-full overflow-hidden select-none pointer-events-none flex justify-center z-10 pt-3 md:pt-4 pb-0">
+          <h1 className="text-[8vw] sm:text-[10vw] md:text-[9vw] lg:text-[110px] xl:text-[123px] font-bold whitespace-nowrap leading-none tracking-tight text-[#6A7282] opacity-[0.27]">
             Auxbeam Bangladesh
           </h1>
         </div>
