@@ -28,7 +28,7 @@ export default function AuthGuard({
       return;
     }
 
-    if (requireRole && user?.role !== requireRole) {
+    if (requireRole && user?.user_type !== requireRole) {
       router.push('/');
       return;
     }
@@ -46,7 +46,7 @@ export default function AuthGuard({
     return null;
   }
 
-  if (requireRole && user?.role !== requireRole) {
+  if (requireRole && user?.user_type !== requireRole) {
     return null;
   }
 

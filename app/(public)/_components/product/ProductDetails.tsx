@@ -6,10 +6,11 @@ import ProductReviews from './ProductReviews';
 type TabType = 'description' | 'specifications' | 'shipping' | 'reviews';
 
 interface ProductDetailsProps {
+  productId: number;
   reviewCount?: number;
 }
 
-export default function ProductDetails({ reviewCount = 132 }: ProductDetailsProps) {
+export default function ProductDetails({ productId, reviewCount = 0 }: ProductDetailsProps) {
   const [activeTab, setActiveTab] = useState<TabType>('description');
 
   const tabs = [
@@ -233,12 +234,7 @@ export default function ProductDetails({ reviewCount = 132 }: ProductDetailsProp
       )}
 
       {activeTab === 'reviews' && (
-        <ProductReviews 
-          totalReviews={reviewCount}
-          averageRating={5}
-          currentPage={1}
-          totalPages={5}
-        />
+        <ProductReviews productId={productId} />
       )}
     </div>
   );

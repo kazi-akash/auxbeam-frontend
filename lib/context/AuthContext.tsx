@@ -1,6 +1,7 @@
 'use client';
 
 import { createContext, useContext, useState, useEffect, ReactNode } from 'react';
+import { useRouter } from 'next/navigation';
 import authService, { User, RegisterData } from '../services/authService';
 
 interface AuthContextType {
@@ -17,13 +18,16 @@ const AuthContext = createContext<AuthContextType | null>(null);
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
+  const router = useRouter();
 
   const checkAuth = async () => {
     try {
       const response = await authService.getUser();
-      setUser(response.data);
-    } catch (error) {
+      setUser(response.data.data ?? response.data);
+    } catch (error: any) {
       setUser(null);
+      // If 401, the axios interceptor already dispatches 'unauthorized'
+      // but checkAuth is the initial load so we just silently clear state
     } finally {
       setLoading(false);
     }
@@ -54,8 +58,13 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   };
 
   const logout = async () => {
-    await authService.logout();
+    try {
+      await authService.logout();
+    } catch {
+      // Proceed with client-side logout even if the API call fails
+    }
     setUser(null);
+    router.push('/login');
   };
 
   return (

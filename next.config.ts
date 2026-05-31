@@ -7,14 +7,20 @@ const nextConfig: NextConfig = {
         protocol: 'http',
         hostname: 'localhost',
         port: '8000',
-        pathname: '/storage/**',
+        pathname: '/**',
+      },
+      {
+        protocol: 'http',
+        hostname: 'localhost',
+        port: '8001',
+        pathname: '/**',
       },
       {
         protocol: 'https',
-        hostname: '**', // Allow all HTTPS images
+        hostname: '**',
       },
     ],
-    qualities: [100, 75],
+    qualities: [75, 95, 100],
   },
 };
 

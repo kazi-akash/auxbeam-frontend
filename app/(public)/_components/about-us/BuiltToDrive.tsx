@@ -1,14 +1,48 @@
+'use client';
+
 import Image from 'next/image';
 import Link from 'next/link';
 import { ArrowUpRight, CircleCheck } from 'lucide-react';
+import { useEffect, useRef } from 'react';
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+gsap.registerPlugin(ScrollTrigger);
 
 export default function BuiltToDrive() {
+  const sectionRef  = useRef<HTMLElement>(null);
+  const leftRef     = useRef<HTMLDivElement>(null);
+  const rightRef    = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      gsap.fromTo(
+        leftRef.current,
+        { opacity: 0, x: -50 },
+        {
+          opacity: 1, x: 0, duration: 0.9, ease: 'power2.out',
+          scrollTrigger: { trigger: leftRef.current, start: 'top 87%', toggleActions: 'play none none none' },
+        }
+      );
+      gsap.fromTo(
+        rightRef.current,
+        { opacity: 0, x: 50, scale: 0.97 },
+        {
+          opacity: 1, x: 0, scale: 1, duration: 1.0, ease: 'power2.out',
+          scrollTrigger: { trigger: rightRef.current, start: 'top 87%', toggleActions: 'play none none none' },
+        }
+      );
+    }, sectionRef);
+
+    return () => ctx.revert();
+  }, []);
+
   return (
-    <section className="py-12 sm:py-16 md:py-24 bg-white">
+    <section ref={sectionRef} className="py-12 sm:py-16 md:py-24 bg-white">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-16 items-center">
           {/* Left: Content */}
-          <div className='max-w-[646px]'>
+          <div ref={leftRef} className='max-w-[646px]'>
             {/* Heading */}
             <h2 className="text-2xl sm:text-3xl md:text-[32px] font-[600] text-[#12100E] mb-4 sm:mb-[16px]">
               Built to Drive Real Performance.
@@ -53,11 +87,11 @@ export default function BuiltToDrive() {
                 <ArrowUpRight className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
               </div>
             </Link>
-            
+
           </div>
 
           {/* Right: Image */}
-          <div className="relative">
+          <div ref={rightRef} className="relative">
             <div className="relative w-full max-w-[602px] h-[350px] sm:h-[450px] md:h-[550px] lg:h-[592px] rounded-[8px] overflow-hidden mx-auto lg:ml-auto">
               <Image
                 src="/images/about-us/build-to-drive-img.jpg"

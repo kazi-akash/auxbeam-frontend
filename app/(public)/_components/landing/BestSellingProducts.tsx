@@ -3,6 +3,11 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { Heart, Star, Plus } from 'lucide-react';
+import { useEffect, useRef } from 'react';
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+gsap.registerPlugin(ScrollTrigger);
 
 const products = [
   {
@@ -96,30 +101,64 @@ const products = [
 ];
 
 export default function BestSellingProducts() {
+  const sectionRef  = useRef<HTMLElement>(null);
+  const headerRef   = useRef<HTMLDivElement>(null);
+  const gridRef     = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      // Header row fade-up
+      gsap.fromTo(
+        headerRef.current,
+        { opacity: 0, y: 28 },
+        {
+          opacity: 1, y: 0, duration: 0.7, ease: 'power2.out',
+          scrollTrigger: { trigger: headerRef.current, start: 'top 88%', toggleActions: 'play none none none' },
+        }
+      );
+
+      // Cards stagger
+      const cards = gridRef.current?.querySelectorAll(':scope > a');
+      if (cards?.length) {
+        gsap.fromTo(
+          cards,
+          { opacity: 0, y: 40, scale: 0.97 },
+          {
+            opacity: 1, y: 0, scale: 1,
+            duration: 0.65, stagger: 0.07, ease: 'power2.out',
+            scrollTrigger: { trigger: gridRef.current, start: 'top 86%', toggleActions: 'play none none none' },
+          }
+        );
+      }
+    }, sectionRef);
+
+    return () => ctx.revert();
+  }, []);
+
   return (
-    <section className="pt-10 pb-5 md:pt-16 md:pb-8 lg:py-[100px] bg-[#F9FAFB]">
+    <section ref={sectionRef} className="pt-10 pb-5 md:pt-16 md:pb-8 lg:py-[100px] bg-[#F9FAFB]">
       <div className="container mx-auto px-4 sm:px-6 md:px-8">
         {/* Header */}
-        <div className="flex items-center justify-between mb-8 md:mb-10 gap-4">
+        <div ref={headerRef} className="flex items-center justify-between mb-8 md:mb-10 gap-4">
           <h2 className="text-xl md:text-2xl lg:text-[32px] font-[600] text-[#12100E] leading-tight break-words">Best Selling Product</h2>
-          <Link 
-            href="/shop" 
+          <Link
+            href="/shop"
             className="flex items-center gap-1 sm:gap-2 text-[#12100E] font-[600] text-sm md:text-base lg:text-[16px] group flex-shrink-0"
           >
             <span className="underline hidden sm:inline">View All Products</span>
             <span className="underline sm:hidden">View All</span>
-            <svg 
-              width="20" 
-              height="20" 
-              viewBox="0 0 20 20" 
-              fill="none" 
+            <svg
+              width="20"
+              height="20"
+              viewBox="0 0 20 20"
+              fill="none"
               className="group-hover:translate-x-1 transition-transform w-4 h-4 sm:w-5 sm:h-5"
             >
-              <path 
-                d="M7.5 15L12.5 10L7.5 5" 
-                stroke="currentColor" 
-                strokeWidth="2" 
-                strokeLinecap="round" 
+              <path
+                d="M7.5 15L12.5 10L7.5 5"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
                 strokeLinejoin="round"
               />
             </svg>
@@ -127,7 +166,7 @@ export default function BestSellingProducts() {
         </div>
 
         {/* Products Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-5 justify-items-center">
+        <div ref={gridRef} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-5 justify-items-center">
           {products.map((product) => (
             <Link
               key={product.id}
@@ -186,11 +225,11 @@ export default function BestSellingProducts() {
                 <div className="flex items-center gap-2">
                   <div className="flex items-center gap-0.5">
                     {[...Array(5)].map((_, i) => (
-                      <Star 
-                        key={i} 
+                      <Star
+                        key={i}
                         className={`w-3.5 h-3.5 ${
-                          i < product.rating 
-                            ? 'fill-[#ff8904] text-[#ff8904]' 
+                          i < product.rating
+                            ? 'fill-[#ff8904] text-[#ff8904]'
                             : 'fill-gray-200 text-gray-200'
                         }`}
                       />

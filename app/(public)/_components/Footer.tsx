@@ -1,6 +1,13 @@
+'use client';
+
 import Link from 'next/link';
 import Image from 'next/image';
+import { useState, useEffect, useRef } from 'react';
 import { Phone, Mail, MapPin } from 'lucide-react';
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+gsap.registerPlugin(ScrollTrigger);
 
 // Custom Facebook icon matching lucide-react styling
 const Facebook = ({ className = "" }: { className?: string }) => (
@@ -78,8 +85,50 @@ const Youtube = ({ className = "" }: { className?: string }) => (
 );
 
 export default function Footer() {
-  return (
-    <footer className="relative bg-[#000000] text-white mt-auto overflow-hidden font-[family-name:var(--font-geist-sans)]">
+  const [year, setYear] = useState(new Date().getFullYear());
+  const footerRef      = useRef<HTMLElement>(null);
+  const newsletterRef  = useRef<HTMLDivElement>(null);
+  const linksRef       = useRef<HTMLDivElement>(null);
+  const bottomRef      = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      gsap.fromTo(
+        newsletterRef.current,
+        { opacity: 0, y: 36 },
+        {
+          opacity: 1, y: 0, duration: 0.85, ease: 'power2.out',
+          scrollTrigger: { trigger: newsletterRef.current, start: 'top 90%', toggleActions: 'play none none none' },
+        }
+      );
+
+      const cols = linksRef.current?.querySelectorAll(':scope > div');
+      if (cols?.length) {
+        gsap.fromTo(
+          cols,
+          { opacity: 0, y: 32 },
+          {
+            opacity: 1, y: 0,
+            duration: 0.7, stagger: 0.1, ease: 'power2.out',
+            scrollTrigger: { trigger: linksRef.current, start: 'top 90%', toggleActions: 'play none none none' },
+          }
+        );
+      }
+
+      gsap.fromTo(
+        bottomRef.current,
+        { opacity: 0, y: 20 },
+        {
+          opacity: 1, y: 0, duration: 0.65, ease: 'power2.out',
+          scrollTrigger: { trigger: bottomRef.current, start: 'top 96%', toggleActions: 'play none none none' },
+        }
+      );
+    }, footerRef);
+
+    return () => ctx.revert();
+  }, []);
+
+  return (    <footer ref={footerRef} className="relative bg-[#000000] text-white mt-auto overflow-hidden font-[family-name:var(--font-geist-sans)]">
       {/* Background Glow Shapes */}
       {/* Top center glow */}
       <div 
@@ -114,7 +163,7 @@ export default function Footer() {
 
       <div className="container mx-auto pt-12 md:pt-16 lg:pt-20 relative z-10 px-4 sm:px-6 md:px-8">
         {/* Newsletter Section */}
-        <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center border-b border-[#333333] pb-8 md:pb-10 lg:pb-12 mb-8 md:mb-10 lg:mb-12 gap-6 md:gap-8">
+        <div ref={newsletterRef} className="flex flex-col lg:flex-row justify-between items-start lg:items-center border-b border-[#333333] pb-8 md:pb-10 lg:pb-12 mb-8 md:mb-10 lg:mb-12 gap-6 md:gap-8">
           <h2 className="text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold leading-tight break-words">
             Sign Up For Our<br />Newsletter Today
           </h2>
@@ -136,7 +185,7 @@ export default function Footer() {
         </div>
 
         {/* Links Section */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-[2fr_1fr_1fr_1fr] gap-8 md:gap-10 lg:gap-8 mb-12 md:mb-14 lg:mb-16">
+        <div ref={linksRef} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-[2fr_1fr_1fr_1fr] gap-8 md:gap-10 lg:gap-8 mb-12 md:mb-14 lg:mb-16">
           {/* Brand Info */}
           <div>
             <div className="w-16 h-12 sm:w-20 sm:h-16 relative mb-4 md:mb-6">
@@ -207,7 +256,7 @@ export default function Footer() {
         </div>
 
         {/* Bottom Section */}
-        <div className="flex flex-col lg:flex-row items-center justify-between pt-6 md:pt-8 pb-8 md:pb-10 lg:pb-12 gap-4 md:gap-6 relative z-20">
+        <div ref={bottomRef} className="flex flex-col lg:flex-row items-center justify-between pt-6 md:pt-8 pb-8 md:pb-10 lg:pb-12 gap-4 md:gap-6 relative z-20">
           {/* Socials */}
           <div className="flex items-center gap-3 md:gap-4 order-1 lg:order-1">
             <a href="#" className="w-[38px] h-[38px] sm:w-[42px] sm:h-[42px] rounded-full bg-[#FADE4B] flex items-center justify-center text-black hover:bg-white transition-colors">
@@ -254,7 +303,7 @@ export default function Footer() {
 
           {/* Copyright */}
           <div className="text-sm md:text-[15px] text-[#D4D4D8] text-center lg:text-left break-words order-3 lg:order-2">
-            {new Date().getFullYear()} <span className="font-semibold text-white">Auxbeam Bangladesh</span> All Rights Reserved.
+            {year} <span className="font-semibold text-white">Auxbeam Bangladesh</span> All Rights Reserved.
           </div>
         </div>
 

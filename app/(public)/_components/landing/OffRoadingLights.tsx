@@ -1,13 +1,55 @@
+'use client';
+
 import Image from 'next/image';
 import Link from 'next/link';
+import { useEffect, useRef } from 'react';
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+gsap.registerPlugin(ScrollTrigger);
 
 export default function OffRoadingLights() {
+  const sectionRef = useRef<HTMLElement>(null);
+  const leftRef    = useRef<HTMLAnchorElement>(null);
+  const rightRef   = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      // Large left card slides in from left
+      gsap.fromTo(
+        leftRef.current,
+        { opacity: 0, x: -50 },
+        {
+          opacity: 1, x: 0, duration: 0.85, ease: 'power2.out',
+          scrollTrigger: { trigger: leftRef.current, start: 'top 86%', toggleActions: 'play none none none' },
+        }
+      );
+
+      // Right column cards stagger from right
+      const rightCards = rightRef.current?.querySelectorAll(':scope > *, :scope > * > a');
+      if (rightCards?.length) {
+        gsap.fromTo(
+          rightCards,
+          { opacity: 0, x: 50 },
+          {
+            opacity: 1, x: 0,
+            duration: 0.75, stagger: 0.1, ease: 'power2.out',
+            scrollTrigger: { trigger: rightRef.current, start: 'top 86%', toggleActions: 'play none none none' },
+          }
+        );
+      }
+    }, sectionRef);
+
+    return () => ctx.revert();
+  }, []);
+
   return (
-    <section className="pt-5 pb-5 md:pt-8 md:pb-8 bg-white">
+    <section ref={sectionRef} className="pt-5 pb-5 md:pt-8 md:pb-8 bg-white">
       <div className="container mx-auto bg-white px-4 sm:px-6 md:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-2 md:gap-4 lg:gap-6">
         {/* Large Left Card - Led Off Road Lights */}
         <Link
+          ref={leftRef}
           href="/shop?category=off-road-lights"
           className="relative group overflow-hidden rounded-[8px] h-[320px] sm:h-[400px] md:h-[500px] lg:h-[630px] block"
         >
@@ -17,7 +59,7 @@ export default function OffRoadingLights() {
             fill
             className="object-cover transition-transform duration-500 group-hover:scale-105"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent transition-opacity duration-300 group-hover:from-black/90" />
           <div className="absolute bottom-0 left-0 p-4 sm:p-6 md:p-8 lg:p-10">
             <h3 className="text-xl md:text-2xl lg:text-[32px] font-[600] leading-tight text-white mb-4 md:mb-6 break-words">
               Led Off Road
@@ -31,7 +73,7 @@ export default function OffRoadingLights() {
         </Link>
 
         {/* Right Column - 3 Cards */}
-        <div className="grid md:grid-rows-2 gap-2 md:gap-4 lg:gap-6">
+        <div ref={rightRef} className="grid md:grid-rows-2 gap-2 md:gap-4 lg:gap-6">
           {/* Top Row - 2 Small Cards */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 md:gap-4 lg:gap-6">
             {/* Led Light Bar */}

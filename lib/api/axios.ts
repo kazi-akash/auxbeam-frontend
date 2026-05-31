@@ -35,22 +35,30 @@ api.interceptors.response.use(
   async (error) => {
     const originalRequest = error.config;
 
-    // Handle 419 CSRF token mismatch
+    // Handle 419 CSRF token mismatch — refresh cookie then retry once.
+    // Use a plain axios call (not the api instance) to avoid interceptor loops.
     if (error.response?.status === 419 && !originalRequest._retry) {
       originalRequest._retry = true;
       try {
-        // Refresh CSRF token
         await axios.get(`${API_URL}/sanctum/csrf-cookie`, { withCredentials: true });
-        // Retry original request
+        // Re-read the refreshed XSRF-TOKEN and attach it before retrying
+        const newToken = getCookie('XSRF-TOKEN');
+        if (newToken) {
+          originalRequest.headers['X-XSRF-TOKEN'] = decodeURIComponent(newToken);
+        }
         return api(originalRequest);
-      } catch (csrfError) {
-        return Promise.reject(csrfError);
+      } catch {
+        return Promise.reject(error);
       }
     }
 
-    // Handle 401 Unauthorized
-    if (error.response?.status === 401 && !originalRequest._retry) {
-      // Clear auth state - handled by AuthContext
+    // Handle 401 Unauthorized — but not for the initial auth check endpoint
+    // (it's expected to 401 when the user is not logged in)
+    if (
+      error.response?.status === 401 &&
+      !originalRequest._retry &&
+      !originalRequest.url?.includes('/api/auth/user')
+    ) {
       if (typeof window !== 'undefined') {
         window.dispatchEvent(new Event('unauthorized'));
       }

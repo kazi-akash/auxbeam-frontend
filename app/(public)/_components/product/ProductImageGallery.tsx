@@ -48,6 +48,7 @@ export default function ProductImageGallery({ images }: ProductImageGalleryProps
             src={images[currentIndex]}
             alt="Product Main Image"
             fill
+            unoptimized
             className="object-contain p-4 lg:p-8"
           />
         </div>
@@ -63,11 +64,12 @@ export default function ProductImageGallery({ images }: ProductImageGalleryProps
               idx === currentIndex ? 'border-yellow-400' : 'border-transparent hover:border-gray-200'
             }`}
           >
-            <Image 
-              src={img} 
-              alt={`Thumbnail ${idx + 1}`} 
-              fill 
-              className="object-cover bg-black" 
+            <Image
+              src={img}
+              alt={`Thumbnail ${idx + 1}`}
+              fill
+              unoptimized
+              className="object-cover bg-black"
             />
             {/* Optional Play Icon for the first thumbnail if we assume it's a video based on the screenshot */}
             {idx === 0 && (

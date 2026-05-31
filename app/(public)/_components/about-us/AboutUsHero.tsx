@@ -1,7 +1,32 @@
+'use client';
+
 import Image from 'next/image';
 import Link from 'next/link';
+import { useEffect, useRef } from 'react';
+import { gsap } from 'gsap';
 
 export default function AboutUsHero() {
+  const breadcrumbRef = useRef<HTMLElement>(null);
+  const headingRef    = useRef<HTMLHeadingElement>(null);
+
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
+      tl.fromTo(
+        breadcrumbRef.current,
+        { opacity: 0, y: 16 },
+        { opacity: 1, y: 0, duration: 0.65 }
+      ).fromTo(
+        headingRef.current,
+        { opacity: 0, y: 28, skewY: 1 },
+        { opacity: 1, y: 0, skewY: 0, duration: 0.75 },
+        '-=0.35'
+      );
+    });
+
+    return () => ctx.revert();
+  }, []);
+
   return (
     <section className="relative h-[490px] w-full overflow-hidden">
       {/* Background Image */}
@@ -12,17 +37,17 @@ export default function AboutUsHero() {
         className="object-cover"
         priority
       />
-      
+
       {/* Gradient Overlay */}
       <div className="absolute inset-0 bg-gradient-to-b from-black/50 to-black/50" />
-      
+
       {/* Content */}
       <div className="relative h-full container mx-auto px-4 sm:px-6 lg:px-8 flex flex-col justify-center">
         {/* Breadcrumb */}
-        <nav className="mb-4 sm:mb-6">
+        <nav ref={breadcrumbRef} className="mb-4 sm:mb-6" style={{ opacity: 0 }}>
           <ol className="flex items-center text-sm text-white/90">
             <li>
-              <Link 
+              <Link
                 href="/"
                 className="hover:text-white transition-colors text-[13px] sm:text-[14px] font-[400]"
               >
@@ -33,9 +58,9 @@ export default function AboutUsHero() {
             <li className="text-white text-[13px] sm:text-[14px] font-[600] font-medium">About Us</li>
           </ol>
         </nav>
-        
+
         {/* Heading */}
-        <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white">
+        <h1 ref={headingRef} className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white" style={{ opacity: 0 }}>
           About Us
         </h1>
       </div>

@@ -1,14 +1,48 @@
+'use client';
+
 import Image from 'next/image';
 import Link from 'next/link';
 import { ArrowUpRight, CircleCheck } from 'lucide-react';
+import { useEffect, useRef } from 'react';
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+gsap.registerPlugin(ScrollTrigger);
 
 export default function ShapingTheFuture() {
+  const sectionRef = useRef<HTMLElement>(null);
+  const imgRef     = useRef<HTMLDivElement>(null);
+  const textRef    = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      gsap.fromTo(
+        imgRef.current,
+        { opacity: 0, x: -50, scale: 0.97 },
+        {
+          opacity: 1, x: 0, scale: 1, duration: 1.0, ease: 'power2.out',
+          scrollTrigger: { trigger: imgRef.current, start: 'top 87%', toggleActions: 'play none none none' },
+        }
+      );
+      gsap.fromTo(
+        textRef.current,
+        { opacity: 0, x: 50 },
+        {
+          opacity: 1, x: 0, duration: 0.9, ease: 'power2.out',
+          scrollTrigger: { trigger: textRef.current, start: 'top 87%', toggleActions: 'play none none none' },
+        }
+      );
+    }, sectionRef);
+
+    return () => ctx.revert();
+  }, []);
+
   return (
-    <section className="py-12 sm:py-16 md:py-24 bg-white">
+    <section ref={sectionRef} className="py-12 sm:py-16 md:py-24 bg-white">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-16 items-center">
           {/* Left: Image */}
-          <div className="relative order-2 lg:order-1">
+          <div ref={imgRef} className="relative order-2 lg:order-1">
             <div className="relative w-full max-w-[602px] h-[350px] sm:h-[450px] md:h-[550px] lg:h-[592px] rounded-[8px] overflow-hidden mx-auto lg:mx-0">
               <Image
                 src="/images/about-us/automotive-light-img.jpg"
@@ -20,7 +54,7 @@ export default function ShapingTheFuture() {
           </div>
 
           {/* Right: Content */}
-          <div className='max-w-[646px] order-1 lg:order-2'>
+          <div ref={textRef} className='max-w-[646px] order-1 lg:order-2'>
             {/* Heading */}
             <h2 className="text-2xl sm:text-3xl md:text-[32px] font-[600] text-[#12100E] mb-4 sm:mb-[16px]">
               Shaping The Future of Automotive Light.

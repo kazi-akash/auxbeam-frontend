@@ -1,9 +1,48 @@
+'use client';
+
 import { Shield, Zap, Wrench, Headphones } from 'lucide-react';
 import Image from 'next/image';
+import { useEffect, useRef } from 'react';
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+gsap.registerPlugin(ScrollTrigger);
 
 export default function WhatMakesUsDifferent() {
+  const sectionRef  = useRef<HTMLElement>(null);
+  const headerRef   = useRef<HTMLDivElement>(null);
+  const gridRef     = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      gsap.fromTo(
+        headerRef.current,
+        { opacity: 0, y: 32 },
+        {
+          opacity: 1, y: 0, duration: 0.75, ease: 'power2.out',
+          scrollTrigger: { trigger: headerRef.current, start: 'top 88%', toggleActions: 'play none none none' },
+        }
+      );
+
+      const cards = gridRef.current?.querySelectorAll(':scope > div');
+      if (cards?.length) {
+        gsap.fromTo(
+          cards,
+          { opacity: 0, y: 44, scale: 0.95 },
+          {
+            opacity: 1, y: 0, scale: 1,
+            duration: 0.65, stagger: 0.1, ease: 'back.out(1.2)',
+            scrollTrigger: { trigger: gridRef.current, start: 'top 86%', toggleActions: 'play none none none' },
+          }
+        );
+      }
+    }, sectionRef);
+
+    return () => ctx.revert();
+  }, []);
+
   return (
-    <section className="relative py-12 sm:py-16 md:py-24 min-h-[500px] sm:min-h-[577px] overflow-hidden">
+    <section ref={sectionRef} className="relative py-12 sm:py-16 md:py-24 min-h-[500px] sm:min-h-[577px] overflow-hidden">
       {/* Background Image */}
       <div className="absolute inset-0">
         <Image
@@ -13,13 +52,13 @@ export default function WhatMakesUsDifferent() {
           className="object-cover opacity-10"
         />
       </div>
-      
+
       {/* Background Color Overlay */}
       <div className="absolute inset-0 bg-[#422006]" style={{ mixBlendMode: 'multiply' }} />
-      
+
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Heading and Description */}
-        <div className="text-center mb-8 sm:mb-12">
+        <div ref={headerRef} className="text-center mb-8 sm:mb-12">
           <h2 className="text-2xl sm:text-3xl md:text-[32px] font-[600] text-white mb-4 sm:mb-[29px]">
             What Makes Us Different
           </h2>
@@ -30,7 +69,7 @@ export default function WhatMakesUsDifferent() {
         </div>
 
         {/* Cards Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 max-w-[1312px] mx-auto">
+        <div ref={gridRef} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 max-w-[1312px] mx-auto">
           {/* Card 1 */}
           <div className="bg-[#FEF9C3] rounded-[8px] w-full max-w-[313px] h-auto min-h-[220px] sm:min-h-[234px] pt-5 sm:pt-[21px] px-4 sm:px-[16px] pb-4 mx-auto">
             <div className="w-10 h-10 sm:w-12 sm:h-12 bg-[#FDDE35] rounded-[8px] flex items-center justify-center mb-6 sm:mb-8">

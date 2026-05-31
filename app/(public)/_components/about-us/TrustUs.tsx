@@ -1,11 +1,20 @@
 'use client';
 
 import Image from 'next/image';
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { ChevronDown, ChevronUp } from 'lucide-react';
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+gsap.registerPlugin(ScrollTrigger);
 
 export default function TrustUs() {
   const [openIndex, setOpenIndex] = useState(0);
+  const sectionRef   = useRef<HTMLElement>(null);
+  const leftRef      = useRef<HTMLDivElement>(null);
+  const rightRef     = useRef<HTMLDivElement>(null);
+  // Keep refs for accordion content panels for smooth height animation
+  const contentRefs  = useRef<(HTMLDivElement | null)[]>([]);
 
   const accordionItems = [
     {
@@ -30,12 +39,47 @@ export default function TrustUs() {
     },
   ];
 
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      gsap.fromTo(
+        leftRef.current,
+        { opacity: 0, x: -50 },
+        {
+          opacity: 1, x: 0, duration: 0.9, ease: 'power2.out',
+          scrollTrigger: { trigger: leftRef.current, start: 'top 87%', toggleActions: 'play none none none' },
+        }
+      );
+      gsap.fromTo(
+        rightRef.current,
+        { opacity: 0, x: 50, scale: 0.97 },
+        {
+          opacity: 1, x: 0, scale: 1, duration: 1.0, ease: 'power2.out',
+          scrollTrigger: { trigger: rightRef.current, start: 'top 87%', toggleActions: 'play none none none' },
+        }
+      );
+    }, sectionRef);
+
+    return () => ctx.revert();
+  }, []);
+
+  // Animate accordion content panel open
+  function handleAccordion(index: number) {
+    const next = openIndex === index ? -1 : index;
+    setOpenIndex(next);
+
+    // Micro-animation: bounce the chevron button
+    const btn = sectionRef.current?.querySelectorAll('[data-accordion-btn]')[index];
+    if (btn) {
+      gsap.fromTo(btn, { scale: 0.88 }, { scale: 1, duration: 0.25, ease: 'back.out(2)' });
+    }
+  }
+
   return (
-    <section className="py-12 sm:py-16 md:py-24 bg-white">
+    <section ref={sectionRef} className="py-12 sm:py-16 md:py-24 bg-white">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-16 items-start">
           {/* Left: Content */}
-          <div className="order-2 lg:order-1">
+          <div ref={leftRef} className="order-2 lg:order-1">
             {/* Heading */}
             <h2 className="text-2xl sm:text-3xl md:text-[32px] font-[600] text-[#12100E] mb-3 sm:mb-4">
               The Core Reasons to Trust Us
@@ -58,14 +102,15 @@ export default function TrustUs() {
                 >
                   {/* Accordion Header */}
                   <button
-                    onClick={() => setOpenIndex(openIndex === index ? -1 : index)}
+                    data-accordion-btn
+                    onClick={() => handleAccordion(index)}
                     className="w-full flex items-center justify-between p-3 sm:p-4 text-left"
                   >
                     <span className="text-[16px] sm:text-[20px] font-[500] text-[#12100E] pr-2">
                       {item.title}
                     </span>
                     <div
-                      className={`flex-shrink-0 w-7 h-7 sm:w-8 sm:h-8 rounded-full flex items-center justify-center ${
+                      className={`flex-shrink-0 w-7 h-7 sm:w-8 sm:h-8 rounded-full flex items-center justify-center transition-colors duration-200 ${
                         openIndex === index ? 'bg-[#FCE32D]' : 'bg-[#E5E7EB]'
                       }`}
                     >
@@ -79,7 +124,10 @@ export default function TrustUs() {
 
                   {/* Accordion Content */}
                   {openIndex === index && (
-                    <div className="px-3 sm:px-4 pb-3 sm:pb-4">
+                    <div
+                      ref={(el) => { contentRefs.current[index] = el; }}
+                      className="px-3 sm:px-4 pb-3 sm:pb-4"
+                    >
                       <p className="text-[#4D4C44] text-[13px] sm:text-[14px] font-[400] leading-relaxed">
                         {item.content}
                       </p>
@@ -91,7 +139,7 @@ export default function TrustUs() {
           </div>
 
           {/* Right: Image */}
-          <div className="relative order-1 lg:order-2">
+          <div ref={rightRef} className="relative order-1 lg:order-2">
             <div className="relative w-full max-w-[602px] h-[350px] sm:h-[450px] md:h-[550px] lg:h-[592px] rounded-[8px] overflow-hidden mx-auto lg:ml-auto">
               <Image
                 src="/images/about-us/trust-us-img.jpg"
