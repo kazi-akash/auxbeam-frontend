@@ -2,9 +2,10 @@
 
 import { useState, useEffect, useRef } from 'react';
 import { Loader2, Upload, X, Star, ChevronDown, ChevronUp, Plus, Trash2 } from 'lucide-react';
-import type { CreateProductPayload, ProductVariationPayload } from '@/lib/types/admin';
+import type { CreateProductPayload, ProductVariationPayload, AdminService } from '@/lib/types/admin';
 import type { Product, ProductImage } from '@/lib/types/catalog';
 import type { Brand, Category } from '@/lib/types/catalog';
+import ProductServicesPanel, { type LocalProductService } from './ProductServicesPanel';
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
@@ -86,7 +87,9 @@ interface Props {
   models: ProductModel[];
   shippingClasses: ShippingClass[];
   variationTypes: VariationType[];
-  onSubmit: (payload: CreateProductPayload, images: LocalImage[], variations: LocalVariation[]) => void;
+  availableServices?: AdminService[];
+  initialServices?: LocalProductService[];
+  onSubmit: (payload: CreateProductPayload, images: LocalImage[], variations: LocalVariation[], services: LocalProductService[]) => void;
   loading: boolean;
   submitLabel?: string;
 }
@@ -439,6 +442,8 @@ export default function ProductForm({
   models,
   shippingClasses,
   variationTypes,
+  availableServices = [],
+  initialServices = [],
   onSubmit,
   loading,
   submitLabel = 'Save Product',
@@ -452,6 +457,7 @@ export default function ProductForm({
   const [variations, setVariations] = useState<LocalVariation[]>(
     initialProduct ? variationsToLocal(initialProduct.variations) : []
   );
+  const [productServices, setProductServices] = useState<LocalProductService[]>(initialServices);
 
   // Section open/close state
   const [sections, setSections] = useState({
@@ -466,6 +472,11 @@ export default function ProductForm({
       setVariations(variationsToLocal(initialProduct.variations));
     }
   }, [initialProduct]);
+
+  useEffect(() => {
+    setProductServices(initialServices);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [initialServices.length]);
 
   function set<K extends keyof ProductFormValues>(key: K, value: ProductFormValues[K]) {
     setForm((p) => ({ ...p, [key]: value }));
@@ -538,7 +549,7 @@ export default function ProductForm({
         })) as ProductVariationPayload[],
     };
 
-    onSubmit(payload, images, variations);
+    onSubmit(payload, images, variations, productServices);
   }
 
   return (
@@ -597,14 +608,6 @@ export default function ProductForm({
                       <option value="">— No model —</option>
                       {filteredModels.map((m) => (
                         <option key={m.id} value={m.id}>{m.name}</option>
-                      ))}
-                    </select>
-                  </Field>
-                  <Field label="Shipping Class">
-                    <select value={form.shipping_class_id} onChange={(e) => set('shipping_class_id', e.target.value)} className={SELECT}>
-                      <option value="">— Default —</option>
-                      {shippingClasses.map((sc) => (
-                        <option key={sc.id} value={sc.id}>{sc.name}</option>
                       ))}
                     </select>
                   </Field>
@@ -673,24 +676,73 @@ export default function ProductForm({
             <SectionHeader title="Shipping & Dimensions" open={sections.shipping} onToggle={() => toggleSection('shipping')} />
             {sections.shipping && (
               <div className="pt-4 space-y-4">
+
+                {/* Shipping Class + Type row */}
                 <div className="grid grid-cols-2 gap-4">
+                  <Field label="Shipping Class">
+                    <select value={form.shipping_class_id} onChange={(e) => set('shipping_class_id', e.target.value)} className={SELECT}>
+                      <option value="">— Default (no class) —</option>
+                      {shippingClasses.map((sc) => (
+                        <option key={sc.id} value={sc.id}>{sc.name}</option>
+                      ))}
+                    </select>
+                    {form.shipping_class_id && (() => {
+                      const sc = shippingClasses.find((c) => String(c.id) === form.shipping_class_id);
+                      return sc ? (
+                        <p className="mt-1.5 text-[11px] text-purple-600 font-medium flex items-center gap-1">
+                          <span className="w-1.5 h-1.5 rounded-full bg-purple-400 inline-block" />
+                          Assigned: {sc.name}
+                        </p>
+                      ) : null;
+                    })()}
+                  </Field>
                   <Field label="Shipping Type">
                     <select value={form.shipping_type} onChange={(e) => set('shipping_type', e.target.value as ProductFormValues['shipping_type'])} className={SELECT}>
-                      <option value="default">Default</option>
+                      <option value="default">Default (use class rate)</option>
                       <option value="free">Free Shipping</option>
                       <option value="fixed">Fixed Cost</option>
-                      <option value="per_item">Per Item</option>
+                      <option value="per_item">Per Item Cost</option>
                     </select>
                   </Field>
-                  {(form.shipping_type === 'fixed' || form.shipping_type === 'per_item') && (
-                    <Field label="Shipping Cost ($)">
-                      <input type="number" min="0" step="0.01" value={form.shipping_cost} onChange={(e) => set('shipping_cost', e.target.value)}
-                        placeholder="0.00" className={INPUT} />
-                    </Field>
-                  )}
                 </div>
 
-                <div className="flex items-center gap-6">
+                {/* Shipping cost — only shown when fixed or per_item */}
+                {(form.shipping_type === 'fixed' || form.shipping_type === 'per_item') && (
+                  <div className="grid grid-cols-2 gap-4">
+                    <Field label={`Shipping Cost (BDT) — ${form.shipping_type === 'per_item' ? 'per item' : 'fixed'}`}>
+                      <div className="relative">
+                        <span className="absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-400 text-sm font-medium">৳</span>
+                        <input type="number" min="0" step="0.01" value={form.shipping_cost}
+                          onChange={(e) => set('shipping_cost', e.target.value)}
+                          placeholder="0.00" className={INPUT + ' pl-7'} />
+                      </div>
+                    </Field>
+                  </div>
+                )}
+
+                {/* Free shipping hint */}
+                {form.shipping_type === 'free' && (
+                  <div className="flex items-center gap-2 px-3 py-2 rounded-lg bg-emerald-50 border border-emerald-100">
+                    <span className="w-2 h-2 rounded-full bg-emerald-400 shrink-0" />
+                    <p className="text-xs text-emerald-700">This product will always ship for free, regardless of order total.</p>
+                  </div>
+                )}
+
+                {form.shipping_type === 'default' && !form.shipping_class_id && (
+                  <div className="flex items-center gap-2 px-3 py-2 rounded-lg bg-blue-50 border border-blue-100">
+                    <span className="w-2 h-2 rounded-full bg-blue-400 shrink-0" />
+                    <p className="text-xs text-blue-700">Shipping rate will be determined by the store's default shipping rules at checkout.</p>
+                  </div>
+                )}
+
+                {form.shipping_type === 'default' && form.shipping_class_id && (
+                  <div className="flex items-center gap-2 px-3 py-2 rounded-lg bg-purple-50 border border-purple-100">
+                    <span className="w-2 h-2 rounded-full bg-purple-400 shrink-0" />
+                    <p className="text-xs text-purple-700">Shipping rate will be looked up from the assigned shipping class at checkout.</p>
+                  </div>
+                )}
+
+                <div className="flex items-center gap-6 pt-1">
                   <label className="flex items-center gap-2 cursor-pointer">
                     <input type="checkbox" checked={form.requires_shipping} onChange={(e) => set('requires_shipping', e.target.checked)}
                       className="w-4 h-4 rounded border-gray-300 text-amber-500 focus:ring-amber-300" />
@@ -804,6 +856,22 @@ export default function ProductForm({
               variations={variations}
               variationTypes={variationTypes}
               onChange={setVariations}
+            />
+          </div>
+
+          {/* Services */}
+          <div className="bg-white rounded-xl border border-gray-100 shadow-sm px-6 py-4">
+            <h3 className="text-sm font-semibold text-gray-700 border-b border-gray-100 pb-3 mb-4">
+              Services
+            </h3>
+            <p className="text-xs text-gray-400 mb-4">
+              Attach available services (Home Service, Office Booking, etc.) with per-product pricing.
+              Mark a service as <strong>Required</strong> to force customers to select it.
+            </p>
+            <ProductServicesPanel
+              services={productServices}
+              availableServices={availableServices}
+              onChange={setProductServices}
             />
           </div>
         </div>

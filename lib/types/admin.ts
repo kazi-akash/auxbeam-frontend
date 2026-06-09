@@ -165,6 +165,61 @@ export interface BulkCreateVariationOptionsPayload {
   options: CreateVariationOptionPayload[];
 }
 
+// ─── Services ─────────────────────────────────────────────────────────────────
+
+export type ServiceType = 'home_service' | 'office_booking' | 'home_delivery' | 'outlet_pickup';
+
+export interface AdminService {
+  id: number;
+  name: string;
+  slug: string;
+  description: string | null;
+  type: ServiceType;
+  requires_scheduling: boolean;
+  is_active: boolean;
+  sort_order: number;
+  created_at: string;
+  updated_at: string;
+}
+
+export interface CreateServicePayload {
+  name: string;
+  slug?: string;
+  description?: string;
+  type: ServiceType;
+  requires_scheduling?: boolean;
+  is_active?: boolean;
+  sort_order?: number;
+}
+
+export type UpdateServicePayload = Partial<CreateServicePayload>;
+
+export interface ProductServicePivot {
+  service_id: number;
+  price: number;
+  is_required: boolean;
+  is_active: boolean;
+  conditions: string | null;
+}
+
+export interface ProductServiceItem extends AdminService {
+  price: number;
+  is_required: boolean;
+  conditions: string | null;
+}
+
+export interface AttachServicePayload {
+  service_id: number;
+  price: number;
+  is_required?: boolean;
+  is_active?: boolean;
+  conditions?: string;
+}
+
+export interface SyncServicesPayload {
+  services: AttachServicePayload[];
+}
+
 // ─── Orders ───────────────────────────────────────────────────────────────────
 
 export type OrderSource = 'website' | 'facebook' | 'instagram' | 'whatsapp' | 'phone_call' | 'manual';
@@ -596,6 +651,30 @@ export interface CreateFlashDealPayload {
 }
 
 // ─── Shipping ─────────────────────────────────────────────────────────────────
+
+export interface AdminShippingClass {
+  id: number;
+  name: string;
+  slug: string;
+  description: string | null;
+  created_at: string;
+  updated_at: string;
+}
+
+export interface AdminShippingRate {
+  id: number;
+  name: string;
+  method: string;
+  shipping_class_id: number | null;
+  shipping_class?: AdminShippingClass | null;
+  country: string | null;
+  delivery_time: string | null;
+  free_shipping_min_order: string | null;
+  base_cost: string;
+  is_active: boolean;
+  created_at: string;
+  updated_at: string;
+}
 
 export interface CreateShippingRatePayload {
   name: string;

@@ -6,6 +6,7 @@ import Link from 'next/link';
 import { ChevronRight, Loader2 } from 'lucide-react';
 
 import ProductForm, { type LocalImage, type LocalVariation } from '../../_components/ProductForm';
+import type { LocalProductService } from '../../_components/ProductServicesPanel';
 import {
   useAdminProduct,
   useAdminUpdateProduct,
@@ -17,6 +18,8 @@ import { useAdminCategories } from '@/lib/hooks/admin/useAdminCategories';
 import { useAdminBrands, useAdminProductModels } from '@/lib/hooks/admin/useAdminBrands';
 import { useAdminShippingClasses } from '@/lib/hooks/admin/useAdminShipping';
 import { useAdminVariations } from '@/lib/hooks/admin/useAdminVariations';
+import { useAdminServices, useAdminProductServices } from '@/lib/hooks/admin/useAdminServices';
+import api from '@/lib/api/axios';
 import type { CreateProductPayload, UpdateProductPayload } from '@/lib/types/admin';
 import type { Category } from '@/lib/types/catalog';
 
@@ -52,10 +55,26 @@ export default function EditProductPage() {
     : (shippingData?.data?.data ?? []);
   const variationTypes = Array.isArray(variationTypesRaw) ? variationTypesRaw : [];
 
+  // Services
+  const { data: allServices = [] } = useAdminServices();
+  const { data: existingProductServices = [] } = useAdminProductServices(productId);
+
+  // Map existing product services to LocalProductService shape
+  const initialServices: LocalProductService[] = existingProductServices.map((s) => ({
+    service_id:  s.id,
+    name:        s.name,
+    type:        s.type,
+    price:       String(s.price ?? 0),
+    is_required: s.is_required ?? false,
+    is_active:   s.is_active ?? true,
+    conditions:  s.conditions ?? '',
+  }));
+
   async function handleSubmit(
     payload: CreateProductPayload,
     images: LocalImage[],
-    _variations: LocalVariation[]
+    _variations: LocalVariation[],
+    services: LocalProductService[]
   ) {
     // Build update payload (omit images — handled separately)
     const updatePayload: UpdateProductPayload = {
@@ -97,6 +116,17 @@ export default function EditProductPage() {
           await setPrimary.mutateAsync({ productId, imageId: primaryExisting.id });
         }
       }
+
+      // Sync services (full replace)
+      await api.post(`/api/admin/products/${productId}/services/sync`, {
+        services: services.map((s) => ({
+          service_id:  s.service_id,
+          price:       Number(s.price),
+          is_required: s.is_required,
+          is_active:   s.is_active,
+          conditions:  s.conditions || undefined,
+        })),
+      });
 
       toast.success('Product updated successfully');
       router.push('/admin/products');
@@ -155,6 +185,8 @@ export default function EditProductPage() {
         models={models}
         shippingClasses={shippingClasses}
         variationTypes={variationTypes}
+        availableServices={allServices}
+        initialServices={initialServices}
         onSubmit={handleSubmit}
         loading={isSaving}
         submitLabel="Save Changes"

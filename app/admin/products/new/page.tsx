@@ -6,11 +6,14 @@ import Link from 'next/link';
 import { ChevronRight } from 'lucide-react';
 
 import ProductForm, { type LocalImage, type LocalVariation } from '../_components/ProductForm';
+import type { LocalProductService } from '../_components/ProductServicesPanel';
 import { useAdminCreateProduct } from '@/lib/hooks/admin/useAdminProducts';
 import { useAdminCategories } from '@/lib/hooks/admin/useAdminCategories';
 import { useAdminBrands, useAdminProductModels } from '@/lib/hooks/admin/useAdminBrands';
 import { useAdminShippingClasses } from '@/lib/hooks/admin/useAdminShipping';
 import { useAdminVariations } from '@/lib/hooks/admin/useAdminVariations';
+import { useAdminServices } from '@/lib/hooks/admin/useAdminServices';
+import api from '@/lib/api/axios';
 import type { CreateProductPayload } from '@/lib/types/admin';
 import type { Category } from '@/lib/types/catalog';
 
@@ -40,10 +43,14 @@ export default function NewProductPage() {
     : (shippingData?.data?.data ?? []);
   const variationTypes = Array.isArray(variationTypesRaw) ? variationTypesRaw : [];
 
+  // All global services (for the panel dropdown)
+  const { data: allServices = [] } = useAdminServices();
+
   async function handleSubmit(
     payload: CreateProductPayload,
     images: LocalImage[],
-    _variations: LocalVariation[]
+    _variations: LocalVariation[],
+    services: LocalProductService[]
   ) {
     // Attach new file images to payload
     const newImages = images.filter((img) => !img._delete && img.file);
@@ -58,7 +65,23 @@ export default function NewProductPage() {
     };
 
     createProduct.mutate(payloadWithImages, {
-      onSuccess: () => {
+      onSuccess: async (newProduct: { id: number }) => {
+        // Sync services after product creation
+        if (services.length > 0) {
+          try {
+            await api.post(`/api/admin/products/${newProduct.id}/services/sync`, {
+              services: services.map((s) => ({
+                service_id: s.service_id,
+                price: Number(s.price),
+                is_required: s.is_required,
+                is_active: s.is_active,
+                conditions: s.conditions || undefined,
+              })),
+            });
+          } catch {
+            toast.warning('Product created but services could not be saved.');
+          }
+        }
         toast.success('Product created successfully');
         router.push('/admin/products');
       },
@@ -88,6 +111,7 @@ export default function NewProductPage() {
         models={models}
         shippingClasses={shippingClasses}
         variationTypes={variationTypes}
+        availableServices={allServices}
         onSubmit={handleSubmit}
         loading={createProduct.isPending}
         submitLabel="Create Product"

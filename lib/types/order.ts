@@ -28,7 +28,10 @@ export type PaymentMethod =
   | 'bkash'
   | 'nagad'
   | 'cod'
-  | 'cash_on_delivery';
+  | 'cash_on_delivery'
+  | 'pos_on_delivery'
+  | 'cash_on_service'
+  | 'pos_on_service';
 
 export interface OrderItem {
   id: number;
@@ -126,6 +129,7 @@ export interface CheckoutPreviewPayload {
 export interface CheckoutPreview {
   subtotal: number;
   shipping_cost: number;
+  promotion_discount: number;
   coupon_discount: number;
   total: number;
   is_preorder: boolean;

@@ -3,6 +3,15 @@
 import { createContext, useContext, useState, useEffect, useRef, ReactNode, useCallback } from 'react';
 import { useAuth } from './AuthContext';
 
+export interface SelectedService {
+  service_id: number;
+  name: string;
+  type: string;
+  price: number;
+  scheduled_date?: string;
+  scheduled_time?: string;
+}
+
 export interface CartItem {
   id: number;
   product_id: number;
@@ -10,6 +19,7 @@ export interface CartItem {
   quantity: number;
   service?: string;
   bulbSize?: string;
+  selectedServices?: SelectedService[];
   product: {
     id: number;
     name: string;
@@ -20,13 +30,21 @@ export interface CartItem {
   };
 }
 
+export interface AppliedCoupon {
+  code: string;
+  discount: number;
+}
+
 interface CartContextType {
   items: CartItem[];
   itemCount: number;
   total: number;
+  appliedCoupon: AppliedCoupon | null;
+  setAppliedCoupon: (coupon: AppliedCoupon | null) => void;
   addItem: (item: Omit<CartItem, 'id'>) => void;
   removeItem: (id: number) => void;
   updateQuantity: (id: number, quantity: number) => void;
+  updateItemServices: (id: number, services: SelectedService[]) => void;
   clearCart: () => void;
 }
 
@@ -76,6 +94,7 @@ const CartContext = createContext<CartContextType | null>(null);
 export const CartProvider = ({ children }: { children: ReactNode }) => {
   const { user, loading: authLoading } = useAuth();
   const [items, setItems] = useState<CartItem[]>([]);
+  const [appliedCoupon, setAppliedCoupon] = useState<AppliedCoupon | null>(null);
   // Track which storage key is currently active so we persist to the right place.
   const storageKeyRef = useRef<string>(GUEST_CART_KEY);
   // Whether the initial auth resolution has been handled.
@@ -171,15 +190,20 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
     setItems((prev) => prev.map((i) => (i.id === id ? { ...i, quantity } : i)));
   }, []);
 
+  const updateItemServices = useCallback((id: number, services: SelectedService[]) => {
+    setItems((prev) => prev.map((i) => (i.id === id ? { ...i, selectedServices: services } : i)));
+  }, []);
+
   const clearCart = useCallback(() => {
     setItems([]);
+    setAppliedCoupon(null);
   }, []);
 
   const itemCount = items.reduce((sum, item) => sum + item.quantity, 0);
   const total = items.reduce((sum, item) => sum + item.product.price * item.quantity, 0);
 
   return (
-    <CartContext.Provider value={{ items, itemCount, total, addItem, removeItem, updateQuantity, clearCart }}>
+    <CartContext.Provider value={{ items, itemCount, total, appliedCoupon, setAppliedCoupon, addItem, removeItem, updateQuantity, updateItemServices, clearCart }}>
       {children}
     </CartContext.Provider>
   );

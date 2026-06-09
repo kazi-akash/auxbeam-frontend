@@ -10,16 +10,9 @@ import { useCart } from '@/lib/context/CartContext';
 import { useAvailableCoupons, useCartSummary } from '@/lib/hooks/public/useCart';
 import type { AvailableCoupon } from '@/lib/types';
 
-const INSTALLATION_COST: Record<string, number> = {
-  'Home Installation': 999.99,
-  'Store Installation': 499.99,
-  'No Installation': 0,
-};
-
 export default function CartPage() {
-  const { items, updateQuantity, removeItem } = useCart();
+  const { items, updateQuantity, removeItem, appliedCoupon, setAppliedCoupon } = useCart();
   const [couponCode, setCouponCode] = useState('');
-  const [appliedCoupon, setAppliedCoupon] = useState<{ code: string; discount: number } | null>(null);
   const [couponError, setCouponError] = useState<string | null>(null);
   const [showCouponList, setShowCouponList] = useState(false);
 
@@ -36,10 +29,17 @@ export default function CartPage() {
 
   const totalItems = items.reduce((sum, item) => sum + item.quantity, 0);
   const totalPrice = items.reduce((sum, item) => sum + item.product.price * item.quantity, 0);
-  const installationCost = items.reduce(
-    (sum, item) => sum + (INSTALLATION_COST[item.service ?? ''] ?? 0),
-    0
-  );
+  // Deduplicate services by service_id (take max price when same service appears in multiple items)
+  const serviceMap = new Map<number, { name: string; price: number }>();
+  for (const item of items) {
+    for (const svc of item.selectedServices ?? []) {
+      const existing = serviceMap.get(svc.service_id);
+      if (!existing || svc.price > existing.price) {
+        serviceMap.set(svc.service_id, { name: svc.name, price: svc.price });
+      }
+    }
+  }
+  const serviceCost = Array.from(serviceMap.values()).reduce((sum, s) => sum + s.price, 0);
 
   // Fetch server summary whenever cart items change (to get accurate post-promotion subtotal).
   useEffect(() => {
@@ -51,11 +51,11 @@ export default function CartPage() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [items]);
 
-  // Display values: prefer server-computed subtotal when available.
+  // Display values: server returns raw subtotal + promotion_discount separately.
   const promotionDiscount = serverSummary?.promotion_discount ?? 0;
-  const serverSubtotal = serverSummary?.subtotal ?? totalPrice; // post-promotion
+  const rawSubtotal = serverSummary?.subtotal ?? totalPrice;
   const couponDiscount = appliedCoupon?.discount ?? 0;
-  const subTotal = serverSubtotal + installationCost - couponDiscount;
+  const subTotal = rawSubtotal - promotionDiscount + serviceCost - couponDiscount;
 
   function handleApplyCoupon(code: string) {
     const trimmed = code.trim().toUpperCase();
@@ -148,10 +148,15 @@ export default function CartPage() {
                               {item.product.name}
                             </h3>
                           </Link>
-                          {item.service && (
-                            <p className="text-[12px] md:text-[14px] font-[400] text-[#6B7280] mb-[4px]">
-                              Service: {item.service}
-                            </p>
+                          {item.selectedServices && item.selectedServices.length > 0 && (
+                            <div className="mb-[4px]">
+                              {item.selectedServices.map((svc) => (
+                                <p key={svc.service_id} className="text-[12px] md:text-[14px] font-[400] text-[#6B7280]">
+                                  {svc.name}{svc.price > 0 ? ` (+${svc.price.toFixed(2)} BDT)` : ''}
+                                  {svc.scheduled_date && ` — ${svc.scheduled_date}${svc.scheduled_time ? ` ${svc.scheduled_time}` : ''}`}
+                                </p>
+                              ))}
+                            </div>
                           )}
                           {item.bulbSize && (
                             <p className="text-[12px] md:text-[14px] font-[400] text-[#6B7280] mb-[11px] md:mb-4">
@@ -359,7 +364,7 @@ export default function CartPage() {
                 <div className="flex justify-between text-sm">
                   <span className="text-[#4D4C44] text-[14px] md:text-[16px]">Total Items ({totalItems})</span>
                   <span className="font-[500] text-[14px] md:text-[16px] text-[#101114]">
-                    {totalPrice.toFixed(2)} BDT
+                    {rawSubtotal.toFixed(2)} BDT
                   </span>
                 </div>
                 {promotionDiscount > 0 && (
@@ -370,11 +375,11 @@ export default function CartPage() {
                     </span>
                   </div>
                 )}
-                {installationCost > 0 && (
+                {serviceCost > 0 && (
                   <div className="flex justify-between text-sm">
-                    <span className="text-[#4D4C44] text-[14px] md:text-[16px]">Installation Service</span>
+                    <span className="text-[#4D4C44] text-[14px] md:text-[16px]">Services</span>
                     <span className="font-[500] text-[14px] md:text-[16px] text-[#101114]">
-                      {installationCost.toFixed(2)} BDT
+                      {serviceCost.toFixed(2)} BDT
                     </span>
                   </div>
                 )}

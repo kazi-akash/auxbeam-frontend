@@ -43,6 +43,13 @@ export const queryKeys = {
     availableCoupons: () => ['cart', 'available-coupons'] as const,
   },
 
+  // Services — public
+  services: {
+    all: () => ['services'] as const,
+    product: (productId: number) => ['services', 'product', productId] as const,
+    paymentMethods: (deliveryType: string) => ['services', 'payment-methods', deliveryType] as const,
+  },
+
   // Reviews — public
   reviews: {
     product: (productId: number, filters?: object) =>
@@ -285,6 +292,12 @@ export const queryKeys = {
       growthReport: (filters?: object) => ['admin', 'customer-analytics', 'growth-report', filters] as const,
       ltvDistribution: () => ['admin', 'customer-analytics', 'ltv-distribution'] as const,
       spendingSummary: (customerId: number) => ['admin', 'customer-analytics', customerId, 'spending-summary'] as const,
+    },
+
+    services: {
+      list: (filters?: object) => ['admin', 'services', filters] as const,
+      single: (id: number) => ['admin', 'services', id] as const,
+      productServices: (productId: number) => ['admin', 'products', productId, 'services'] as const,
     },
 
     metaPixel: {

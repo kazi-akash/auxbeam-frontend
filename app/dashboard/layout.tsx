@@ -7,6 +7,12 @@ import Header from '@/app/(public)/_components/Header';
 import Footer from '@/app/(public)/_components/Footer';
 import UserSidebar from './_components/UserSidebar';
 import { PanelLeft } from 'lucide-react';
+import { useNotificationChannel } from '@/lib/hooks/customer/useNotifications';
+
+function NotificationChannelMount() {
+  useNotificationChannel();
+  return null;
+}
 
 export default function DashboardLayout({
   children,
@@ -29,6 +35,7 @@ export default function DashboardLayout({
 
   return (
     <div className="flex flex-col min-h-screen bg-gray-50">
+      <NotificationChannelMount />
       <Header />
 
       <div className="flex flex-1 w-full max-w-5xl mx-auto px-4 sm:px-6 py-8 gap-5">

@@ -5,6 +5,8 @@ import { AuthProvider } from "@/lib/context/AuthContext";
 import { CartProvider } from "@/lib/context/CartContext";
 import QueryProvider from "@/lib/providers/QueryProvider";
 import { ToastProvider } from "@/lib/components/ToastProvider";
+import { EchoProvider } from "@/lib/providers/EchoProvider";
+import { AIChatbot } from "@/lib/components/AIChatbot";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -34,10 +36,13 @@ export default function RootLayout({
       <body className="min-h-full flex flex-col" suppressHydrationWarning>
         <QueryProvider>
           <AuthProvider>
-            <CartProvider>
-              <ToastProvider />
-              {children}
-            </CartProvider>
+            <EchoProvider>
+              <CartProvider>
+                <ToastProvider />
+                <AIChatbot />
+                {children}
+              </CartProvider>
+            </EchoProvider>
           </AuthProvider>
         </QueryProvider>
       </body>

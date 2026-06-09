@@ -163,7 +163,7 @@ export default function MetaPixelEventLog() {
                       {ev.sent_to_facebook
                         ? <CheckCircle2 className="w-4 h-4 text-emerald-500" />
                         : ev.error_message
-                        ? <XCircle className="w-4 h-4 text-red-400" title={ev.error_message} />
+                        ? <span title={ev.error_message}><XCircle className="w-4 h-4 text-red-400" /></span>
                         : <Clock className="w-4 h-4 text-gray-300" />}
                     </td>
 

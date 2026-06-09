@@ -114,15 +114,88 @@ export interface Return {
 
 // ─── Notifications ────────────────────────────────────────────────────────────
 
+export type NotificationType =
+  // Orders
+  | 'order_placed'
+  | 'order_confirmed'
+  | 'order_processing'
+  | 'order_shipped'
+  | 'order_out_for_delivery'
+  | 'order_delivered'
+  | 'order_cancelled'
+  | 'order_status_updated'
+  // Returns & Refunds
+  | 'return_requested'
+  | 'return_approved'
+  | 'return_rejected'
+  | 'return_received'
+  | 'refund_initiated'
+  | 'refund_completed'
+  | 'refund_failed'
+  // Reviews
+  | 'review_approved'
+  | 'review_rejected'
+  | 'review_response'
+  // Inventory (admin)
+  | 'low_stock_alert'
+  | 'out_of_stock_alert'
+  // Campaigns (admin)
+  | 'campaign_sent'
+  | 'campaign_failed'
+  // Meta Ads (admin)
+  | 'meta_pixel_error'
+  | 'meta_ad_event'
+  // Promotions & Coupons (customer)
+  | 'promotion_started'
+  | 'coupon_issued'
+  | 'coupon_expiring'
+  // Reports (admin)
+  | 'report_ready'
+  // Generic
+  | 'promo'
+  | 'system';
+
+export interface NotificationData {
+  title: string;
+  message: string;
+  // Order context
+  order_number?: string;
+  order_id?: number;
+  order_status?: string;
+  // Return / refund context
+  return_id?: number;
+  refund_id?: number;
+  refund_amount?: number;
+  refund_method?: string;
+  // Product / inventory context
+  product_id?: number;
+  product_name?: string;
+  product_sku?: string;
+  stock_quantity?: number;
+  threshold?: number;
+  // Campaign context
+  campaign_id?: number;
+  campaign_name?: string;
+  recipients_count?: number;
+  // Promotion / coupon context
+  promotion_id?: number;
+  coupon_code?: string;
+  discount_value?: number;
+  expires_at?: string;
+  // Review context
+  review_id?: number;
+  // Report context
+  report_type?: string;
+  report_url?: string;
+  // Action URL for deep-linking
+  action_url?: string;
+  [key: string]: unknown;
+}
+
 export interface Notification {
   id: string;
-  type: string;
-  data: {
-    title: string;
-    message: string;
-    order_number?: string;
-    [key: string]: unknown;
-  };
+  type: NotificationType | string;
+  data: NotificationData;
   read_at: string | null;
   created_at: string;
 }

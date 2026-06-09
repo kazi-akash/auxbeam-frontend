@@ -1,8 +1,9 @@
 'use client';
 
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import { Bell, PanelLeft } from 'lucide-react';
 import { useAuth } from '@/lib/context/AuthContext';
+import { useUnreadNotificationCount } from '@/lib/hooks/customer/useNotifications';
 
 const PAGE_META: Record<string, { title: string; subtitle: (name: string) => string }> = {
   '/dashboard': {
@@ -18,8 +19,8 @@ const PAGE_META: Record<string, { title: string; subtitle: (name: string) => str
     subtitle: () => 'Manage your saved addresses.',
   },
   '/dashboard/wishlist': {
-    title: 'Wishlist',
-    subtitle: () => 'Your saved products.',
+    title: 'Your wishlist',
+    subtitle: () => "Curated pieces you've loved. Add to cart when you're ready.",
   },
   '/dashboard/reviews': {
     title: 'Reviews',
@@ -41,9 +42,12 @@ const PAGE_META: Record<string, { title: string; subtitle: (name: string) => str
 
 export default function UserTopbar({ onToggleSidebar }: { onToggleSidebar?: () => void }) {
   const pathname = usePathname();
+  const router = useRouter();
   const { user } = useAuth();
+  const { data: countData } = useUnreadNotificationCount();
 
   const firstName = user?.first_name || user?.name?.split(' ')[0] || 'there';
+  const unreadCount = countData?.unread_count ?? 0;
 
   const meta =
     PAGE_META[pathname] ??
@@ -71,11 +75,16 @@ export default function UserTopbar({ onToggleSidebar }: { onToggleSidebar?: () =
 
       <div className="flex items-center gap-2">
         <button
+          onClick={() => router.push('/dashboard/notifications')}
           className="relative p-2 text-gray-400 hover:text-gray-700 transition-colors"
-          aria-label="Notifications"
+          aria-label={`Notifications${unreadCount > 0 ? ` (${unreadCount} unread)` : ''}`}
         >
           <Bell className="w-5 h-5" />
-          <span className="absolute top-1.5 right-1.5 w-2 h-2 bg-red-500 rounded-full" />
+          {unreadCount > 0 && (
+            <span className="absolute top-1 right-1 min-w-[16px] h-4 px-0.5 flex items-center justify-center bg-red-500 text-white text-[9px] font-bold rounded-full leading-none">
+              {unreadCount > 99 ? '99+' : unreadCount}
+            </span>
+          )}
         </button>
       </div>
     </header>

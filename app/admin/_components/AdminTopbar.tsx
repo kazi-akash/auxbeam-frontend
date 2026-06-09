@@ -1,8 +1,9 @@
 'use client';
 
 import { usePathname } from 'next/navigation';
-import { Bell, Search, PanelLeft } from 'lucide-react';
+import { Search, PanelLeft } from 'lucide-react';
 import { useAuth } from '@/lib/context/AuthContext';
+import { NotificationsPanel } from './NotificationsPanel';
 
 interface PageMeta {
   title: string;
@@ -42,6 +43,42 @@ const PAGE_META: Record<string, PageMeta> = {
     title: 'Analytics',
     subtitle: () => 'Insights and performance metrics.',
   },
+  '/admin/inventory': {
+    title: 'Inventory',
+    subtitle: () => 'Manage stock levels and alerts.',
+  },
+  '/admin/returns': {
+    title: 'Returns',
+    subtitle: () => 'Manage customer return requests.',
+  },
+  '/admin/refunds': {
+    title: 'Refunds',
+    subtitle: () => 'Process and track refunds.',
+  },
+  '/admin/reviews': {
+    title: 'Reviews',
+    subtitle: () => 'Moderate product reviews.',
+  },
+  '/admin/campaigns': {
+    title: 'Campaigns',
+    subtitle: () => 'Email and marketing campaigns.',
+  },
+  '/admin/promotions': {
+    title: 'Promotions',
+    subtitle: () => 'Manage discounts and promotions.',
+  },
+  '/admin/coupons': {
+    title: 'Coupons',
+    subtitle: () => 'Manage coupon codes.',
+  },
+  '/admin/marketing': {
+    title: 'Marketing',
+    subtitle: () => 'Meta Pixel and ad integrations.',
+  },
+  '/admin/notifications': {
+    title: 'Notifications',
+    subtitle: () => 'All system notifications.',
+  },
   '/admin/settings': {
     title: 'Settings',
     subtitle: () => 'Configure your admin preferences.',
@@ -58,7 +95,6 @@ export default function AdminTopbar({ onToggleSidebar }: AdminTopbarProps) {
 
   const firstName = user?.first_name || user?.name?.split(' ')[0] || 'Admin';
 
-  // Exact match first, then prefix match (skip root /admin for prefix)
   const meta =
     PAGE_META[pathname] ??
     Object.entries(PAGE_META)
@@ -78,7 +114,6 @@ export default function AdminTopbar({ onToggleSidebar }: AdminTopbarProps) {
           <PanelLeft className="w-5 h-5" />
         </button>
 
-        {/* Desktop sidebar toggle */}
         <button
           onClick={onToggleSidebar}
           className="hidden lg:block text-gray-400 hover:text-gray-700 transition-colors"
@@ -88,18 +123,13 @@ export default function AdminTopbar({ onToggleSidebar }: AdminTopbarProps) {
         </button>
 
         <div>
-          <h1 className="text-base font-bold text-gray-900 leading-tight">
-            {meta.title}
-          </h1>
-          <p className="text-xs text-gray-500 leading-tight">
-            {meta.subtitle(firstName)}
-          </p>
+          <h1 className="text-base font-bold text-gray-900 leading-tight">{meta.title}</h1>
+          <p className="text-xs text-gray-500 leading-tight">{meta.subtitle(firstName)}</p>
         </div>
       </div>
 
-      {/* Right: search + notifications */}
+      {/* Right: search + notifications panel */}
       <div className="flex items-center gap-3">
-        {/* Search */}
         <div className="relative hidden sm:block">
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
           <input
@@ -109,15 +139,7 @@ export default function AdminTopbar({ onToggleSidebar }: AdminTopbarProps) {
           />
         </div>
 
-        {/* Notifications */}
-        <button
-          className="relative p-2 text-gray-400 hover:text-gray-700 transition-colors"
-          aria-label="Notifications"
-        >
-          <Bell className="w-5 h-5" />
-          {/* Unread dot */}
-          <span className="absolute top-1.5 right-1.5 w-2 h-2 bg-amber-400 rounded-full" />
-        </button>
+        <NotificationsPanel />
       </div>
     </header>
   );

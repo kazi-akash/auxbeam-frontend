@@ -5,6 +5,12 @@ import { useRouter } from 'next/navigation';
 import { useAuth } from '@/lib/context/AuthContext';
 import AdminSidebar from './_components/AdminSidebar';
 import AdminTopbar from './_components/AdminTopbar';
+import { useAdminNotificationChannel } from '@/lib/hooks/admin/useAdminNotifications';
+
+function AdminNotificationChannelMount() {
+  useAdminNotificationChannel();
+  return null;
+}
 
 export default function AdminLayout({
   children,
@@ -27,6 +33,7 @@ export default function AdminLayout({
 
   return (
     <div className="flex h-screen bg-gray-50 overflow-hidden">
+      <AdminNotificationChannelMount />
       {/* Mobile overlay */}
       {sidebarOpen && (
         <div

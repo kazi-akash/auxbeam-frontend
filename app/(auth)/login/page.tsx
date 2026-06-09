@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import Image from 'next/image';
 import { toast } from 'react-toastify';
@@ -14,6 +14,7 @@ export default function LoginPage() {
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const router = useRouter();
+  const searchParams = useSearchParams();
   const { checkAuth } = useAuth();
   const loginMutation = useLogin();
 
@@ -33,7 +34,8 @@ export default function LoginPage() {
           if (userType === 'admin') {
             router.push('/admin');
           } else {
-            router.push('/dashboard');
+            const redirect = searchParams.get('redirect');
+            router.push(redirect ?? '/dashboard');
           }
         },
         onError: (error: any) => {

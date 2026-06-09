@@ -27,8 +27,11 @@ import {
   Settings,
   LogOut,
   Zap,
+  ConciergeBell,
+  Bell,
   type LucideIcon,
 } from 'lucide-react';
+import { useAdminUnreadNotificationCount } from '@/lib/hooks/admin/useAdminNotifications';
 
 // ─── Menu structure ────────────────────────────────────────────────
 
@@ -36,6 +39,7 @@ interface MenuItem {
   label: string;
   href: string;
   icon: LucideIcon;
+  badge?: number;
 }
 
 interface MenuGroup {
@@ -64,11 +68,12 @@ const MENU_GROUPS: MenuGroup[] = [
   {
     title: 'Orders & Fulfillment',
     items: [
-      { label: 'Orders',   href: '/admin/orders',   icon: ShoppingCart },
-      { label: 'Returns',  href: '/admin/returns',  icon: RotateCcw    },
-      { label: 'Refunds',  href: '/admin/refunds',  icon: CreditCard   },
-      { label: 'Shipping', href: '/admin/shipping', icon: Truck        },
-      { label: 'Reviews',  href: '/admin/reviews',  icon: Star         },
+      { label: 'Orders',   href: '/admin/orders',   icon: ShoppingCart  },
+      { label: 'Returns',  href: '/admin/returns',  icon: RotateCcw     },
+      { label: 'Refunds',  href: '/admin/refunds',  icon: CreditCard    },
+      { label: 'Shipping', href: '/admin/shipping', icon: Truck         },
+      { label: 'Services', href: '/admin/services', icon: ConciergeBell },
+      { label: 'Reviews',  href: '/admin/reviews',  icon: Star          },
     ],
   },
   {
@@ -98,7 +103,8 @@ const MENU_GROUPS: MenuGroup[] = [
 ];
 
 const SYSTEM_ITEMS: MenuItem[] = [
-  { label: 'Settings', href: '/admin/settings', icon: Settings },
+  { label: 'Notifications', href: '/admin/notifications', icon: Bell     },
+  { label: 'Settings',      href: '/admin/settings',      icon: Settings },
 ];
 
 // ─── Helpers ───────────────────────────────────────────────────────
@@ -119,11 +125,13 @@ function NavItem({
   icon: Icon,
   label,
   active,
+  badge,
 }: {
   href: string;
   icon: LucideIcon;
   label: string;
   active: boolean;
+  badge?: number;
 }) {
   return (
     <li>
@@ -137,9 +145,13 @@ function NavItem({
       >
         <Icon className="w-[17px] h-[17px] shrink-0" />
         <span className="truncate">{label}</span>
-        {active && (
+        {badge != null && badge > 0 ? (
+          <span className="ml-auto min-w-[18px] h-[18px] px-1 flex items-center justify-center bg-amber-400 text-black text-[9px] font-bold rounded-full shrink-0">
+            {badge > 99 ? '99+' : badge}
+          </span>
+        ) : active ? (
           <span className="ml-auto w-1 h-4 rounded-full bg-amber-400 shrink-0" />
-        )}
+        ) : null}
       </Link>
     </li>
   );
@@ -158,6 +170,8 @@ function SectionLabel({ title }: { title: string }) {
 export default function AdminSidebar() {
   const pathname = usePathname();
   const { user, logout } = useAuth();
+  const { data: countData } = useAdminUnreadNotificationCount();
+  const unreadCount = countData?.unread_count ?? 0;
 
   const isActive = (href: string) => {
     if (href === '/admin') return pathname === '/admin';
@@ -212,6 +226,7 @@ export default function AdminSidebar() {
                 icon={icon}
                 label={label}
                 active={isActive(href)}
+                badge={href === '/admin/notifications' ? unreadCount : undefined}
               />
             ))}
           </ul>

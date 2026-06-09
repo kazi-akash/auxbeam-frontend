@@ -27,6 +27,7 @@ import {
   Trash2,
 } from 'lucide-react';
 import { useWishlist } from '@/lib/hooks/customer/useWishlist';
+import { useCartSummary } from '@/lib/hooks/public/useCart';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -47,9 +48,18 @@ function MegaMenuDropdown({
   const panelRef = useRef<HTMLDivElement>(null);
   const hasChildren = (category.children?.length ?? 0) > 0;
 
-  // Reset active index when panel opens
+  // Reset active index and animate panel in when it opens
   useEffect(() => {
-    if (open) setActiveIdx(0);
+    if (open) {
+      setActiveIdx(0);
+      if (panelRef.current) {
+        gsap.fromTo(
+          panelRef.current,
+          { opacity: 0, y: -8 },
+          { opacity: 1, y: 0, duration: 0.22, ease: 'power2.out' }
+        );
+      }
+    }
   }, [open]);
 
   // Close on outside click
@@ -91,13 +101,6 @@ function MegaMenuDropdown({
 
   function handleOpen() {
     setOpen(true);
-    if (panelRef.current) {
-      gsap.fromTo(
-        panelRef.current,
-        { opacity: 0, y: -8 },
-        { opacity: 1, y: 0, duration: 0.22, ease: 'power2.out' }
-      );
-    }
   }
 
   function handleClose(related: Node | null) {
@@ -365,8 +368,12 @@ export default function Header() {
   const { user, logout } = useAuth();
   const { items, itemCount, total, removeItem } = useCart();
   const { data: wishlistItems } = useWishlist({ enabled: !!user });
+  const cartSummaryMutation = useCartSummary();
+  const [drawerSummary, setDrawerSummary] = useState<{ subtotal: number; promotion_discount: number; total: number } | null>(null);
   const [cartOpen, setCartOpen] = useState(false);
   const cartRef = useRef<HTMLDivElement>(null);
+  const cartDrawerRef = useRef<HTMLDivElement>(null);
+  const cartBackdropRef = useRef<HTMLDivElement>(null);
   const { data: categories } = useCategories();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
@@ -404,6 +411,29 @@ export default function Header() {
     window.addEventListener('scroll', onScroll, { passive: true });
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
+
+  // Animate cart drawer open/close
+  useEffect(() => {
+    const drawer = cartDrawerRef.current;
+    const backdrop = cartBackdropRef.current;
+    if (!drawer || !backdrop) return;
+
+    if (cartOpen) {
+      gsap.fromTo(drawer, { x: '100%' }, { x: '0%', duration: 0.32, ease: 'power3.out' });
+      gsap.fromTo(backdrop, { opacity: 0 }, { opacity: 1, duration: 0.25 });
+
+      if (items.length > 0) {
+        cartSummaryMutation.mutate(
+          { items: items.map((i) => ({ product_id: i.product_id, variation_id: i.variation_id ?? null, quantity: i.quantity })) },
+          { onSuccess: (data) => setDrawerSummary({ subtotal: data.subtotal, promotion_discount: data.promotion_discount, total: data.total }) }
+        );
+      }
+    } else {
+      gsap.to(drawer, { x: '100%', duration: 0.28, ease: 'power3.in' });
+      gsap.to(backdrop, { opacity: 0, duration: 0.22 });
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [cartOpen]);
 
   // Animate mobile menu open/close
   useEffect(() => {
@@ -527,7 +557,7 @@ export default function Header() {
                 Shop
               </Link>
 
-              {topLevelCategories.map((cat) => (
+              {mounted && topLevelCategories.map((cat) => (
                 <MegaMenuDropdown key={cat.id} category={cat} containerRef={navContainerRef} />
               ))}
             </nav>
@@ -567,15 +597,10 @@ export default function Header() {
                 <span>Wishlist</span>
               </Link>
 
-              {/* Cart dropdown */}
-              <div
-                ref={cartRef}
-                className="relative"
-                onMouseEnter={() => setCartOpen(true)}
-                onMouseLeave={() => setCartOpen(false)}
-              >
-                <Link
-                  href="/cart"
+              {/* Cart — click opens right-side drawer */}
+              <div ref={cartRef} className="relative">
+                <button
+                  onClick={() => setCartOpen(true)}
                   className="flex items-center gap-2 hover:text-primary-600 transition-colors"
                   style={{ fontSize: '15px', fontWeight: 400, color: '#12100E' }}
                 >
@@ -588,117 +613,7 @@ export default function Header() {
                     )}
                   </div>
                   <span>Cart</span>
-                </Link>
-
-                {/* Dropdown panel */}
-                {mounted && cartOpen && (
-                  <div className="absolute right-0 top-full pt-3 w-[360px] z-[9999]">
-                    <div className="bg-white rounded-xl shadow-[0_8px_40px_rgba(0,0,0,0.14)] border border-gray-100 overflow-hidden">
-                      {/* Header */}
-                      <div className="flex items-center justify-between px-4 py-3 border-b border-gray-100 bg-gray-50">
-                        <span className="text-[13px] font-[600] text-[#12100E]">
-                          My Cart
-                        </span>
-                        {itemCount > 0 && (
-                          <span className="text-[12px] text-gray-500">{itemCount} item{itemCount !== 1 ? 's' : ''}</span>
-                        )}
-                      </div>
-
-                      {items.length === 0 ? (
-                        <div className="flex flex-col items-center gap-3 py-10 px-4">
-                          <ShoppingBag className="w-10 h-10 text-gray-200" />
-                          <p className="text-[13px] text-gray-400 font-[500]">Your cart is empty</p>
-                          <Link
-                            href="/shop"
-                            onClick={() => setCartOpen(false)}
-                            className="text-[12px] font-[600] text-[#12100E] underline underline-offset-2 hover:text-primary-600 transition-colors"
-                          >
-                            Start Shopping
-                          </Link>
-                        </div>
-                      ) : (
-                        <>
-                          {/* Items list */}
-                          <ul className="max-h-[280px] overflow-y-auto divide-y divide-gray-50 px-4 py-2">
-                            {items.map((item) => (
-                              <li key={item.id} className="flex items-center gap-3 py-3">
-                                {/* Image */}
-                                <Link
-                                  href={`/products/${item.product.slug}`}
-                                  onClick={() => setCartOpen(false)}
-                                  className="w-14 h-14 rounded-lg bg-[#F3F4F6] flex-shrink-0 relative overflow-hidden"
-                                >
-                                  <Image
-                                    src={item.product.image || '/images/product-page/e289c177b94614ad421b2a48e6ed78c26793555a.png'}
-                                    alt={item.product.name}
-                                    fill
-                                    unoptimized
-                                    className="object-contain p-1"
-                                  />
-                                </Link>
-
-                                {/* Info */}
-                                <div className="flex-1 min-w-0">
-                                  <Link
-                                    href={`/products/${item.product.slug}`}
-                                    onClick={() => setCartOpen(false)}
-                                    className="text-[13px] font-[500] text-[#12100E] line-clamp-2 leading-snug hover:text-primary-600 transition-colors"
-                                  >
-                                    {item.product.name}
-                                  </Link>
-                                  {item.service && (
-                                    <p className="text-[11px] text-gray-400 mt-0.5">{item.service}</p>
-                                  )}
-                                  <div className="flex items-center gap-2 mt-1">
-                                    <span className="text-[13px] font-[600] text-[#12100E]">
-                                      {item.product.price.toFixed(2)} BDT
-                                    </span>
-                                    <span className="text-[11px] text-gray-400">× {item.quantity}</span>
-                                  </div>
-                                </div>
-
-                                {/* Remove */}
-                                <button
-                                  onClick={() => removeItem(item.id)}
-                                  className="flex-shrink-0 w-7 h-7 rounded-full hover:bg-red-50 flex items-center justify-center transition-colors group"
-                                  aria-label="Remove"
-                                >
-                                  <Trash2 className="w-3.5 h-3.5 text-gray-300 group-hover:text-red-500 transition-colors" />
-                                </button>
-                              </li>
-                            ))}
-                          </ul>
-
-                          {/* Footer */}
-                          <div className="px-4 pt-3 pb-4 border-t border-gray-100 bg-gray-50 space-y-3">
-                            <div className="flex items-center justify-between">
-                              <span className="text-[13px] text-gray-500">Subtotal</span>
-                              <span className="text-[15px] font-[700] text-[#12100E]">
-                                {total.toFixed(2)} BDT
-                              </span>
-                            </div>
-                            <div className="grid grid-cols-2 gap-2">
-                              <Link
-                                href="/cart"
-                                onClick={() => setCartOpen(false)}
-                                className="text-center py-2.5 rounded-lg border border-gray-200 text-[13px] font-[600] text-[#12100E] hover:bg-gray-100 transition-colors"
-                              >
-                                View Cart
-                              </Link>
-                              <Link
-                                href="/checkout"
-                                onClick={() => setCartOpen(false)}
-                                className="text-center py-2.5 rounded-lg bg-[#FDDE35] hover:bg-[#FACC15] text-[13px] font-[600] text-[#12100E] transition-colors"
-                              >
-                                Checkout
-                              </Link>
-                            </div>
-                          </div>
-                        </>
-                      )}
-                    </div>
-                  </div>
-                )}
+                </button>
               </div>
 
               <div className="flex items-center gap-3" suppressHydrationWarning>
@@ -811,7 +726,7 @@ export default function Header() {
               Shop
             </Link>
 
-            {topLevelCategories.map((cat) => (
+            {mounted && topLevelCategories.map((cat) => (
               <MobileNavItem
                 key={cat.id}
                 category={cat}
@@ -840,6 +755,168 @@ export default function Header() {
             </div>
           </nav>
         </div>
+      )}
+      {/* Cart drawer — right side slide-in */}
+      {mounted && (
+        <>
+          {/* Backdrop */}
+          <div
+            ref={cartBackdropRef}
+            onClick={() => setCartOpen(false)}
+            className="fixed inset-0 z-[9998] bg-black/30 backdrop-blur-[2px]"
+            style={{ opacity: 0, pointerEvents: cartOpen ? 'auto' : 'none' }}
+          />
+
+          {/* Drawer */}
+          <div
+            ref={cartDrawerRef}
+            className="fixed top-0 right-0 h-full w-[400px] z-[9999] flex flex-col bg-white shadow-2xl font-[family-name:var(--font-geist-sans)]"
+            style={{ transform: 'translateX(100%)' }}
+          >
+            {/* Drawer header */}
+            <div className="flex items-center justify-between px-6 py-5 border-b border-gray-100">
+              <div className="flex items-center gap-2.5">
+                <ShoppingBag className="w-5 h-5 text-[#12100E]" />
+                <span className="text-[16px] font-[700] text-[#12100E] tracking-tight">My Cart</span>
+                {itemCount > 0 && (
+                  <span className="bg-[#FDDE35] text-[#12100E] text-[11px] font-[700] rounded-full px-2 py-0.5 leading-none">
+                    {itemCount} item{itemCount !== 1 ? 's' : ''}
+                  </span>
+                )}
+              </div>
+              <button
+                onClick={() => setCartOpen(false)}
+                className="w-8 h-8 rounded-full hover:bg-gray-100 flex items-center justify-center transition-colors"
+                aria-label="Close cart"
+              >
+                <X className="w-4 h-4 text-gray-500" />
+              </button>
+            </div>
+
+            {/* Items */}
+            <div className="flex-1 overflow-y-auto">
+              {items.length === 0 ? (
+                <div className="flex flex-col items-center justify-center gap-4 h-full pb-20 px-6">
+                  <div className="w-20 h-20 rounded-full bg-gray-50 flex items-center justify-center">
+                    <ShoppingBag className="w-9 h-9 text-gray-200" />
+                  </div>
+                  <div className="text-center">
+                    <p className="text-[15px] font-[600] text-[#12100E]">Your cart is empty</p>
+                    <p className="text-[13px] text-gray-400 mt-1">Add items to get started</p>
+                  </div>
+                  <Link
+                    href="/shop"
+                    onClick={() => setCartOpen(false)}
+                    className="mt-2 px-6 py-2.5 rounded-lg bg-[#12100E] text-white text-[13px] font-[600] hover:bg-[#2a2522] transition-colors"
+                  >
+                    Shop Now
+                  </Link>
+                </div>
+              ) : (
+                <ul className="divide-y divide-gray-50 px-6 py-2">
+                  {items.map((item) => (
+                    <li key={item.id} className="flex items-start gap-4 py-4">
+                      <Link
+                        href={`/products/${item.product.slug}`}
+                        onClick={() => setCartOpen(false)}
+                        className="w-[72px] h-[72px] rounded-xl bg-[#F3F4F6] flex-shrink-0 relative overflow-hidden"
+                      >
+                        <Image
+                          src={item.product.image || '/images/product-page/e289c177b94614ad421b2a48e6ed78c26793555a.png'}
+                          alt={item.product.name}
+                          fill
+                          unoptimized
+                          className="object-contain p-1.5"
+                        />
+                      </Link>
+
+                      <div className="flex-1 min-w-0">
+                        <Link
+                          href={`/products/${item.product.slug}`}
+                          onClick={() => setCartOpen(false)}
+                          className="text-[13px] font-[500] text-[#12100E] line-clamp-2 leading-snug hover:text-primary-600 transition-colors"
+                        >
+                          {item.product.name}
+                        </Link>
+                        {item.service && (
+                          <p className="text-[11px] text-gray-400 mt-0.5">{item.service}</p>
+                        )}
+                        <div className="flex items-center justify-between mt-2">
+                          <div className="flex items-center gap-1.5">
+                            <span className="text-[14px] font-[700] text-[#12100E]">
+                              {item.product.price.toFixed(2)}
+                            </span>
+                            <span className="text-[12px] text-gray-400 font-[500]">BDT</span>
+                          </div>
+                          <span className="text-[12px] text-gray-400 bg-gray-50 px-2 py-0.5 rounded-md">
+                            Qty: {item.quantity}
+                          </span>
+                        </div>
+                      </div>
+
+                      <button
+                        onClick={() => removeItem(item.id)}
+                        className="flex-shrink-0 w-7 h-7 rounded-full hover:bg-red-50 flex items-center justify-center transition-colors group mt-0.5"
+                        aria-label="Remove item"
+                      >
+                        <Trash2 className="w-3.5 h-3.5 text-gray-300 group-hover:text-red-500 transition-colors" />
+                      </button>
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </div>
+
+            {/* Footer */}
+            {items.length > 0 && (
+              <div className="border-t border-gray-100 px-6 py-5 space-y-3 bg-gray-50/60">
+                {/* Subtotal row */}
+                <div className="flex items-center justify-between text-[13px]">
+                  <span className="text-gray-500 font-[500]">Subtotal</span>
+                  <span className="font-[600] text-[#12100E]">
+                    {(drawerSummary?.subtotal ?? total).toFixed(2)} BDT
+                  </span>
+                </div>
+                {/* Promotion discount row */}
+                {(drawerSummary?.promotion_discount ?? 0) > 0 && (
+                  <div className="flex items-center justify-between text-[13px]">
+                    <span className="text-emerald-600 font-[500]">Promotion Discount</span>
+                    <span className="font-[600] text-emerald-600">
+                      −{drawerSummary!.promotion_discount.toFixed(2)} BDT
+                    </span>
+                  </div>
+                )}
+                {/* Total */}
+                <div className="flex items-center justify-between pt-2 border-t border-gray-200">
+                  <span className="text-[14px] font-[700] text-[#12100E]">Total</span>
+                  <div className="flex items-baseline gap-1">
+                    <span className="text-[18px] font-[800] text-[#12100E]">
+                      {(drawerSummary?.total ?? total).toFixed(2)}
+                    </span>
+                    <span className="text-[13px] text-gray-500 font-[500]">BDT</span>
+                  </div>
+                </div>
+                <p className="text-[11px] text-gray-400">Shipping & taxes calculated at checkout</p>
+                <div className="flex flex-col gap-2.5">
+                  <Link
+                    href="/checkout"
+                    onClick={() => setCartOpen(false)}
+                    className="w-full text-center py-3 rounded-xl bg-[#FDDE35] hover:bg-[#FACC15] text-[14px] font-[700] text-[#12100E] transition-colors shadow-sm"
+                  >
+                    Checkout
+                  </Link>
+                  <Link
+                    href="/cart"
+                    onClick={() => setCartOpen(false)}
+                    className="w-full text-center py-3 rounded-xl border border-gray-200 bg-white hover:bg-gray-50 text-[13px] font-[600] text-[#12100E] transition-colors"
+                  >
+                    View Full Cart
+                  </Link>
+                </div>
+              </div>
+            )}
+          </div>
+        </>
       )}
     </header>
   );
